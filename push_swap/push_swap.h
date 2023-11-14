@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/14 10:27:54 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/14 16:05:36 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_list {
 	
 	struct s_list	*prev;
-	char	*data;
+	int	data;
 	struct s_list	*next;
 }	t_list;
 

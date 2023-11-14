@@ -6,17 +6,19 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:37:41 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/14 11:45:08 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/14 16:07:11 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 t_list	*push_swap(char	**argv)
 {
 	
 	extract_stack()
 	{
-		/*extract all the numbers and stock it in the stack list */;
+		//extract all the numbers and stock it in the stack list ;
 	}
 
 	
 }
+*/
