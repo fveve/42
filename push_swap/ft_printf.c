@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:37:56 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/14 16:07:37 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/15 11:46:29 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_printf(const char *format, ...)
 		if (format[x] == '%')
 		{
 			++x;
-			fill(format[x], arg, count);
+			fill(format[x], arg, &count);
 		}
 		else
 		{

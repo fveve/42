@@ -1,6 +1,6 @@
 NAME = checker
 CC = gcc
-FLAGS += -Wall -Werror -Wextra
+FLAGS +=-g -Wall -Werror -Wextra
 
 SRC = $(wildcard *c)
 OBJ = $(SRC:.c=.o)
