@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/16 14:42:37 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/17 15:10:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,20 @@ t_list	*init_node(char *str, int r)
 	return (node);
 }
 
+void	set_rank(t_list	**stack, int	rank)
+{
+	t_list	*start;
+
+	start = *stack;
+	while (rank > 0)
+	{
+		(*stack)->rank = rank;
+		rank--;
+		(*stack) = (*stack)->next;
+	}
+	*stack = start;
+}
+
 t_list *extract_stack(char **argv)
 {
 	t_list	*stack;
@@ -59,12 +73,12 @@ t_list *extract_stack(char **argv)
 	int	r;
 
 	x = 1;
-	r = 0;
+	r = 1;
 	node = NULL;
 	stack =  NULL;
 	while(argv[x])
 	{
-		node = init_node(argv[x], int r);
+		node = init_node(argv[x], r);
 		ft_lstadd_back(&stack, node);
 		x++;
 		r++;
@@ -74,5 +88,9 @@ t_list *extract_stack(char **argv)
 		node->next = stack;
 		stack->prev = node;
 	}
+	stack = stack->prev;
+	set_rank(&stack, r);
 	return (stack);
 }
+
+

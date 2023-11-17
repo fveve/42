@@ -6,17 +6,18 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/17 11:52:52 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/17 14:37:21 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*init_command(void)
+t_list	*init_command(char	*str)
 {
 	t_list	*node;
 
 	node = malloc(sizeof(t_list));
+	node->command = str;
 	node->next = NULL;
 	return (node);
 }
