@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/15 14:11:53 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/16 14:42:37 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_atoi(char *str)
 	
 }
 
-t_list	*init_node(char *str)
+t_list	*init_node(char *str, int r)
 {
 	t_list	*node;
 	int	y;
@@ -45,9 +45,9 @@ t_list	*init_node(char *str)
 	if (y > 10 && str[0] == '-')
 		return (NULL);
 	node = malloc(sizeof(t_list));
-	node->command = malloc(sizeof(char) * 3);
 	node->next = NULL;
 	node->data = ft_atoi(str);
+	node->rank = r;
 	return (node);
 }
 
@@ -56,15 +56,23 @@ t_list *extract_stack(char **argv)
 	t_list	*stack;
 	t_list	*node;
 	int	x;
+	int	r;
 
 	x = 1;
+	r = 0;
 	node = NULL;
 	stack =  NULL;
 	while(argv[x])
 	{
-		node = init_node(argv[x]);
+		node = init_node(argv[x], int r);
 		ft_lstadd_back(&stack, node);
 		x++;
+		r++;
+	}
+	if (x > 2)
+	{
+		node->next = stack;
+		stack->prev = node;
 	}
 	return (stack);
 }
