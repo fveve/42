@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_stack_utils.c                                 :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/20 14:58:00 by arafa            ###   ########.fr       */
+/*   Created: 2023/11/20 13:05:19 by arafa             #+#    #+#             */
+/*   Updated: 2023/11/20 14:41:11 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_rank(t_list	**list)
+void	ft_push(t_list **a, t_list **b)
+{
+	
+}
+
+void	swap_data(t_list	**list)
 {
 	int	temp;
 
-	temp = (*list)->rank;
-	(*list)->rank = (*list)->next->rank;
+	temp = (*list)->data;
+	(*list)->data = (*list)->next->data;
 	(*list)->next->rank = temp;
 }
 
-int	go_to_max_rank(t_list	**list)
+void ft_rotate(t_list *stack)
 {
-	while ((*list)->rank < (*list)->next->rank)
-		*list = (*list)->next;
-	return ((*list)->rank);
+
 }
 
-void	go_to_rank(t_list **list, int rank)
+void ft_rev_rotate(t_list **stack)
 {
-	if (list)
-	{
-		while ((*list)->rank != rank)
-			*list = (*list)->next;
-	}
+
 }

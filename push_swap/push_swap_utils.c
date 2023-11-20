@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/17 15:10:39 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/20 13:41:24 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int	ft_atoi(char *str)
 {
 	int	sign;
-	int res;
+	int	res;
 	int	x;
-	
+
 	x = 0;
 	sign = 1;
 	res = 0;
@@ -33,14 +33,13 @@ int	ft_atoi(char *str)
 		x++;
 	}
 	return (res * sign);
-	
 }
 
 t_list	*init_node(char *str, int r)
 {
 	t_list	*node;
-	int	y;
-	
+	int		y;
+
 	y = ft_strlen(str);
 	if (y > 10 && str[0] == '-')
 		return (NULL);
@@ -51,7 +50,7 @@ t_list	*init_node(char *str, int r)
 	return (node);
 }
 
-void	set_rank(t_list	**stack, int	rank)
+void	set_rank(t_list	**stack, int rank)
 {
 	t_list	*start;
 
@@ -65,18 +64,18 @@ void	set_rank(t_list	**stack, int	rank)
 	*stack = start;
 }
 
-t_list *extract_stack(char **argv)
+t_list	*extract_stack(char **argv)
 {
 	t_list	*stack;
 	t_list	*node;
-	int	x;
-	int	r;
-
+	int		x;
+	int		r;
+	
 	x = 1;
 	r = 1;
 	node = NULL;
-	stack =  NULL;
-	while(argv[x])
+	stack = NULL;
+	while (argv[x])
 	{
 		node = init_node(argv[x], r);
 		ft_lstadd_back(&stack, node);
@@ -92,5 +91,3 @@ t_list *extract_stack(char **argv)
 	set_rank(&stack, r);
 	return (stack);
 }
-
-
