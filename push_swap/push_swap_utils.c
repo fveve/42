@@ -6,30 +6,33 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/20 13:41:24 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:27:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int	ft_atoi(char *str)
+int	ft_atoi(char *nptr)
 {
+	int	x;
 	int	sign;
 	int	res;
-	int	x;
 
 	x = 0;
 	sign = 1;
 	res = 0;
-	if (str[x] == '-')
+	while ((nptr[x] >= 9 && nptr[x] <= 13) || nptr[x] == 32)
+		x++;
+	if (nptr[x] == 43 || nptr[x] == 45)
 	{
-		sign *= -1;
+		if (nptr[x] == 45)
+			sign *= -1;
 		x++;
 	}
-	while (str[x] <= '9' && str[x] >= '0')
+	while (nptr[x] >= 48 && nptr[x] <= 57)
 	{
-		res = res * 10 + (str[x] - 48);
+		res = res * 10 + (nptr[x] - 48);
 		x++;
 	}
 	return (res * sign);
@@ -38,10 +41,10 @@ int	ft_atoi(char *str)
 t_list	*init_node(char *str, int r)
 {
 	t_list	*node;
-	int		y;
+	int		x;
 
-	y = ft_strlen(str);
-	if (y > 10 && str[0] == '-')
+	x = ft_strlen(str);
+	if (x > 10 && str[0] == '-')
 		return (NULL);
 	node = malloc(sizeof(t_list));
 	node->next = NULL;
@@ -50,44 +53,53 @@ t_list	*init_node(char *str, int r)
 	return (node);
 }
 
-void	set_rank(t_list	**stack, int rank)
+int	init_stack(t_list	**stack, t_list	**node, char	*str, int rank)
 {
-	t_list	*start;
+	*node = init_node(str, rank);
+	ft_lstadd_back(stack, *node);
+	rank++;
+	return (rank);
+}
 
-	start = *stack;
-	while (rank > 0)
+int	init_stack2(t_list	**stack, t_list	**node, char	*str, int rank)
+{
+	char	*nb;
+	
+	while (ft_strlen(str) > 1)
 	{
-		(*stack)->rank = rank;
-		rank--;
-		(*stack) = (*stack)->next;
+		str = ft_strtrim(str, " ");
+		nb = ft_itoa(ft_atoi(str));
+		*node = init_node(str, rank);
+		ft_lstadd_back(stack, *node);
+		str = ft_strtrim(str, nb);
+		rank++;
 	}
-	*stack = start;
+	return (rank);
 }
 
 t_list	*extract_stack(char **argv)
 {
 	t_list	*stack;
 	t_list	*node;
+	int 	rank;
 	int		x;
-	int		r;
 	
 	x = 1;
-	r = 1;
+	rank = 1;
 	node = NULL;
 	stack = NULL;
 	while (argv[x])
 	{
-		node = init_node(argv[x], r);
-		ft_lstadd_back(&stack, node);
+		if (ft_strlen(argv[x]) > 1)
+			rank = init_stack2(&stack, &node, argv[x], rank);
+		else
+			rank = init_stack(&stack, &node, argv[x], rank);
 		x++;
-		r++;
 	}
 	if (x > 2)
 	{
 		node->next = stack;
 		stack->prev = node;
 	}
-	stack = stack->prev;
-	set_rank(&stack, r);
 	return (stack);
 }

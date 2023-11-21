@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/20 15:05:04 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:27:34 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sort_stack_b(t_list **stack_b)
 	}
 }
 
-void	*sort_data(t_list	**stack)
+void	sort_data(t_list	**stack)
 {
 	t_list	*stack_b;
 
@@ -47,15 +47,12 @@ void	*sort_data(t_list	**stack)
 
 int	is_valid(t_list	*stack)
 {
-	t_list	*temp;
 	int	x;
 
-	temp = stack;
-	x = go_to_max_rank(&temp);
+	x = go_to_max_rank(&stack);
 	while (x > 0)
 	{
-		if ((stack->data > stack->next->data) 
-			&& (stack->rank < stack->next->rank))
+		if (stack->data > stack->next->data)
 			return (0);
 		stack = stack->next;
 		x--;
@@ -63,7 +60,7 @@ int	is_valid(t_list	*stack)
 	return (1);
 }
 
-void	*ft_sort(t_list **stack)
+void	ft_sort(t_list **stack)
 {
 	if (stack)
 	{
@@ -74,11 +71,21 @@ void	*ft_sort(t_list **stack)
 		}
 	}
 }
+/*
 #include <stdio.h>
 int	main (int argc, char **argv)
 {
 	t_list	*stack;
+	int x = 0;
 	
-	stack = extract_stack(argv);
-	printf ("%d", is_valid(stack));
-}
+	if (argc > 1)
+	{
+		stack = extract_stack(argv);
+		while (x < 11)
+		{
+			printf("data : %d\nrank : %d\n\n", stack->data, stack->rank);
+			stack = stack->next;
+			x++;
+		}
+	}
+}*/
