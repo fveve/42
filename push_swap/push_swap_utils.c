@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/21 15:27:05 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:31:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,12 @@ int	init_stack(t_list	**stack, t_list	**node, char	*str, int rank)
 
 int	init_stack2(t_list	**stack, t_list	**node, char	*str, int rank)
 {
-	char	*nb;
-	
 	while (ft_strlen(str) > 1)
 	{
 		str = ft_strtrim(str, " ");
-		nb = ft_itoa(ft_atoi(str));
 		*node = init_node(str, rank);
 		ft_lstadd_back(stack, *node);
-		str = ft_strtrim(str, nb);
+		str = ft_delete_nb(str);
 		rank++;
 	}
 	return (rank);

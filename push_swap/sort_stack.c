@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/21 15:27:34 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:36:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_sort(t_list **stack)
 		}
 	}
 }
-/*
+
 #include <stdio.h>
 int	main (int argc, char **argv)
 {
@@ -88,4 +88,4 @@ int	main (int argc, char **argv)
 			x++;
 		}
 	}
-}*/
+}

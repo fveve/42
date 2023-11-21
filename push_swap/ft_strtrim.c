@@ -72,7 +72,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (tab);
 }
 
-
+/*
 #include <stdio.h>
 
    int main ()
@@ -84,3 +84,4 @@ char	*ft_strtrim(char const *s1, char const *set)
    tab = ft_strtrim("13 13508    4    ", " ");
    printf("%s", tab);
    }
+*/
