@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/21 17:31:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/22 13:14:44 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+int	is_neg (char	*str)
+{
+	int	x;
 
+	x = 0;
+	while(str[x])
+	{
+		if (str[x] == '-' || str[x] == '+')
+			return (1);
+		x++;
+	}
+	return (0);
+}
 int	ft_atoi(char *nptr)
 {
 	int	x;
@@ -41,11 +53,7 @@ int	ft_atoi(char *nptr)
 t_list	*init_node(char *str, int r)
 {
 	t_list	*node;
-	int		x;
 
-	x = ft_strlen(str);
-	if (x > 10 && str[0] == '-')
-		return (NULL);
 	node = malloc(sizeof(t_list));
 	node->next = NULL;
 	node->data = ft_atoi(str);
@@ -63,13 +71,18 @@ int	init_stack(t_list	**stack, t_list	**node, char	*str, int rank)
 
 int	init_stack2(t_list	**stack, t_list	**node, char	*str, int rank)
 {
-	while (ft_strlen(str) > 1)
+	if (is_neg(str))
+		init_stack(stack, node, str, rank);
+	else
 	{
-		str = ft_strtrim(str, " ");
-		*node = init_node(str, rank);
-		ft_lstadd_back(stack, *node);
-		str = ft_delete_nb(str);
-		rank++;
+		while (ft_strlen(str) > 1)
+		{
+			str = ft_delete_space(str);
+			*node = init_node(str, rank);
+			ft_lstadd_back(stack, *node);
+			str = ft_delete_nb(str);
+			rank++;
+		}
 	}
 	return (rank);
 }
@@ -87,13 +100,13 @@ t_list	*extract_stack(char **argv)
 	stack = NULL;
 	while (argv[x])
 	{
-		if (ft_strlen(argv[x]) > 1)
+		if (ft_strlen(argv[x]) > 1 )              
 			rank = init_stack2(&stack, &node, argv[x], rank);
 		else
 			rank = init_stack(&stack, &node, argv[x], rank);
 		x++;
 	}
-	if (x > 2)
+	if (rank > 1)
 	{
 		node->next = stack;
 		stack->prev = node;

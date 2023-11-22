@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/21 17:35:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/22 11:26:41 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list {
 int	go_to_max_rank(t_list	**list);
 int		ft_atoi(char *str);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_delete_space(char *str);
 char	*ft_delete_nb(char *str);
 void	sort_stack_b(t_list **stack_b);
 void	ft_lstadd_back(t_list **lst, t_list *new);
