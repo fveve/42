@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/27 10:53:14 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/28 11:55:18 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,3 @@ void	ft_sort(t_list **stack)
 		}
 	}
 }
-/*
-#include <stdio.h>
-int	main (int argc, char **argv)
-{
-	t_list	*stack;
-	int x = 0;
-	
-	if (argc > 1)
-	{
-		stack = extract_stack(argv);
-		while (x < 11)
-		{
-			printf("data : %d\nrank : %d\n\n", stack->data, stack->rank);
-			stack = stack->next;
-			x++;
-		}
-	}
-}
-*/

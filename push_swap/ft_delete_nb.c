@@ -12,66 +12,77 @@
 
 #include "push_swap.h"
 #include <stdio.h>
-char	*ft_delete_space(char	*str)
+
+int count_numbers(char *str)
 {
-	char	*tab;
-	int	len;
 	int	x;
+	int	nb;
 
 	x = 0;
-	len = 0;
-	while ((str[x] >= 9 && str[x] <= 13) || str[x] == 32)
-		x++;
+	nb = 0;
 	while (str[x])
 	{
-		len++;
+		if ((str[x] <= '9' && str[x] >= '0') || str[x] == '-' || str[x] == '+')
+		{
+			nb++;
+			while ((str[x] <= '9' && str[x] >= '0') || str[x] == '-' || str[x] == '+')
+				x++;
+		}
+		else
+			x++;
+	}
+	return (nb);
+}
+
+char	*ft_strdup(char *s)
+{
+	char	*tab;
+	int		x;
+
+	x = 0;
+	if (!s)
+		return (NULL);
+	tab = malloc(ft_strlen(s) + 1);
+	if (!tab)
+		return (NULL);
+	while (s[x])
+	{
+		tab[x] = s[x];
 		x++;
 	}
-	tab = malloc(sizeof(char) * (len + 1));
-	len = 0;
-	x = 0;
-	while ((str[x] >= 9 && str[x] <= 13) || str[x] == 32)
-		x++;
-	while (str[x])
-		tab[len++] = str[x++];
-	tab[len] = '\0';
+	tab[x] = '\0';
 	return (tab);
 }
 
-int    ft_len(char *str)
+char    *ft_delete_nb(char *str, int x)
 {
-    int    x;
-    int    len;
+    char  *tab;
+    int        y;
+    int        z;
 
-    x = 0;
-    len = 0;
-      while ((str[x] >= 9 && str[x] <= 13) || str[x] == 32)
-            x++;
-    while (str[x])
+    z = 0;
+    y = 0;
+    tab = ft_strdup(str);
+	if (!tab)
+		return (NULL);
+    while (!(str[z] <= '9' && str[z] >= '0') && str[z])
+        z++;
+    if (str[z] <= '9' && str[z] >= '0' && str[z])
     {
-      if ((str[x] <= '9' && str[x] >= '0') || str[x] == 32 || str[x] == '-' || str[x] == '+')
-        len++;
-      x++;
+        while (str[z] <= '9' && str[z] >= '0' && str[z])
+            z++;
     }
-    return (len + 1);
-}
-char    *ft_delete_nb(char *str)
-{
-char    *tab;
-    int    len;
-    int    x;
+    if (str[z])
+    {
+        while (str[z])
+            tab[y++] = str[z++];
+    }
+    while (tab[y])
+	{
+        tab[y] = '\0';
+	}
+	x = x;
 
-    x = 0;
-    len = ft_len(str);
-    tab = malloc(sizeof(char) * (len + 1));
-	len  = 0;
-    while ((str[len] >= 9 && str[len] <= 13) || str[len] == 32)
-        len++;
-    while ((str[len] <= '9' && str[len] >= '0') || str[len] == '-' || str[len] == '+')
-        len++;
-    while (str[len])
-        tab[x++] = str[len++];
-    tab[x] = '\0';
     return (tab);
 }
 
@@ -82,9 +93,8 @@ int	main ()
 {
 	char	*tab;
 
-		tab = ft_delete_nb("         -25    -12    -5 -4   8   7   5");
-		tab = ft_delete_nb(tab);
-		tab = ft_delete_nb(tab);
+		tab = ft_delete_nb("         -25    -12    -5 -4   8   7   5", 1);
 		printf("%s", tab);
+				free(tab);
 }
 */

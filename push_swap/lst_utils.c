@@ -6,11 +6,27 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/20 13:31:26 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/28 16:34:26 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_stack(t_list	*stack)
+{
+	t_list	*next;
+	int		max_rank;
+
+	max_rank = go_to_max_rank(&stack);
+	go_to_rank(&stack, 1);
+	while  (stack->rank != max_rank)
+	{
+		next = stack->next;
+		free (stack);
+	 	stack = next;
+	}
+	free (stack);
+}
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {

@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/22 11:26:41 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/28 16:16:47 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ typedef struct s_list {
 
 //Functions-------------------------------------------------
 int	go_to_max_rank(t_list	**list);
+int	verif(int argc, char **argv);
+int	verif_double(t_list *stack);
 int		ft_atoi(char *str);
 char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_delete_space(char *str);
-char	*ft_delete_nb(char *str);
+char	*ft_delete_nb(char *str, int x);
 void	sort_stack_b(t_list **stack_b);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	go_to_rank(t_list **list, int rank);
+void	free_stack(t_list	*stack);
 void	swap_rank(t_list **list);
 void	swap_data(t_list **list);
 void	ft_sort(t_list **stack);
