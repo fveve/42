@@ -6,13 +6,13 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/22 13:14:44 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/27 11:24:45 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-int	is_neg (char	*str)
+int	is_neg(char	*str)
 {
 	int	x;
 
@@ -72,18 +72,28 @@ int	init_stack(t_list	**stack, t_list	**node, char	*str, int rank)
 int	init_stack2(t_list	**stack, t_list	**node, char	*str, int rank)
 {
 	if (is_neg(str))
-		init_stack(stack, node, str, rank);
-	else
 	{
-		while (ft_strlen(str) > 1)
+		while (ft_strlen(str) > 2 )
 		{
 			str = ft_delete_space(str);
 			*node = init_node(str, rank);
 			ft_lstadd_back(stack, *node);
-			str = ft_delete_nb(str);
 			rank++;
+			str = ft_delete_nb(str);
 		}
 	}
+	else
+	{
+		while (ft_strlen(str) > 1 )
+		{
+			str = ft_delete_space(str);
+			*node = init_node(str, rank);
+			ft_lstadd_back(stack, *node);
+			rank++;
+			str = ft_delete_nb(str);
+		}
+	}
+		
 	return (rank);
 }
 

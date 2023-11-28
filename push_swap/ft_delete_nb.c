@@ -49,7 +49,7 @@ int    ft_len(char *str)
             x++;
     while (str[x])
     {
-      if ((str[x] <= '9' && str[x] >= '0') || str[x] == 32)
+      if ((str[x] <= '9' && str[x] >= '0') || str[x] == 32 || str[x] == '-' || str[x] == '+')
         len++;
       x++;
     }
@@ -67,7 +67,7 @@ char    *tab;
 	len  = 0;
     while ((str[len] >= 9 && str[len] <= 13) || str[len] == 32)
         len++;
-    while (str[len] <= '9' && str[len] >= '0')
+    while ((str[len] <= '9' && str[len] >= '0') || str[len] == '-' || str[len] == '+')
         len++;
     while (str[len])
         tab[x++] = str[len++];
@@ -82,7 +82,9 @@ int	main ()
 {
 	char	*tab;
 
-		tab = ft_delete_space("         25    12    5 4   8   7   5");
+		tab = ft_delete_nb("         -25    -12    -5 -4   8   7   5");
+		tab = ft_delete_nb(tab);
+		tab = ft_delete_nb(tab);
 		printf("%s", tab);
 }
 */

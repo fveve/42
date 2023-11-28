@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/22 12:00:58 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/27 10:53:14 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_sort(t_list **stack)
 		}
 	}
 }
-
+/*
 #include <stdio.h>
 int	main (int argc, char **argv)
 {
@@ -89,3 +89,4 @@ int	main (int argc, char **argv)
 		}
 	}
 }
+*/
