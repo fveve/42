@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verifs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:44:22 by arafa             #+#    #+#             */
-/*   Updated: 2023/11/28 15:11:25 by arafa            ###   ########.fr       */
+/*   Updated: 2023/11/29 10:30:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,29 @@ int	not_nb(char	*str)
 
 int	verif_int(char	*str)
 {
+	char	*tab;
 	long int	nb;
 	int			x;
 
 	x = 0;
 	nb = 0;
-	if (!str)
-		return (0);
-	while (str[x])
+	tab = ft_strdup(str);
+	while (tab[x])
 	{
-		if (((str[x] <= '9' && str[x] >= '0') || str[x] == '-' || str[x] == '+') && str[x])
+		if (((tab[x] <= '9' && tab[x] >= '0') || tab[x] == '-' || tab[x] == '+') && tab[x])
 		{
-			nb = ft_long_atoi(str);
+			nb = ft_long_atoi(tab);
 			if (nb > 2147483647 || nb < -2147483648)
 				return (1);
-			if (str[x])
-			{
-				str = ft_delete_nb(str, x);
-				if (!str[x])
-					return (0);
+			if (count_numbers(tab) > 1)
+			{					
+				tab = ft_delete_nb(tab);
 				x = 0;
 			}
 		}
 		x++;
 	}
+	free(tab);
 	return (0);
 }
 

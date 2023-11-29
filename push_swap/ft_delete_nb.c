@@ -20,6 +20,8 @@ int count_numbers(char *str)
 
 	x = 0;
 	nb = 0;
+	if (!str)
+		return (0);
 	while (str[x])
 	{
 		if ((str[x] <= '9' && str[x] >= '0') || str[x] == '-' || str[x] == '+')
@@ -54,14 +56,17 @@ char	*ft_strdup(char *s)
 	return (tab);
 }
 
-char    *ft_delete_nb(char *str, int x)
+char    *ft_delete_nb(char *str)
 {
-    char  *tab;
+    char  	*tab;
     int        y;
     int        z;
+	
 
     z = 0;
     y = 0;
+	if (!str)
+		return (NULL);
     tab = ft_strdup(str);
 	if (!tab)
 		return (NULL);
@@ -81,8 +86,7 @@ char    *ft_delete_nb(char *str, int x)
 	{
         tab[y] = '\0';
 	}
-	x = x;
-
+	free(str);
     return (tab);
 }
 
