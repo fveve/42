@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/02 11:42:46 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/02 16:34:08 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,17 @@ typedef struct s_list {
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_stack {
+	t_list	*stack_a;
+	t_list	*stack_b;
+}	t_stack;
+
 //Functions-------------------------------------------------
 long int	ft_long_atoi(char *nptr);
 int			init_stack2(t_list	**stack, t_list	**node, char *str, int rank);
 int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
 int			verif_int_2(char *tab, int x, long int nb);
+int			go_to_max_rank(t_list	**list);
 int			go_to_max_rank(t_list	**list);
 int			verif(int argc, char **argv);
 int			verif_double(t_list *stack);
@@ -40,8 +46,6 @@ void		sort_stack_b(t_list **stack_b);
 void		ft_lstadd_back(t_list **lst, t_list *new);
 void		go_to_rank(t_list **list, int rank);
 void		free_stack(t_list	*stack);
-void		swap_rank(t_list **list);
-void		swap_data(t_list **list);
 void		ft_sort(t_list **stack);
 t_list		*extract_stack(char **argv);
 t_list		*init_node(char *str, int r);

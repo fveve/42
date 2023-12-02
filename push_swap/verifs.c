@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:44:22 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/02 11:27:16 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/02 14:12:12 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,24 @@ int	verif_double(t_list *stack)
 {
 	int	nb;
 	int	current_rank;
-	int	max_rank;
 
-	current_rank = 0;
-	max_rank = 0;
+	current_rank = 1;
 	nb = 0;
-	while (stack->next->rank != 1)
-		stack = stack->next;
-	max_rank = stack->rank;
 	go_to_rank(&stack, 1);
-	while (stack->rank != max_rank && stack->data != nb)
+	while (stack->next->rank != 1)
 	{
 		nb = stack->data;
-		current_rank = stack->rank;
+		current_rank += 1;
 		stack = stack->next;
-		while (stack->rank != current_rank)
+		while (stack)
 		{
+			if (stack->next->rank == current_rank)
+				break ;
 			if (nb == stack->data)
 				return (1);
 			stack = stack->next;
 		}
+		go_to_rank(&stack, current_rank);
 	}
 	return (0);
 }
