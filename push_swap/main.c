@@ -28,4 +28,16 @@ int	main(int argc, char **argv)
 		free_stack(stack);
 		exit(0);
 	}
+	else
+	{
+		while (stack->next->rank != 1)
+		{
+			ft_printf("data : %d\n", stack->data);
+			ft_printf("rank : %d\n\n", stack->rank);
+			stack = stack->next;
+		}
+		ft_printf("data : %d\n", stack->data);
+		ft_printf("rank : %d\n\n", stack->rank);
+		free_stack(stack);
+	}
 }
