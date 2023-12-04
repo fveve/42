@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/02 16:34:08 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/04 15:40:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,21 @@ int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
 int			verif_int_2(char *tab, int x, long int nb);
 int			go_to_max_rank(t_list	**list);
 int			go_to_max_rank(t_list	**list);
+int			lst_size(t_list *lst);
 int			verif(int argc, char **argv);
 int			verif_double(t_list *stack);
 int			count_numbers(char *str);
 int			ft_atoi(char *str);
 char		*ft_delete_nb(char *str);
 char		*ft_strdup(char *s);
-void		sort_stack_b(t_list **stack_b);
 void		ft_lstadd_back(t_list **lst, t_list *new);
 void		go_to_rank(t_list **list, int rank);
+void		sort_stack_b(t_list **stack_b);
 void		free_stack(t_list	*stack);
 void		ft_sort(t_list **stack);
-t_list		*extract_stack(char **argv);
+void		set_rank(t_list **lst);
 t_list		*init_node(char *str, int r);
+t_list		*extract_stack(char **argv);
 t_list		*ft_lstlast(t_list *lst);
+t_list		*lst_dup(t_list *lst1);
 #endif
