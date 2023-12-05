@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils_2.c                                :+:      :+:    :+:   */
+/*   commands_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 11:30:08 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 13:40:57 by arafa            ###   ########.fr       */
+/*   Created: 2023/12/05 14:30:44 by arafa             #+#    #+#             */
+/*   Updated: 2023/12/05 15:01:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*extract_stack(char **argv)
+void	ft_r(t_list **stack)
 {
-	t_list	*stack;
-	t_list	*node;
-	int		rank;
-	int		x;
+	int	rank;
 
-	x = 1;
-	rank = 1;
-	node = NULL;
-	stack = NULL;
-	while (argv[x])
+	rank = go_to_max_rank(stack);
+	*stack = (*stack)->next;
+	while (rank >= 1)
 	{
-		if (ft_strlen(argv[x]) > 1)
-			rank = init_stack2(&stack, &node, argv[x], rank);
-		else
-			rank = init_stack(&stack, &node, argv[x], rank);
-		x++;
+		(*stack)->rank = rank;
+		rank--;
+		*stack = (*stack)->prev;
 	}
-	if (rank > 1)
-	{
-		node->next = stack;
-		stack->prev = node;
-	}
-	return (stack);
 }

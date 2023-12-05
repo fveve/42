@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/04 15:40:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/05 13:46:55 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "ft_printf.h"
+# include <stdio.h>
 # include <unistd.h>
 
 //List------------------------------------------------------
@@ -21,6 +22,7 @@ typedef struct s_list {
 	struct s_list	*prev;
 	int				data;
 	int				rank;
+	int				pos;
 	struct s_list	*next;
 }	t_list;
 
