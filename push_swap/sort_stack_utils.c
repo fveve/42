@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 15:44:44 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/07 10:44:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int	go_to_max_rank(t_list	**list)
 	return ((*list)->rank);
 }
 
+int	go_to_max_data(t_list	**list)
+{
+	while ((*list)->data < (*list)->next->data)
+		*list = (*list)->next;
+	return ((*list)->data);
+}
+
 void	go_to_rank(t_list **list, int rank)
 {
 	if (list)
@@ -44,7 +51,7 @@ int isinit(t_list *stack)
 {
 	t_list	*start;
 	
-	start = *stack;
+	start = stack;
 	while (stack->next != start)
 	{
 		if (stack->pos == -1)
@@ -54,41 +61,40 @@ int isinit(t_list *stack)
 	return (0);
 }
 
+int	is_smallest(t_list	*stack)
+{
+	t_list *temp;
+	
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack )
+	{
+		if (temp->data > stack->data && stack !=temp && stack->pos == -1)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 void	set_pos(t_list **stack)
 {
-	t_list	*temp;
 	int	pos;
+	int max;
 
 	pos = 1;
-	temp = NULL;
+	max = go_to_max_rank(stack);
 	go_to_rank(stack, 1);
-	while (isinit(*stack))
+	while (pos <= max)
 	{
-		temp = *stack;
-		while ((*stack)->next != temp)
+		 if ((*stack)->pos == -1)
 		{
-			if (temp->data > (*stack)->data && (*stack)->pos == -1)
-				temp = *stack;
-			*stack = (*stack)->next;
-		}.
-		
-		temp->pos = pos;
-		pos++;
+			if (is_smallest(*stack))
+			{
+				(*stack)->pos = pos;
+				pos++;
+			}
+		}
 		*stack = (*stack)->next;
 	}
 }
 
-int	main(int ac, char **argv)
-{
-	t_stack	stack;
-
-	stack.stack_b = extract_stack(argv);
-	stack.stack_a = NULL;
-	ac = ac;
-	set_pos(&(stack.stack_b));
-	while (stack.stack_b->next->rank != 1)
-	{
-		printf("|%d|-----|%d|\n",stack.stack_b->data, stack.stack_b->pos);
-		stack.stack_b =stack.stack_b->next;
-	}
-}
