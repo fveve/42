@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/07 16:52:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:50:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,26 @@ int main (int ac, char **av)
 	set_pos(&(stack.stack_a));
 	go_to_rank(&(stack.stack_a), 1);
 	stack.stack_b = NULL;
-	ft_pb2(&stack);
+	ft_pb(&stack);
 	go_to_rank(&(stack.stack_a), 1);
-	ft_pb2(&stack);
+	ft_pb(&stack);
 	go_to_rank(&(stack.stack_a), 1);
-	ft_pb2(&stack);
+	ft_pb(&stack);
+	go_to_rank(&(stack.stack_b), 1);
+	ft_pa(&stack);
+	go_to_rank(&(stack.stack_b), 1);
+	ft_pa(&stack);
+	go_to_rank(&(stack.stack_b), 1);
+	ft_pa(&stack);
 	go_to_rank(&(stack.stack_a), 1);
 	go_to_rank(&(stack.stack_b), 1);
 	x = 0;
-	while (x != 4)
+	while (x != 3)
 	{
-		printf("%d , %d |   %d\n", stack.stack_b->data,  stack.stack_b->rank, stack.stack_a->data);
-		stack.stack_a = stack.stack_a->next;
-		stack.stack_b = stack.stack_b->next;
+		printf("%d , %d |   %d , %d\n", stack.stack_b->data,  stack.stack_b->rank, stack.stack_a->data, stack.stack_a->rank);
+		stack.stack_b = stack.stack_b->prev;
+		stack.stack_a = stack.stack_a->prev;
 		x++;
 	}
+	printf("%d , %d |   %d , %d\n", stack.stack_b->data,  stack.stack_b->rank, stack.stack_a->data, stack.stack_a->rank);
 }

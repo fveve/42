@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/07 16:52:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:29:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,20 @@ t_list	*lst_dup(t_list *lst1)
 
 void	set_rank(t_list **lst)
 {
-	int size;
 	int	x;
+	t_list	*current;
+	//int min;
 
 	x = 1;
-	size = lst_size(*lst);
-	go_to_min_rank(lst);
-		while (x <= size + 1)
-		{
-			(*lst)->rank = x;
-			x++;
-			(*lst )= (*lst)->next;
-		}
+	current = *lst;
+	//min = go_to_min_rank(lst);
+	while ((*lst)->next != current)
+	{
+		(*lst)->rank = x;
+		x++;
+		(*lst )= (*lst)->next;
+	}
+	(*lst)->rank = x;
 }
 
 void	free_stack(t_list	*stack)

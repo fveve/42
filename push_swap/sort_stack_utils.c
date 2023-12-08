@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/07 16:50:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/08 09:58:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int go_to_max_rank(t_list **list) {
     return (*list)->rank;
 }
 
-void	go_to_min_rank(t_list **list)
+int	go_to_min_rank(t_list **list)
 {
 	t_list	*current;
 	int	rank;
@@ -36,6 +36,7 @@ void	go_to_min_rank(t_list **list)
 		current = current->next;
 	}
 	go_to_rank(list, rank);
+	return (rank);
 }
 
 int	go_to_max_data(t_list	**list)
