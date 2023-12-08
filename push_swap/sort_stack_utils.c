@@ -6,29 +6,36 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/07 10:44:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/07 16:50:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_data(t_list	**list, t_list **list2)
-{
-	int	temp;
+int go_to_max_rank(t_list **list) {
+    if ( (*list)->next == NULL)
+        return 1;
 
-	temp = (*list)->rank;
-	(*list)->rank = (*list2)->rank;
-	(*list2)->rank = temp;
-	temp = (*list)->data;
-	(*list)->data = (*list2)->data;
-	(*list2)->data = temp;
+    while ((*list)->next != NULL && (*list)->rank < (*list)->next->rank) {
+        *list = (*list)->next;
+    }
+    return (*list)->rank;
 }
 
-int	go_to_max_rank(t_list	**list)
+void	go_to_min_rank(t_list **list)
 {
-	while ((*list)->rank < (*list)->next->rank)
-		*list = (*list)->next;
-	return ((*list)->rank);
+	t_list	*current;
+	int	rank;
+	
+	current = *list;
+	rank = current->rank;
+	while (current->next != *list)
+	{
+		if (current->rank > current->next->rank)
+			rank = current->next->rank;
+		current = current->next;
+	}
+	go_to_rank(list, rank);
 }
 
 int	go_to_max_data(t_list	**list)
@@ -45,20 +52,6 @@ void	go_to_rank(t_list **list, int rank)
 		while ((*list)->rank != rank)
 			*list = (*list)->next;
 	}
-}
-
-int isinit(t_list *stack)
-{
-	t_list	*start;
-	
-	start = stack;
-	while (stack->next != start)
-	{
-		if (stack->pos == -1)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
 }
 
 int	is_smallest(t_list	*stack)

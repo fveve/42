@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 13:48:54 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:52:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	lst_size(t_list *lst)
 
 	x = 0;
 	current = lst;
-	lst = lst->next;
-	if (lst)
+	if (lst && lst->next)
 	{
-		while (lst!= current)
-		{
-			x++;
-			lst = lst->next;
-		}
+		lst = lst->next;
+			while (lst!= current && lst)
+			{
+				x++;
+				lst = lst->next;
+			}
 	}
 	return (x);
 }
@@ -51,14 +51,13 @@ void	set_rank(t_list **lst)
 
 	x = 1;
 	size = lst_size(*lst);
-	go_to_max_rank(lst);
-	(*lst) = (*lst)->next;
-	while (x <= size + 1)
-	{
-		(*lst)->rank = x;
-		x++;
-		(*lst )= (*lst)->next;
-	}
+	go_to_min_rank(lst);
+		while (x <= size + 1)
+		{
+			(*lst)->rank = x;
+			x++;
+			(*lst )= (*lst)->next;
+		}
 }
 
 void	free_stack(t_list	*stack)

@@ -3,41 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:05:19 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 14:58:15 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:26:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	ft_pb2(t_stack *stack)
+void	isolate_node(t_list	**node)
 {
-	t_list	*stack_a;
-	t_list	*pb;
+	t_list	*next;
+	t_list	*prev;
 
-	go_to_rank(&(stack->stack_a), 1);
-	stack_a = stack->stack_a;
-	pb = lst_dup(stack_a);
-	pb->rank = 1;
-	stack_a->prev->next = stack_a->next;
-	stack_a->next->prev = stack_a->prev;
-	stack->stack_a = stack->stack_a->next;
-	set_rank(&(stack->stack_a));
-	free(stack_a);
-	if (stack->stack_b != NULL)
+	next = (*node)->next;
+	prev = (*node)->prev;
+	prev->next = next;
+	next->prev = prev;
+	free(*node);
+}
+
+void	link_to_stack(t_list **stack,t_list **node)
+{
+	t_list	*next;
+
+	go_to_rank(stack, 1);
+	if((*stack)->next)
 	{
-		go_to_max_rank((&stack->stack_b));
-		pb->next = stack->stack_b->next;
-		pb->prev = stack->stack_b;
-		stack->stack_b->next->prev = pb;
-		stack->stack_b->next = pb;
-		set_rank((&stack->stack_b));
+		(*node)->next = (*stack)->next;
+		next = (*stack)->next;
+		next->prev = (*node);
 	}
 	else
-		stack->stack_b = pb;
+		(*node)->next = *stack;
+	(*node)->prev = (*stack);
+	(*stack)->next = (*node);
+}
+
+void	ft_pb2(t_stack *stack)
+{
+	t_list	*temp;
+	t_list	*node;
+
+	go_to_rank(&(stack->stack_a), 1);
+	node = lst_dup(stack->stack_a);
+	node->rank = 1;
+	temp = stack->stack_a;
+	stack->stack_a = stack->stack_a->next;
+	isolate_node(&temp);
+	if (!stack->stack_b)
+	{
+		stack->stack_b = node;
+		node->next = NULL;
+		node->prev = NULL;
+		set_rank(&(stack->stack_a));
+	}
+	else
+	{
+		link_to_stack(&(stack->stack_b), &node);
+		set_rank(&(stack->stack_b));
+		set_rank(&(stack->stack_a));
+	}
 }
 
 void	ft_pb(t_stack *stack)
@@ -45,7 +73,7 @@ void	ft_pb(t_stack *stack)
 	t_list	*pb;
 
 	pb = NULL;
-	if (lst_size(stack->stack_a) > 1)
+	if (lst_size(stack->stack_a) > 2)
 		ft_pb2(stack);
 	else
 	{
