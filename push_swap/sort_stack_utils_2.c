@@ -1,48 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils_2.c                                :+:      :+:    :+:   */
+/*   sort_stack_utils_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 11:30:08 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 18:54:36 by marvin           ###   ########.fr       */
+/*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
+/*   Updated: 2023/12/10 18:40:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_strlen(char *s)
+void	set_pos(t_list **stack)
 {
-	int	x;
+	int	pos;
+	int	max;
 
-	x = 0;
-	while (s[x])
-		x++;
-	return (x);
+	pos = 1;
+	max = go_to_max_rank(stack);
+	go_to_rank(stack, 1);
+	while (pos <= max)
+	{
+		if ((*stack)->pos == -1)
+		{
+			if (is_smallest(*stack))
+			{
+				(*stack)->pos = pos;
+				pos++;
+			}
+		}
+		*stack = (*stack)->next;
+	}
 }
 
-t_list	*extract_stack(char **argv)
+void	set_rank(t_list *lst)
 {
-	t_list	*stack;
-	t_list	*node;
-	int		rank;
-	int		x;
+	int	size;
+	int	x;
 
+	size = lst_size(lst) + 1;
 	x = 1;
-	rank = 1;
-	node = NULL;
-	stack = NULL;
-	while (argv[x])
+	while (x <= size)
 	{
-		if (ft_strlen(argv[x]) > 1)
-			rank = init_stack2(&stack, &node, argv[x], rank);
-		else
-			rank = init_stack(&stack, &node, argv[x], rank);
+		lst->rank = x;
+		lst = lst->next;
 		x++;
 	}
-	if (rank > 1)
-		node->next = stack;
-	set_pos(&stack);
-	return (stack);
 }
