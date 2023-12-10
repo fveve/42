@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 10:22:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/10 11:38:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
 int			verif_int_2(char *tab, int x, long int nb);
 int			go_to_max_rank(t_list	**list);
 int			go_to_max_data(t_list	**list);
+int			is_smallest2(t_list	*stack);
 int			is_smallest(t_list	*stack);
 int			lst_size(t_list *lst);
 int			verif(int argc, char **argv);
@@ -46,6 +47,7 @@ int			ft_atoi(char *str);
 int			ft_strlen(char *s);
 char		*ft_delete_nb(char *str);
 char		*ft_strdup(char *s);
+void		ft_push(t_list	**stack_1, t_list **stack_2);
 void		ft_lstadd_back(t_list **lst, t_list *new);
 void		go_to_rank(t_list **list, int rank);
 void		free_stack(t_list	*stack);

@@ -1,4 +1,4 @@
-NAME = checker
+NAME = push_swap
 FLAGS += -g -Wall -Werror -Wextra
 CC = gcc $(FLAGS)
 SRC = $(wildcard *c)

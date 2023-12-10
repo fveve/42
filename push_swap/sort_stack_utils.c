@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 09:23:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/10 11:37:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,21 @@ int	is_smallest(t_list	*stack)
 	while (temp != stack )
 	{
 		if (temp->data > stack->data && stack !=temp && stack->pos == -1)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	is_smallest2(t_list	*stack)
+{
+	t_list *temp;
+	
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack )
+	{
+		if (temp->data > stack->data && stack !=temp)
 			return (0);
 		stack = stack->next;
 	}
