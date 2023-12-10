@@ -6,31 +6,42 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:30:44 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/07 12:05:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/10 10:27:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_data(t_list	**list, t_list **list2)
+void	ft_swap(t_list	*list)
 {
+	t_list *next;
 	int	temp;
 
-	temp = (*list)->data;
-	(*list)->data = (*list2)->data;
-	(*list2)->data = temp;
+	if (list)
+	{
+		go_to_rank(&list, 1);
+		next = list->next;
+		temp = list->data;
+		list->data = next->data;
+		next->data = temp;
+	}
 }
 
-void	ft_r(t_list **stack)
+void	ft_r(t_list *stack)
 {
 	int	rank;
+	int max_rank;
 
-	rank = go_to_max_rank(stack);
-	*stack = (*stack)->next;
-	while (rank >= 1)
+	rank = 1;
+	if (stack)
 	{
-		(*stack)->rank = rank;
-		rank--;
-		*stack = (*stack)->prev;
+		max_rank = go_to_max_rank(&stack);
+		go_to_rank(&stack, 2);
+		while (rank <= max_rank)
+		{
+			stack->rank = rank;
+			rank++;
+			stack = stack->next;
+		}
 	}
 }

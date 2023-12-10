@@ -6,12 +6,26 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/08 09:58:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/10 09:23:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+void	go_to_rank(t_list **list, int rank)
+{
+	t_list	*current;
+	
+	if (*list)
+	{
+		current = *list;
+		while ((*list)->rank != rank)
+		{
+			if ((*list)->next == current)
+				return ;
+			*list = (*list)->next;
+		}
+	}
+}
 int go_to_max_rank(t_list **list) {
     if ( (*list)->next == NULL)
         return 1;
@@ -22,36 +36,15 @@ int go_to_max_rank(t_list **list) {
     return (*list)->rank;
 }
 
-int	go_to_min_rank(t_list **list)
+void go_to_last(t_list	**lst)
 {
-	t_list	*current;
-	int	rank;
-	
-	current = *list;
-	rank = current->rank;
-	while (current->next != *list)
-	{
-		if (current->rank > current->next->rank)
-			rank = current->next->rank;
-		current = current->next;
-	}
-	go_to_rank(list, rank);
-	return (rank);
-}
+	t_list  *current;
 
-int	go_to_max_data(t_list	**list)
-{
-	while ((*list)->data < (*list)->next->data)
-		*list = (*list)->next;
-	return ((*list)->data);
-}
-
-void	go_to_rank(t_list **list, int rank)
-{
-	if (list)
+	current = *lst;
+	if (*lst)
 	{
-		while ((*list)->rank != rank)
-			*list = (*list)->next;
+		while ((*lst)->next != current)
+			*lst = (*lst)->next;
 	}
 }
 
@@ -92,3 +85,17 @@ void	set_pos(t_list **stack)
 	}
 }
 
+void	set_rank(t_list *lst)
+{
+	int size;
+	int x;
+
+	size = lst_size(lst) + 1;
+	x = 1;
+	while (x <= size)
+	{
+		lst->rank = x;
+		lst = lst->next;
+		x++;
+	}
+}

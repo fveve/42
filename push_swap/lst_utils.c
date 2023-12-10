@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/08 10:29:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/09 21:54:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	lst_size(t_list *lst)
 	}
 	return (x);
 }
-
 t_list	*lst_dup(t_list *lst1)
 {
 	t_list	*lst2;
@@ -39,28 +38,10 @@ t_list	*lst_dup(t_list *lst1)
 	lst2->data = lst1->data;
 	lst2->rank = lst1->rank;
 	lst2->next = NULL;
-	lst2->prev = NULL;
 
 	return (lst2);
 }
 
-void	set_rank(t_list **lst)
-{
-	int	x;
-	t_list	*current;
-	//int min;
-
-	x = 1;
-	current = *lst;
-	//min = go_to_min_rank(lst);
-	while ((*lst)->next != current)
-	{
-		(*lst)->rank = x;
-		x++;
-		(*lst )= (*lst)->next;
-	}
-	(*lst)->rank = x;
-}
 
 void	free_stack(t_list	*stack)
 {
@@ -92,7 +73,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		{
 			temp = ft_lstlast(*lst);
 			temp->next = new;
-			new->prev = temp;
 		}
 	}
 }
@@ -106,16 +86,3 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-t_list	*ft_lst_bfrlast(t_list *lst)
-{
-	t_list	*temp;
-
-	if (!lst)
-		return (NULL);
-	while (lst->next != NULL)
-	{
-		temp = lst;
-		lst = lst->next;
-	}
-	return (temp);
-}

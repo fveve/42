@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:30:08 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 13:40:57 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/09 21:35:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	ft_strlen(char *s)
+{
+	int x;
+
+	x =  0;
+	while (s[x])
+		x++;
+	return (x);
+}
 
 t_list	*extract_stack(char **argv)
 {
@@ -32,9 +42,6 @@ t_list	*extract_stack(char **argv)
 		x++;
 	}
 	if (rank > 1)
-	{
 		node->next = stack;
-		stack->prev = node;
-	}
 	return (stack);
 }
