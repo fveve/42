@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 		exit(0);
 	}
 	stack.stack_a = extract_stack(argv);
+	stack.stack_b = NULL;
 	if (verif_double(stack.stack_a) == 1)
 	{
 		write(1, "Error\n", 6);
