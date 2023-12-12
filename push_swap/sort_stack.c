@@ -96,23 +96,26 @@ int r_or_rr(t_list **stack_a, t_list **stack_b)
 	
 	ra = 0;
 	rb = 0;
-	if (gtr1_with_r(*stack_a) > gtr1_with_rr(*stack_a))
+	if ((*stack_a)->rank != 1)
+			rb++;
+	if ((*stack_b)->rank != 1)
+			ra++;
+	if (gtr1_with_r(*stack_a) > gtr1_with_rr(*stack_a) && (*stack_a)->rank != 1)
 		ft_r(*stack_a);
-	else
+	else if ((*stack_a)->rank != 1)
 		ft_rr(*stack_a);
-	ra++;
-	if (gtr1_with_r(*stack_b) > gtr1_with_rr(*stack_b))
+	if (gtr1_with_r(*stack_b) > gtr1_with_rr(*stack_b) && (*stack_b)->rank != 1)
 		ft_r(*stack_b);
-	else
+	else if ((*stack_b)->rank != 1)
 		ft_rr(*stack_b);
-	rb++;
 	if (ra > rb)
 		return (ra - rb);
 	return (rb - ra);
 }
+
 int imaginary_sort2(t_list *stack_a, t_list *stack_b, int i)
 {
-	while (stack_a->rank != 1 && stack_b->rank != 1)
+	while (stack_a->rank != 1 || stack_b->rank != 1)
 	{
 		i += is_swap(&stack_a, &stack_b, i);
 		i += r_or_rr(&stack_a, &stack_b);
@@ -190,7 +193,7 @@ int main (int ac, char **av)
 	stack.stack_b = NULL;
 	ft_push(&(stack.stack_a), &(stack.stack_b));
 	ft_push(&(stack.stack_a), &(stack.stack_b));
-	go_to_rank(&(stack.stack_a), 2);
+	go_to_rank(&(stack.stack_a), 4);
 	printf("%d\n", imaginary_sort2(stack.stack_a, stack.stack_b, 0));
 	go_to_rank(&(stack.stack_a), 1);
 	while (x != 6)
