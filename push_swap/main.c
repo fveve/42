@@ -13,6 +13,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+/*
 int	main(int argc, char **argv)
 {
 	t_stack	stack;
@@ -32,11 +33,10 @@ int	main(int argc, char **argv)
 	}
 	if (is_valid(stack.stack_a))
 		free_stack(stack.stack_a);
-	
 	else
 	{
 		sort_stack(&stack);
 		free_stack(stack.stack_a);
 	}
-	
 }
+*/

@@ -6,11 +6,24 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/12 11:23:10 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/12 14:38:00 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_list	*go_to_last2(t_list	*lst)
+{
+	t_list	*current;
+
+	current = lst;
+	if (lst)
+	{
+		while (lst->next != current)
+			lst = lst->next;
+	}
+	return (lst);
+}
 
 void	set_pos(t_list **stack)
 {

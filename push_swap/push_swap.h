@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/12 11:36:44 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/12 14:38:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void		ft_r(t_list *stack);
 //------------------------------------------------------------
 t_list		*init_node(char *str, int r);
 t_list		*extract_stack(char **argv);
+t_list		*go_to_last2(t_list	*lst);
 t_list		*ft_lstlast(t_list *lst);
+t_list		*lst_dup(t_list	*list);
 #endif

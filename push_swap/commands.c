@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:05:19 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/11 09:57:22 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/12 11:49:34 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_push(t_list	**stack_1, t_list **stack_2)
 
 	if (*stack_1)
 	{
+		go_to_rank(stack_1, 1);
 		if ((*stack_1)->next != *stack_1)
 			ft_push2(stack_1, stack_2);
 		else

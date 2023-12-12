@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:38 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/12 11:25:17 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/12 14:43:20 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,114 @@ int	is_valid(t_list	*stack)
 	return (1);
 }
 
-void	sort_stack(t_stack *stack)
+/*
+int gtr1_with_r(t_list *current)
+
+int gtr1_with_rr(t_list	*current)
 {
-		
-		while (!is_valid(stack->stack_a))
-		{
-			
-		}
+	int	x;
+	
+	x = 0;
+	while (stack != current)
+	{
+		ft_r((c))
+	}
 }
 
-/*
+int imaginary_sort(t_stack stack, int nb)
+{
+	t_list	*temp;
+	t_list	*prev_a;
+	t_list	*prev_b
+	t_list	*last;
+	int 	i;
+
+	temp = stack.stack_a;
+	instruct = 0;
+	while (temp->data != nb)
+		temp = temp->next;
+	prev_b = go_to_last2(stack.stack_b);
+	if (!is_smallest_in_stack(stack.stack_b, nb) && !is_biggest_in_stack(stack.stack_b, nb))
+	{
+		while (temp->rank != 1 && stack.stack_b->pos > temp->pos && prev_b->pos < temp->pos)
+		{
+			prev_a = go_to_last2(temp);
+			prev_b = go_to_last2(stack.stack_b);
+				last = go_to_last2(stack.stack_a);
+			if (temp->rank != 1)
+			{
+				if (prev_a->rank == 1 && prev_b->rank == 1)
+				{
+						ft_swap(stack.stack_a);
+						ft_swap(stack.stack_b);
+						instruct += 1;
+				}
+				else if ()
+			}
+		}
+	}
+}
+
+int find_cheapest2(t_stack stack, t_list *stack_a);
+{
+	t_list	*start;
+	int instruct;
+	int	res;
+	
+	res = imaginary_sort(stack, stack_a->data);//put the number on top, then  put the right number of stack_b at its top and return the number of commands
+	start = stack_a;
+	stack_a = .stack_a->next;
+	while (start != stack_a)
+	{
+		instruct = imaginary_sort(stack, stack_a->data);
+		if (res > instruct)
+			res = instruct;
+		stack_a = stack_a->next;
+	}
+	return (stack_a->data);
+}
+
+void	sort_stack(t_stack *stack)
+{
+	int	nb;
+	int min;
+
+	min = find_min(stack->stack_a);
+	ft_push(&(stack->stack_a),&(stack->stack_b));
+	ft_push(&(stack->stack_a),&(stack->stack_b));
+	while (lst_size((*stack)->stack_a) != 3)
+	{
+		nb = find_cheapest(*stack); //find nb with the least number of operations;
+		bring_number_up(&(stack->stack_a), nb);//bring nb to the top of the list && put stack_b in the correct order;
+	}
+	sort_3_numbers(stack_a);//sort the 3 numbers with max 2 operations;
+	while (stack->stack_b)
+	{
+		arrange_stack(stack->stack_b, &(stack->stack_a));
+		ft_push(&(stack->stack_b), &(stack->stack_a));
+	}
+	bring_number_up(&(stack->stack_a), min);//bring the min at the top of the list
+}
+*/
+
+
+#include <stdio.h>
    int main (int ac, char **av)
    {
    t_stack	stack;
-//int x;
+int x;
 
-//x = 0;
+x = 0;
 stack.stack_a = extract_stack(av);
 ac = ac;
-set_pos(&(stack.stack_a));
-stack.stack_b = NULL;
-sort_stack(&stack);
-go_to_rank(&(stack.stack_a), 1);
-
+stack.stack_b = lst_dup(stack.stack_a);
+go_to_rank(&(stack.stack_b), 1);
 while (x != 6)
 {
-printf("%d , %d |\n",stack.stack_a->data,  stack.stack_a->rank);
-stack.stack_a = stack.stack_a->next;
+printf("%d , %d |\n",stack.stack_b->data,  stack.stack_b->rank);
+stack.stack_b = stack.stack_b->next;
 x++;
 }
 
 }
-*/
+

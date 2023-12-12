@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 18:58:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/12 14:40:54 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,39 @@ int	lst_size(t_list *lst)
 			lst = lst->next;
 		}
 	}
-	return (x);
+	return (x + 1);
 }
 
-t_list	*lst_dup(t_list *lst1)
+t_list	*node_dup(t_list *lst1)
 {
 	t_list	*lst2;
 
 	lst2 = malloc(sizeof(t_list));
 	lst2->data = lst1->data;
 	lst2->rank = lst1->rank;
+	lst2->pos = lst1->pos;
 	lst2->next = NULL;
 	return (lst2);
+}
+
+t_list	*lst_dup(t_list	*list)
+{
+	t_list	*node;
+	t_list	*next;
+	t_list	*start;
+
+	start = node_dup(list);
+	node = start;
+	list = list->next;
+	while (start->data != list->data)
+	{
+		next = node_dup(list);
+		node->next = next;
+		node = node->next;
+		list = list->next;
+	}
+	node->next = start;
+	return (node);
 }
 
 void	free_stack(t_list	*stack)
