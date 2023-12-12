@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_utils_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/10 18:40:40 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:23:10 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_pos(t_list **stack)
 	{
 		if ((*stack)->pos == -1)
 		{
-			if (is_smallest(*stack))
+			if (is_smallest_in_pos(*stack))
 			{
 				(*stack)->pos = pos;
 				pos++;

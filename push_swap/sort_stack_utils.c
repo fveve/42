@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:44:12 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 18:41:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:34:59 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	go_to_last(t_list	**lst)
 	}
 }
 
-int	is_smallest(t_list	*stack)
+int	is_smallest_in_pos(t_list	*stack)
 {
 	t_list	*temp;
 
@@ -64,7 +64,7 @@ int	is_smallest(t_list	*stack)
 	return (1);
 }
 
-int	is_smallest2(t_list	*stack)
+int	is_smallest(t_list	*stack)
 {
 	t_list	*temp;
 
@@ -73,6 +73,51 @@ int	is_smallest2(t_list	*stack)
 	while (temp != stack)
 	{
 		if (temp->data > stack->data && stack != temp)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	is_biggest(t_list *stack)
+{
+	t_list	*temp;
+
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack)
+	{
+		if (temp->data < stack->data && stack != temp)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	is_biggest_in_stack(int data, t_list *stack)
+{
+	t_list	*temp;
+
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack)
+	{
+		if (data < stack->data && stack != temp)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	is_smallest_in_stack(int data, t_list *stack)
+{
+	t_list	*temp;
+
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack)
+	{
+		if (data > stack->data && stack != temp)
 			return (0);
 		stack = stack->next;
 	}
