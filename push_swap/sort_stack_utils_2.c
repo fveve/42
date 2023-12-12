@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/12 14:38:00 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/12 16:20:22 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	set_rank(t_list *lst)
 	int	size;
 	int	x;
 
-	size = lst_size(lst) + 1;
+	size = lst_size(lst);
 	x = 1;
 	while (x <= size)
 	{
