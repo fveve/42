@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/12 14:38:39 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/13 15:23:13 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void		ft_swap(t_list	*list);
 //------------------------------------------------------------
 void		set_rank(t_list *lst);
 //Ft_R && Ft_Rr-----------------------------------------------
-void		ft_rr(t_list *stack);
-void		ft_r(t_list *stack);
+void		ft_rr(t_list **stack);
+void		ft_r(t_list **stack);
 //------------------------------------------------------------
 t_list		*init_node(char *str, int r);
 t_list		*extract_stack(char **argv);

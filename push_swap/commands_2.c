@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:30:44 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 18:35:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/13 15:23:06 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_swap(t_list	*list)
 	}
 }
 
-void	ft_r(t_list *stack)
+void	ft_r(t_list **stack)
 {
 	int	max_rank;
 	int	rank;
@@ -35,13 +35,13 @@ void	ft_r(t_list *stack)
 	rank = 1;
 	if (stack)
 	{
-		max_rank = go_to_max_rank(&stack);
-		go_to_rank(&stack, 2);
+		max_rank = go_to_max_rank(stack);
+		go_to_rank(stack, 2);
 		while (rank <= max_rank)
 		{
-			stack->rank = rank;
+			(*stack)->rank = rank;
 			rank++;
-			stack = stack->next;
+			(*stack) = (*stack)->next;
 		}
 	}
 }

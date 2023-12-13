@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:05:19 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/12 16:12:38 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/13 15:22:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_push(t_list	**stack_1, t_list **stack_2)
 	}
 }
 
-void	ft_rr(t_list *stack)
+void	ft_rr(t_list **stack)
 {
 	int	rank;
 	int	max_rank;
@@ -72,12 +72,12 @@ void	ft_rr(t_list *stack)
 	rank = 1;
 	if (stack)
 	{
-		max_rank = go_to_max_rank(&stack);
+		max_rank = go_to_max_rank(stack);
 		while (rank <= max_rank)
 		{
-			stack->rank = rank;
+			(*stack)->rank = rank;
 			rank++;
-			stack = stack->next;
+			(*stack) = (*stack)->next;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/12 14:40:54 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/13 14:02:10 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_list	*lst_dup(t_list	*list)
 		list = list->next;
 	}
 	node->next = start;
+	go_to_rank(&node, 1);
 	return (node);
 }
 
