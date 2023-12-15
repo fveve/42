@@ -22,6 +22,8 @@ typedef struct s_list
 	int				data;
 	int				rank;
 	int				pos;
+	int				r;
+	int				rr;
 	struct s_list	*next;
 }	t_list;
 
@@ -35,9 +37,14 @@ typedef struct s_stack
 long int	ft_long_atoi(char *nptr);
 int			init_stack2(t_list	**stack, t_list	**node, char *str, int rank);
 int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
+void 		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
 int			is_smallest_in_stack(int data, t_list *stack);
 int			is_biggest_in_stack(int data, t_list *stack);
+int			find_cheapest(t_stack stack, t_list *stack_a);
 int			verif_int_2(char *tab, int x, long int nb);
+//Rotate && Reverse_rotate 2----------------------------------
+int 		r_or_rr3(t_list **stack, t_list *current);
+//------------------------------------------------------------
 int			is_smallest_in_pos(t_list	*stack);
 int			go_to_max_rank(t_list	**list);
 int			go_to_max_data(t_list	**list);
@@ -45,6 +52,9 @@ int			verif(int argc, char **argv);
 int			verif_double(t_list *stack);
 int			is_smallest(t_list	*stack);
 int			is_biggest(t_list	*stack);
+//Rotate && Reverse_rotate 1----------------------------------
+int 		r_or_rr2(t_list **stack);
+//------------------------------------------------------------
 int			count_numbers(char *str);
 int			is_valid(t_list	*stack);
 int			lst_size(t_list *lst);
@@ -55,6 +65,7 @@ char		*ft_strdup(char *s);
 //Ft_Push-----------------------------------------------------
 void		ft_push(t_list	**stack_1, t_list **stack_2);
 //------------------------------------------------------------
+void		go_to_node(t_list	**lst, t_list	*node);
 void		ft_lstadd_back(t_list **lst, t_list *new);
 void		go_to_rank(t_list **list, int rank);
 void		free_stack(t_list	*stack);

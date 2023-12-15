@@ -25,6 +25,15 @@ t_list	*go_to_last2(t_list	*lst)
 	return (lst);
 }
 
+void	go_to_node(t_list	**lst, t_list	*node)
+{
+	if (lst)
+	{
+		while (*lst != node)
+			*lst = (*lst)->next;
+	}
+}
+
 void	set_pos(t_list **stack)
 {
 	int	pos;

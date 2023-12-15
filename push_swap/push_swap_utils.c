@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:41:03 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/05 14:35:10 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/14 15:15:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_list	*init_node(char *str, int r)
 	node->data = ft_atoi(str);
 	node->rank = r;
 	node->pos = -1;
+	node->r = 0;
+	node->rr = 0;
 	return (node);
 }
 

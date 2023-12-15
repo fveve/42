@@ -39,6 +39,8 @@ t_list	*node_dup(t_list *lst1)
 	lst2->data = lst1->data;
 	lst2->rank = lst1->rank;
 	lst2->pos = lst1->pos;
+	lst2->r = lst1->r;
+	lst2->rr = lst1->rr;
 	lst2->next = NULL;
 	return (lst2);
 }
