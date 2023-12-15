@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/13 15:23:13 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/15 14:36:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_stack
 long int	ft_long_atoi(char *nptr);
 int			init_stack2(t_list	**stack, t_list	**node, char *str, int rank);
 int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
-void 		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
 int			is_smallest_in_stack(int data, t_list *stack);
 int			is_biggest_in_stack(int data, t_list *stack);
 int			find_cheapest(t_stack stack, t_list *stack_a);
+
 int			verif_int_2(char *tab, int x, long int nb);
 //Rotate && Reverse_rotate 2----------------------------------
 int 		r_or_rr3(t_list **stack, t_list *current);
@@ -62,6 +62,9 @@ int			ft_atoi(char *str);
 int			ft_strlen(char *s);
 char		*ft_delete_nb(char *str);
 char		*ft_strdup(char *s);
+void		bring_number_up_b(t_list **stack_a, t_list **stack_b, int nb);
+void 		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
+void 		go_to_right_node(t_list *stack_a, t_list **stack_b);
 //Ft_Push-----------------------------------------------------
 void		ft_push(t_list	**stack_1, t_list **stack_2);
 //------------------------------------------------------------
@@ -71,10 +74,10 @@ void		go_to_rank(t_list **list, int rank);
 void		free_stack(t_list	*stack);
 void		go_to_last(t_list	**lst);
 void		sort_stack(t_stack *stack);
-void		set_pos(t_list **stack);
 //FT_Swap-----------------------------------------------------
-void		ft_swap(t_list	*list);
+void		ft_swap(t_list	**list);
 //------------------------------------------------------------
+void		set_pos(t_list **stack);
 void		set_rank(t_list *lst);
 //Ft_R && Ft_Rr-----------------------------------------------
 void		ft_rr(t_list **stack);

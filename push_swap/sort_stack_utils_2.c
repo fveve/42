@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/13 15:13:29 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/15 11:41:34 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*go_to_last2(t_list	*lst)
 	t_list	*current;
 
 	current = lst;
-	if (lst)
+	if (lst && lst->next)
 	{
 		while (lst->next != current)
 			lst = lst->next;

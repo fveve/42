@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   find_cheapest.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:52:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/14 14:52:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/15 13:42:13 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int r_or_rr3(t_list **stack, t_list *current)
 	rr = 0;
 	while ((*stack)->rank != 1)
 	{
+		(*stack)->rr++;
 		ft_rr(stack);
 		rr--;
-		(*stack)->rr++;
 		go_to_node(stack, current);
 	}
 	return (rr);
@@ -42,10 +42,10 @@ int r_or_rr2(t_list **stack)
 	{
 		while ((*stack)->rank != 1)
 		{
-		ft_r(stack);
-		r++;
-		(*stack)->r++;
-		go_to_node(stack, current);
+			(*stack)->r++;
+			ft_r(stack);
+			r++;
+			go_to_node(stack, current);
 		}
 	}
 	else if ((*stack)->rank != 1)
@@ -122,13 +122,15 @@ int imaginary_sort(t_stack stack, int nb)
 			last = go_to_last2(stack.stack_b);
 			stack.stack_b = stack.stack_b->next;
 		}
+			i = imaginary_sort2(stack.stack_a,last->next, i);
 	}
 	else if (is_biggest_in_stack(stack.stack_a->data, stack.stack_b) || is_smallest_in_stack(stack.stack_a->data, stack.stack_b))
 	{
 		while (!is_biggest(stack.stack_b))
 			stack.stack_b = stack.stack_b->next;
+		i = imaginary_sort2(stack.stack_a, stack.stack_b , i);
 	}
-	i = imaginary_sort2(stack.stack_a, stack.stack_b, i);
+
 	return (i);
 }
 
