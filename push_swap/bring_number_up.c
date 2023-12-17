@@ -11,210 +11,104 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void  convert_rotate(t_list **stack_1, t_list **stack_2, int *r, int *rr)
+void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
 {
-		if (((*stack_1)->r > 0 && (*stack_2)->r > 0))
+	t_list	*current;
+	int y;
+
+	y = 1;
+	while ((*stack_1)->data != nb)
+		*stack_1 = (*stack_1)->next;
+	if (is_smallest_in_stack((*stack_1)->data, *stack_2) == 0 && is_biggest_in_stack((*stack_1)->data, *stack_2) == 0)
 	{
-		if ((*stack_1)->r > (*stack_2)->r)
-			*r = (*stack_1)->r - (*stack_2)->r;
-		else if ((*stack_1)->r < (*stack_2)->r)
-			*r = (*stack_2)->r - (*stack_1)->r;
-		else if ((*stack_1)->r == (*stack_2)->r)
+		current = *stack_2;
+		*stack_2 = (*stack_2)->next;
+		while ((*stack_1)->pos != (*stack_2)->pos + y )
 		{
-			*r = (*stack_1)->r;
-			(*stack_1)->r = 0;
-			(*stack_2)->r = 0;
+			if (*stack_2 == current)
+				y++;
+			*stack_2 = (*stack_2)->next;
 		}
 	}
-	if (((*stack_1)->rr > 0 && (*stack_2)->rr > 0))
+	else
 	{
-		if ((*stack_1)->rr > (*stack_2)->rr)
-			*rr = (*stack_1)->rr - (*stack_2)->rr;
-		else if ((*stack_1)->rr < (*stack_2)->rr)
-			*rr = (*stack_2)->rr - (*stack_1)->rr;
-		else if ((*stack_1)->rr == (*stack_2)->rr)
+		while (!is_biggest(*stack_2))
+			*stack_2 = (*stack_2)->next;
+	}
+}
+
+void	bring_number_up(t_list	**stack_1, t_list **stack_2, int nb)
+{
+	int size_1 ;
+	int size_2 ;
+
+	size_1 = lst_size(*stack_1);
+	size_2 = lst_size(*stack_2);
+	go_to_right_node(stack_1, stack_2, nb);
+	if ((*stack_1)->rank <= (size_1 /2 + 1) && (*stack_1)->rank != 1)
+	{
+		while ((*stack_1)->rank != 1)
 		{
-			*rr = (*stack_1)->rr;
-			(*stack_1)->rr = 0;
-			(*stack_2)->rr = 0;
+			ft_r(stack_1);
+			(*stack_1)->r++;
+				go_to_right_node(stack_1, stack_2, nb);
 		}
 	}
-	
-}
-
-void go_to_right_node(t_list *stack_a, t_list **stack_b)
-{
-	t_list	*last;
-
-	if (!is_smallest_in_stack(stack_a->data, (*stack_b)) && !is_biggest_in_stack(stack_a->data, (*stack_b)) )
+	else if ((*stack_1)->rank != 1)
 	{
-		last = go_to_last2(*stack_b);
-		while (((*stack_b)->pos > stack_a->pos )
-			|| (last->pos < stack_a->pos ))
+		while ((*stack_1)->rank != 1)
 		{
-			last = go_to_last2((*stack_b));
-			(*stack_b) = (*stack_b)->next;
+			ft_rr(stack_1);
+			(*stack_1)->rr++;
+				go_to_right_node(stack_1, stack_2, nb);
 		}
-		//*stack_b = last->next;
 	}
-	else if (is_biggest_in_stack(stack_a->data, (*stack_b)) || is_smallest_in_stack(stack_a->data, (*stack_b)))
+	if ((*stack_2)->rank <= (size_2 /2 + 1) && (*stack_2)->rank != 1)
 	{
-		while (!is_biggest((*stack_b)))
-			(*stack_b) = (*stack_b)->next;
-	}
-}
-void go_to_right_node2(t_list *stack_b, t_list **stack_a)
-{
-	t_list	*last;
-
-		last = go_to_last2(*stack_a);
-		while (((*stack_a)->pos > stack_b->pos )
-			|| (last->pos < stack_b->pos ))
+		while ((*stack_2)->rank != 1)
 		{
-			last = go_to_last2((*stack_a));
-			(*stack_a) = (*stack_a)->next;
+			ft_r(stack_2);
+			(*stack_2)->r++;
+				go_to_right_node(stack_1, stack_2, nb);
 		}
-		*stack_a = last->next;
+	}
+	else if ((*stack_2)->rank != 1)
+	{
+		while ((*stack_2)->rank != 1)
+		{
+			ft_rr(stack_2);
+			(*stack_2)->rr++;
+				go_to_right_node(stack_1, stack_2, nb);
+		}
+	}
 }
 
-void bring_number_up(t_list **stack_a, t_list **stack_b, int nb)
-{
-	t_list *stack_1;
-	t_list *stack_2;
-	int rrr;
-	int rr;
 
-	rr = 0;
-	rrr = 0;
-	stack_1 = lst_dup(*stack_a);
-	stack_2 = lst_dup(*stack_b);
-	while (stack_1->data != nb)
-		stack_1 = stack_1->next;
-	go_to_right_node(stack_1, &stack_2);
-	r_or_rr2(&stack_1);
-	r_or_rr2(&stack_2);
-	convert_rotate(&stack_1, &stack_2, &rr, &rrr);
-	while (stack_1->r)
-	{
-		ft_r(stack_a);
-		write(1, "ra\n", 3);
-		stack_1->r--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-	}
-	while (stack_2->r)
-	{
-		ft_r(stack_b);
-		write(1, "rb\n", 3);
-		stack_2->r--;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (rr)
-	{
-		ft_r(stack_a);
-		ft_r(stack_b);
-		write(1, "rr\n", 3);
-		rr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (stack_1->rr)
-	{
-		ft_r(stack_a);
-		write(1, "rra\n", 4);
-		stack_1->rr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-	}
-	while (stack_2->rr)
-	{
-		ft_r(stack_b);
-		write(1, "rrb\n", 4);
-		stack_2->rr--;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (rrr)
-	{
-		ft_rr(stack_a);
-		ft_rr(stack_b);
-		write(1, "rrr\n", 4);
-		rrr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-		go_to_right_node(stack_1, &stack_2);
-	}
-	free_stack(stack_1);
-	free_stack(stack_2);
-}
-void bring_number_up_b(t_list **stack_a, t_list **stack_b, int nb)
+int main (int ac, char **av)
 {
-	t_list *stack_1;
-	t_list *stack_2;
-	int rrr;
-	int rr;
+	t_stack	stack;;
+	int x;
 
-	rr = 0;
-	rrr = 0;
-	stack_1 = lst_dup(*stack_a);
-	stack_2 = lst_dup(*stack_b);
-	while (stack_1->data != nb)
-		stack_1 = stack_1->next;
-	go_to_right_node2(stack_1, &stack_2);
-	r_or_rr2(&stack_1);
-	r_or_rr2(&stack_2);
-	convert_rotate(&stack_1, &stack_2, &rr, &rrr);
-	while (stack_1->r)
+	x = 0;
+	stack.stack_a = extract_stack(av);
+	ac = ac;
+	stack.stack_b = NULL;
+	ft_push(&(stack.stack_a),&(stack.stack_b));
+	ft_push(&(stack.stack_a),&(stack.stack_b));
+	bring_number_up((&stack.stack_a), (&stack.stack_b), 7);
+	ft_push(&(stack.stack_a),&(stack.stack_b));
+	bring_number_up((&stack.stack_a), (&stack.stack_b), 1);
+	ft_push(&(stack.stack_a),&(stack.stack_b));
+	bring_number_up((&stack.stack_a), (&stack.stack_b), 6);
+	ft_push(&(stack.stack_a),&(stack.stack_b));
+
+	while (x != 6)
 	{
-		ft_r(stack_a);
-		write(1, "rb\n", 3);
-		stack_1->r--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
+		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack.stack_a->data, stack.stack_a->rank, stack.stack_b->data, stack.stack_b->rank);
+		stack.stack_a = stack.stack_a->next;
+		stack.stack_b = stack.stack_b->next;
+		x++;
 	}
-	while (stack_2->r)
-	{
-		ft_r(stack_b);
-		write(1, "ra\n", 3);
-		stack_2->r--;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (rr)
-	{
-		ft_r(stack_a);
-		ft_r(stack_b);
-		write(1, "rr\n", 3);
-		rr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (stack_1->rr)
-	{
-		ft_r(stack_a);
-		write(1, "rrb\n", 4);
-		stack_1->rr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-	}
-	while (stack_2->rr)
-	{
-		ft_r(stack_b);
-		write(1, "rra\n", 4);
-		stack_2->rr--;
-		go_to_right_node(stack_1, &stack_2);
-	}
-		while (rrr)
-	{
-		ft_rr(stack_a);
-		ft_rr(stack_b);
-		write(1, "rrr\n", 4);
-		rrr--;
-		while (stack_1->data != nb)
-			stack_1 = stack_1->next;
-		go_to_right_node(stack_1, &stack_2);
-	}
-	free_stack(stack_1);
-	free_stack(stack_2);
+	printf("       stack_a        |       stack_b ");
+
 }

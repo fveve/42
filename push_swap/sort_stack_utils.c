@@ -76,6 +76,8 @@ int	is_smallest(t_list	*stack)
 			return (0);
 		stack = stack->next;
 	}
+	if (temp->data > stack->data)
+		return (0);
 	return (1);
 }
 
@@ -91,6 +93,8 @@ int	is_biggest(t_list *stack)
 			return (0);
 		stack = stack->next;
 	}
+	if (temp->data < stack->data)
+			return (0);
 	return (1);
 }
 
@@ -102,10 +106,12 @@ int	is_biggest_in_stack(int data, t_list *stack)
 	stack = stack->next;
 	while (temp != stack)
 	{
-		if (data < stack->data && stack != temp)
+		if (data < stack->data)
 			return (0);
 		stack = stack->next;
 	}
+			if (data < stack->data)
+			return (0);
 	return (1);
 }
 
@@ -117,9 +123,11 @@ int	is_smallest_in_stack(int data, t_list *stack)
 	stack = stack->next;
 	while (temp != stack)
 	{
-		if (data > stack->data && stack != temp)
+		if (data > stack->data)
 			return (0);
 		stack = stack->next;
 	}
+			if (data > stack->data)
+			return (0);
 	return (1);
 }

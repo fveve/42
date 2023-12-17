@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-
+/*
 int	main(int argc, char **argv)
 {
 	t_stack	stack;
@@ -39,3 +39,4 @@ int	main(int argc, char **argv)
 		free_stack(stack.stack_a);
 	}
 }
+*/
