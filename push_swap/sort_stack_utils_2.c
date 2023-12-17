@@ -56,6 +56,15 @@ void	set_pos(t_list **stack)
 	}
 }
 
+int	go_to_max_data(t_list **list)
+{
+	if ((*list)->next == NULL)
+		return (1);
+	while ((*list)->next != NULL && (*list)->data < (*list)->next->data)
+		*list = (*list)->next;
+	return ((*list)->data);
+}
+
 void	set_rank(t_list *lst)
 {
 	int	size;

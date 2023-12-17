@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
 {
 	t_list	*current;
@@ -36,79 +37,280 @@ void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
 			*stack_2 = (*stack_2)->next;
 	}
 }
-
-void	bring_number_up(t_list	**stack_1, t_list **stack_2, int nb)
+void	go_to_right_node2(t_list **stack_1, t_list **stack_2, int nb)
 {
+	t_list	*current;
+	int y;
+
+	y = 1;
+	while ((*stack_1)->data != nb)
+		*stack_1 = (*stack_1)->next;
+	current = *stack_2;
+	*stack_2 = (*stack_2)->next;
+	while ((*stack_1)->pos != (*stack_2)->pos - y )
+	{
+		if (*stack_2 == current)
+			y++;
+		*stack_2 = (*stack_2)->next;
+	}
+}
+
+
+
+void	false_bring_number_up(t_list *stack_1, t_list *stack_2, int nb)
+{
+	t_list *stack_a;
+	t_list	*stack_b;
 	int size_1 ;
 	int size_2 ;
 
-	size_1 = lst_size(*stack_1);
-	size_2 = lst_size(*stack_2);
-	go_to_right_node(stack_1, stack_2, nb);
-	if ((*stack_1)->rank <= (size_1 /2 + 1) && (*stack_1)->rank != 1)
+	size_1 = lst_size(stack_1);
+	size_2 = lst_size(stack_2);
+	stack_a = lst_dup(stack_1);
+	stack_b = lst_dup(stack_2);
+	go_to_right_node(&stack_a, &stack_b, nb);
+	go_to_right_node(&stack_1, &stack_2, nb);
+	stack_1->r = 0;
+	stack_1->rr = 0;
+	stack_2->rr = 0;
+	stack_2->r = 0;
+	if ( stack_a->rank <= (size_1 /2 + 1) &&  stack_a->rank != 1)
 	{
-		while ((*stack_1)->rank != 1)
+		while ( stack_a->rank != 1)
 		{
-			ft_r(stack_1);
-			(*stack_1)->r++;
-				go_to_right_node(stack_1, stack_2, nb);
+			 stack_1->r++;			
+			ft_r(&stack_a);
+			go_to_right_node(&stack_a, &stack_b, nb);
+			go_to_right_node(&stack_1, &stack_2, nb);
 		}
 	}
-	else if ((*stack_1)->rank != 1)
+	else if ( stack_a->rank != 1)
 	{
-		while ((*stack_1)->rank != 1)
+		while ( stack_a->rank != 1)
 		{
-			ft_rr(stack_1);
-			(*stack_1)->rr++;
-				go_to_right_node(stack_1, stack_2, nb);
+			 stack_1->rr++;
+			ft_rr(&stack_a);
+			go_to_right_node(&stack_a, &stack_b, nb);
+			go_to_right_node(&stack_1, &stack_2, nb);
 		}
 	}
-	if ((*stack_2)->rank <= (size_2 /2 + 1) && (*stack_2)->rank != 1)
+	if (stack_b->rank <= (size_2 /2 + 1) && stack_b->rank != 1)
 	{
-		while ((*stack_2)->rank != 1)
+		while (stack_b->rank != 1)
 		{
-			ft_r(stack_2);
-			(*stack_2)->r++;
-				go_to_right_node(stack_1, stack_2, nb);
+			stack_2->r++;
+			ft_r(&stack_b);
+			go_to_right_node(&stack_a, &stack_b, nb);
+			go_to_right_node(&stack_1, &stack_2, nb);
 		}
 	}
-	else if ((*stack_2)->rank != 1)
+	else if (stack_b->rank != 1)
 	{
-		while ((*stack_2)->rank != 1)
+		while (stack_b->rank != 1)
 		{
-			ft_rr(stack_2);
-			(*stack_2)->rr++;
-				go_to_right_node(stack_1, stack_2, nb);
+			stack_2->rr++;
+			ft_rr(&stack_b);
+			go_to_right_node(&stack_a, &stack_b, nb);
+			go_to_right_node(&stack_1, &stack_2, nb);
 		}
 	}
+	free_stack(stack_a);
+	free_stack(stack_b);
 }
 
 
-int main (int ac, char **av)
+int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 {
-	t_stack	stack;;
-	int x;
+	int rr;
 
-	x = 0;
-	stack.stack_a = extract_stack(av);
-	ac = ac;
-	stack.stack_b = NULL;
-	ft_push(&(stack.stack_a),&(stack.stack_b));
-	ft_push(&(stack.stack_a),&(stack.stack_b));
-	bring_number_up((&stack.stack_a), (&stack.stack_b), 7);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
-	bring_number_up((&stack.stack_a), (&stack.stack_b), 1);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
-	bring_number_up((&stack.stack_a), (&stack.stack_b), 6);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
-
-	while (x != 6)
+	rr = 0;
+	false_bring_number_up(*stack_1, *stack_2, nb);
+	if ((*stack_1)->r && (*stack_2)->r)
 	{
-		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack.stack_a->data, stack.stack_a->rank, stack.stack_b->data, stack.stack_b->rank);
-		stack.stack_a = stack.stack_a->next;
-		stack.stack_b = stack.stack_b->next;
-		x++;
+		if ((*stack_1)->r > (*stack_2)->r)
+		{
+			rr = (*stack_1)->r - (*stack_2)->r;
+			(*stack_1)->r -= rr;
+			(*stack_2)->r -= rr;
+		}
+		if ((*stack_1)->r < (*stack_2)->r)
+		{
+			rr = (*stack_2)->r - (*stack_1)->r;
+			(*stack_1)->r -= rr;
+			(*stack_2)->r -= rr;
+		}
+		if ((*stack_1)->r == (*stack_2)->r)
+		{
+			rr = (*stack_1)->r;
+			(*stack_1)->r = 0;
+			(*stack_2)->r = 0;
+		}
 	}
-	printf("       stack_a        |       stack_b ");
-
+	if ((*stack_1)->rr && (*stack_2)->rr)
+	{
+		if ((*stack_1)->rr > (*stack_2)->rr)
+		{
+			rr = (*stack_1)->rr - (*stack_2)->rr;
+			(*stack_1)->rr -= rr;
+			(*stack_2)->rr -= rr;
+		}
+		if ((*stack_1)->rr < (*stack_2)->rr)
+		{
+			rr = (*stack_2)->rr - (*stack_1)->rr;
+			(*stack_1)->rr -= rr;
+			(*stack_2)->rr -= rr;
+		}
+		if ((*stack_1)->rr == (*stack_2)->rr)
+		{
+			rr = (*stack_1)->rr;
+			(*stack_1)->rr = 0;
+			(*stack_2)->rr = 0;
+		}
+		rr *= -1;
+	}
+	return (rr);
 }
+
+void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
+{
+	int	r;
+	int ra;
+	int rb;
+	int rra;
+	int rrb;
+
+	ra = 0;
+	rb = 0;
+	rra = 0;
+	rrb = 0;
+	r = convert_rotate2(stack_a, stack_b, nb);
+	false_bring_number_up(*stack_a, *stack_b, nb);
+	go_to_right_node(stack_a, stack_b, nb);
+	if ((*stack_a)->r)
+		ra = (*stack_a)->r;
+	if ((*stack_a)->rr)
+		rra = (*stack_a)->rr;
+	if ((*stack_b)->r)
+		rb = (*stack_b)->r;
+	if ((*stack_b)->rr)
+		rrb = (*stack_b)->rr;
+	while (ra)
+	{			
+		ft_r(stack_a);
+		write(1, "ra\n", 3);
+		ra--;
+	}
+	while (rra)
+	{
+		ft_rr(stack_a);
+		write(1, "rra\n", 4);
+		rra--;
+	}
+	while (rb)
+	{
+		(*stack_b)->r--;
+		ft_r(stack_b);
+		write(1, "rb\n", 3);
+		rb--;
+	}
+	while (rrb)
+	{
+		(*stack_b)->rr--;
+		ft_rr(stack_b);
+		write(1, "rrb\n", 4);
+		rrb--;
+	}
+	if (r > 0)
+	{
+		while (r >= 0)
+		{
+			ft_r(stack_a);
+			ft_r(stack_b);
+			write(1, "rr\n", 3);
+			r--;
+		}
+	}
+	else if (r < 0)
+	{
+		while (r <= 0)
+		{
+			ft_r(stack_a);
+			ft_r(stack_b);
+			write(1, "rrr\n", 4);
+			r++;
+		}
+	}
+}
+
+
+void	bring_number_up_b(t_list	**stack_a, t_list **stack_b, int nb)
+{
+	int	r;
+	int ra;
+	int rb;
+	int rra;
+	int rrb;
+
+	ra = 0;
+	rb = 0;
+	rra = 0;
+	rrb = 0;
+	r = convert_rotate2(stack_a, stack_b, nb);
+	false_bring_number_up(*stack_a, *stack_b, nb);
+	go_to_right_node2(stack_a, stack_b, nb);
+	if ((*stack_a)->r)
+		ra = (*stack_a)->r;
+	if ((*stack_a)->rr)
+		rra = (*stack_a)->rr;
+	if ((*stack_b)->r)
+		rb = (*stack_b)->r;
+	if ((*stack_b)->rr)
+		rrb = (*stack_b)->rr;
+	while (ra)
+	{			
+		ft_r(stack_a);
+		write(1, "ra\n", 3);
+		ra--;
+	}
+	while (rra)
+	{
+		ft_rr(stack_a);
+		write(1, "rra\n", 4);
+		rra--;
+	}
+	while (rb)
+	{
+		(*stack_b)->r--;
+		ft_r(stack_b);
+		write(1, "rb\n", 3);
+		rb--;
+	}
+	while (rrb)
+	{
+		(*stack_b)->rr--;
+		ft_rr(stack_b);
+		write(1, "rrb\n", 4);
+		rrb--;
+	}
+	if (r > 0)
+	{
+		while (r >= 0)
+		{
+			ft_r(stack_a);
+			ft_r(stack_b);
+			write(1, "rr\n", 3);
+			r--;
+		}
+	}
+	else if (r < 0)
+	{
+		while (r <= 0)
+		{
+			ft_r(stack_a);
+			ft_r(stack_b);
+			write(1, "rrr\n", 4);
+			r++;
+		}
+	}
+}
+
