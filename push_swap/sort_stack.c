@@ -70,7 +70,7 @@ void	bring_min_up(t_list	**stack, int min)
 		{
 			ft_r(stack);
 		write(1, "ra\n", 3);
-		go_to_node(stack, current);
+			go_to_node(stack, current);
 		}
 	}
 	else if ((*stack)->rank != 1)
@@ -80,10 +80,37 @@ void	bring_min_up(t_list	**stack, int min)
 			ft_rr(stack);
 			write(1, "rra\n", 4);
 			go_to_node(stack, current);
-
 		}
 	}
 }
+
+void	bring_min_up_b(t_list	**stack, int min)
+{
+	t_list *current;
+
+	while ((*stack)->data != min)
+		*stack = (*stack)->next;
+	current = *stack;
+	if ((*stack)->rank <= ((lst_size(*stack)) /2 + 1) && (*stack)->rank != 1)
+	{
+		while ((*stack)->rank != 1)
+		{
+			ft_r(stack);
+		write(1, "rb\n", 3);
+		go_to_node(stack, current);
+		}
+	}
+	else if ((*stack)->rank != 1)
+	{
+		while ((*stack)->rank != 1)
+		{
+			ft_rr(stack);
+			write(1, "rrb\n", 4);
+			go_to_node(stack, current);
+		}
+	}
+}
+
 
 void	sort_stack(t_stack *stack)
 {
@@ -101,18 +128,18 @@ void	sort_stack(t_stack *stack)
 	}
 	while (lst_size(stack->stack_a) > 3)
 	{
-	bring_number_up(&(stack->stack_a), &(stack->stack_b), find_cheapest(stack->stack_a, stack->stack_b));//bring cheapest to the top of the list && put stack_b in the correct order;
+		bring_number_up(&(stack->stack_a), &(stack->stack_b), find_cheapest(stack->stack_a, stack->stack_b));//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_a), &(stack->stack_b));
 		write(1, "pb\n", 3);
 	}
 	sort_3_numbers(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
-	bring_number_up_b(&(stack->stack_b), &(stack->stack_a), stack->stack_b->data);
 	while (stack->stack_b)
 	{
+		bring_number_up_b( &(stack->stack_b),&(stack->stack_a), stack->stack_b->data);//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_b), &(stack->stack_a));
 		write(1, "pa\n", 3);
 	}
-		bring_min_up(&(stack->stack_a), min->data);//bring the min at the top of the list
+	bring_min_up(&(stack->stack_a), min->data);//bring the min at the top of the list
 }
 
 
