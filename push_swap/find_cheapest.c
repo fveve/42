@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:52:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/18 08:51:17 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/18 12:45:16 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,27 @@ int	is_cheapest(t_list *stack_a, t_list *stack_b, int nb)
 	int res;
 	int instruct;
 
+
+	go_to_right_node(&stack_a, &stack_b, nb);
 	res = convert_rotate(stack_a, stack_b, nb);
 	current = stack_a;
 	stack_a = stack_a->next;
 	while (stack_a != current)
 	{
+		go_to_right_node(&stack_a, &stack_b, stack_a->data);
 		instruct = convert_rotate(stack_a, stack_b, stack_a->data);
 		if (res > instruct)
 			return (0);
 		if (stack_a != current)
 			stack_a = stack_a->next;
+		//printf("data : %d, res : %d\n", stack_a->data, instruct);
 	}
-	if (res > instruct)
-		return (0);
+	stack_a = stack_a->next;
+	go_to_right_node(&stack_a, &stack_b, stack_a->data);
+			instruct = convert_rotate(stack_a, stack_b, stack_a->data);
+				//	printf("data : %d, res : %d\n", stack_a->data, instruct);
+		if (res > instruct)
+			return (0);
 	return (1);
 }
 
@@ -92,7 +100,7 @@ int	find_cheapest(t_list *stack_a, t_list *stack_b)
 	int	res;
 
 	res = 0;
-	res = 0;
+	go_to_rank(&stack_a, 1);
 	while (res != 1)
 	{
 		res = is_cheapest(stack_a, stack_b, stack_a->data);

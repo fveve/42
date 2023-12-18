@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/15 14:36:05 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/18 10:16:53 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int			find_cheapest(t_list *stack_a, t_list *stack_b);
 int			verif_int_2(char *tab, int x, long int nb);
 int			is_smallest_in_pos(t_list	*stack);
 int			go_to_max_rank(t_list	**list);
-int			go_to_max_data(t_list	**list);
 int			verif(int argc, char **argv);
 int			verif_double(t_list *stack);
 int			is_smallest(t_list	*stack);

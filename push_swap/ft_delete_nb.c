@@ -84,15 +84,3 @@ char	*ft_delete_nb(char *str)
 	return (tab);
 }
 
-/*
-#include <stdio.h>
-
-int	main ()
-{
-	char	*tab;
-
-		tab = ft_delete_nb("         -25    -12    -5 -4   8   7   5", 1);
-		printf("%s", tab);
-				free(tab);
-}
-*/
