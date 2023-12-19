@@ -28,7 +28,7 @@ void	go_to_right_node2(t_list **stack_b, t_list **stack_a, int nb)
 		{
 			//printf("data : %d, pos : %d | data : %d, pos : %d\n", (*stack_a)->data, (*stack_a)->pos,(*stack_b)->data,(*stack_b)->pos);
 
-			if (*stack_a == current)
+			if (*stack_a == current && (*stack_b)->pos != (*stack_a)->pos - y)
 				y++;
 			if ((*stack_b)->pos != (*stack_a)->pos - y)
 				*stack_a = (*stack_a)->next;

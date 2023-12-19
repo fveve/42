@@ -22,10 +22,10 @@ void	ft_swap(t_list	**list)
 		go_to_rank(list, 1);
 		next = (*list)->next;
 		temp = (*list)->data;
-		temp = (*list)->pos;
 		(*list)->data = next->data;
-		(*list)->pos = next->pos;
 		next->data = temp;
+		temp = (*list)->pos;
+		(*list)->pos = next->pos;
 		next->pos = temp;
 	}
 }

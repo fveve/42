@@ -124,38 +124,49 @@ void	sort_stack(t_stack *stack)
 		ft_push(&(stack->stack_a),&(stack->stack_b));
 		write(1, "pb\n", 3);
 	}
+	/*x = 0;
+		while (x != 8)
+		{
+			printf("[data]: %d, [rank] : %d              | [data] : %d, [rank] : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			stack->stack_a = stack->stack_a->next;
+			stack->stack_b =stack->stack_b->next;
+			x++;
+		}
+		printf("  stack->stack_a    |       stack_b\n\n");*/
 	while (lst_size(stack->stack_a) > 3)
 	{
 		/*x = 0;
 		while (x != 6)
 		{
-			printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			printf("[data]: %d, [rank] : %d | [data] : %d, [rank] : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
 			stack->stack_a = stack->stack_a->next;
 			stack->stack_b =stack->stack_b->next;
 			x++;
 		}
-		printf("  stack->stack_a    |       stack_b\n\n");
-		printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));*/
+		printf("  stack->stack_a    |       stack_b\n\n");*/
+	//	printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));
 		bring_number_up(&(stack->stack_a), &(stack->stack_b), find_cheapest(stack->stack_a, stack->stack_b));//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_a), &(stack->stack_b));
 		write(1, "pb\n", 3);
-	}/*
-	x = 0;
+	}
+
+	sort_3_numbers(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
+		/*x = 0;
 	while (x != 6)
 	{
-		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			printf("[data]: %d, [rank] : %d | [data] : %d, [rank] : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
 		stack->stack_a = stack->stack_a->next;
 		stack->stack_b =stack->stack_b->next;
 		x++;
 	}
 	printf("  stack->stack_a    |       stack_b\n\n");*/
-	sort_3_numbers(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
+
 	while (stack->stack_b)
 	{
 	/*x = 0;
 		while (x <= 6)
 		{
-			printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			printf("[data]: %d, [rank] : %d | [data] : %d, [rank] : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
 			stack->stack_a = stack->stack_a->next;
 			stack->stack_b =stack->stack_b->next;
 			x++;

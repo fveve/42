@@ -72,12 +72,11 @@ int	is_smallest(t_list	*stack)
 	stack = stack->next;
 	while (temp != stack)
 	{
-		if (temp->data > stack->data && stack != temp)
+		if (temp->data > stack->data)
 			return (0);
-		stack = stack->next;
+		if (temp != stack)
+			stack = stack->next;
 	}
-	if (temp->data > stack->data)
-		return (0);
 	return (1);
 }
 
