@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/18 10:16:53 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/19 12:33:42 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char		*ft_strdup(char *s);
 void		false_bring_number_up(t_list *stack_1, t_list *stack_2, int nb);
 void 		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
 void 		bring_number_up_b(t_list **stack_a, t_list **stack_b, int nb);
+void		go_to_right_node2(t_list **stack_1, t_list **stack_2, int nb);
 void		go_to_right_node(t_list **stack_1,t_list **stack_2, int nb);
 //Ft_Push-----------------------------------------------------
 void		ft_push(t_list	**stack_1, t_list **stack_2);

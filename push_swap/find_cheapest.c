@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:52:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/18 12:45:16 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/19 15:47:52 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,56 +22,34 @@ int convert_rotate(t_list *stack_1, t_list *stack_2, int nb)
 	false_bring_number_up(stack_1, stack_2, nb);
 	if (stack_1->r && stack_2->r)
 	{
-		if (stack_1->r > stack_2->r)
+		while (stack_1->r &&  stack_2->r)
 		{
-			rr = stack_1->r - stack_2->r;
-			stack_1->r -= rr;
-			stack_2->r -= rr;
-		}
-		if (stack_1->r < stack_2->r)
-		{
-			rr = stack_2->r - stack_1->r;
-			stack_1->r -= rr;
-			stack_2->r -= rr;
-		}
-		if (stack_1->r == stack_2->r)
-		{
-			rr = stack_1->r;
-			stack_1->r = 0;
-			stack_2->r = 0;
+			rr++;
+			stack_1->r--;
+			stack_2->r--;
 		}
 	}
 	if (stack_1->rr && stack_2->rr)
 	{
-		if (stack_1->rr > stack_2->rr)
+		while (stack_1->rr &&  stack_2->rr)
 		{
-			rrr = stack_1->rr - stack_2->rr;
-			stack_1->rr -= rrr;
-			stack_2->rr -= rrr;
-		}
-		if (stack_1->rr < stack_2->rr)
-		{
-			rrr = stack_2->rr - stack_1->rr;
-			stack_1->rr -= rrr;
-			stack_2->rr -= rrr;
-		}
-		if (stack_1->rr == stack_2->rr)
-		{
-			rrr = stack_1->rr;
-			stack_1->rr = 0;
-			stack_2->rr = 0;
+			rrr++;
+			stack_1->rr--;
+			stack_2->rr--;
 		}
 	}
 	return (stack_1->r + stack_2->r + stack_1->rr + stack_2->rr + rr +rrr);
 }
 
-int	is_cheapest(t_list *stack_a, t_list *stack_b, int nb)
+int	find_cheapest(t_list *stack_a, t_list *stack_b)
 {
 	t_list	*current;
 	int res;
 	int instruct;
+	int nb;
 
-
+	go_to_rank(&stack_a, 1);
+	nb = stack_a->data;
 	go_to_right_node(&stack_a, &stack_b, nb);
 	res = convert_rotate(stack_a, stack_b, nb);
 	current = stack_a;
@@ -81,33 +59,16 @@ int	is_cheapest(t_list *stack_a, t_list *stack_b, int nb)
 		go_to_right_node(&stack_a, &stack_b, stack_a->data);
 		instruct = convert_rotate(stack_a, stack_b, stack_a->data);
 		if (res > instruct)
-			return (0);
+		{
+			nb = stack_a->data;
+			res = instruct;
+		}
 		if (stack_a != current)
 			stack_a = stack_a->next;
 		//printf("data : %d, res : %d\n", stack_a->data, instruct);
 	}
-	stack_a = stack_a->next;
-	go_to_right_node(&stack_a, &stack_b, stack_a->data);
-			instruct = convert_rotate(stack_a, stack_b, stack_a->data);
-				//	printf("data : %d, res : %d\n", stack_a->data, instruct);
-		if (res > instruct)
-			return (0);
-	return (1);
-}
-
-int	find_cheapest(t_list *stack_a, t_list *stack_b)
-{
-	int	res;
-
-	res = 0;
-	go_to_rank(&stack_a, 1);
-	while (res != 1)
-	{
-		res = is_cheapest(stack_a, stack_b, stack_a->data);
-		if (res != 1)
-			stack_a = stack_a->next;	
-	}
-	return (stack_a->data);
+	
+	return (nb);
 }
 /*
 int main (int ac, char **av)

@@ -6,97 +6,55 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:21:20 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/18 13:17:53 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/19 16:42:42 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	go_to_right_node2(t_list **stack_1, t_list **stack_2, int nb)
+void	go_to_right_node2(t_list **stack_b, t_list **stack_a, int nb)
 {
 	t_list	*current;
 	int y;
 
 	y = 1;
-	while ((*stack_1)->data != nb)
-		*stack_1 = (*stack_1)->next;
-	if (is_smallest_in_stack((*stack_1)->data, *stack_2) == 0 && is_biggest_in_stack((*stack_1)->data, *stack_2) == 0)
+	while ((*stack_b)->data != nb)
+		*stack_b = (*stack_b)->next;
+	if (is_smallest_in_stack((*stack_b)->data, *stack_a) == 0 && is_biggest_in_stack((*stack_b)->data, *stack_a) == 0)
 	{
-		current = *stack_2;
-		*stack_2 = (*stack_2)->next;
-		while ((*stack_1)->pos != (*stack_2)->pos - y )
+		current = *stack_a;
+		*stack_a = (*stack_a)->next;
+		while ((*stack_b)->pos != (*stack_a)->pos - y )
 		{
-			if (*stack_2 == current)
+			//printf("data : %d, pos : %d | data : %d, pos : %d\n", (*stack_a)->data, (*stack_a)->pos,(*stack_b)->data,(*stack_b)->pos);
+
+			if (*stack_a == current)
 				y++;
-			*stack_2 = (*stack_2)->next;
+			if ((*stack_b)->pos != (*stack_a)->pos - y)
+				*stack_a = (*stack_a)->next;
 		}
 	}
 	else
 	{
-		while (!is_smallest(*stack_2))
-			*stack_2 = (*stack_2)->next;
+		while (!is_smallest(*stack_a))
+			*stack_a = (*stack_a)->next;
 	}
 }
 
-void	false_bring_number_up_b(t_list *stack_1, t_list *stack_2, int nb)
+void	false_bring_number_up_b(t_list *stack_b, t_list *stack_a, int nb)
 {
-	t_list *stack_a;
-	t_list	*stack_b;
-	int size_1 ;
 	int size_2 ;
+	int max;
 
-	size_1 = lst_size(stack_1);
-	size_2 = lst_size(stack_2);
-	stack_a = lst_dup(stack_1);
-	stack_b = lst_dup(stack_2);
-	go_to_right_node2(&stack_a, &stack_b, nb);
-	go_to_right_node2(&stack_1, &stack_2, nb);
-	stack_1->r = 0;
-	stack_1->rr = 0;
-	stack_2->rr = 0;
-	stack_2->r = 0;
-	if ( stack_a->rank > (size_1 / 2 + 1) &&  stack_a->rank != 1)
-	{
-		while ( stack_a->rank != 1)
-		{
-			 stack_1->r++;			
-			ft_r(&stack_a);
-			go_to_right_node2(&stack_a, &stack_b, nb);
-			go_to_right_node2(&stack_1, &stack_2, nb);
-		}
-	}
+	size_2 = lst_size(stack_a);
+	max = go_to_max_rank(&stack_a);
+	go_to_right_node2(&stack_b, &stack_a, nb);
+	stack_a->rr = 0;
+	stack_a->r = 0;
+	if ( stack_a->rank <= (size_2 /2 + 1) &&  stack_a->rank != 1)
+			 stack_a->r = stack_a->rank - 1;			
 	else if ( stack_a->rank != 1)
-	{
-		while ( stack_a->rank != 1)
-		{
-			 stack_1->rr++;
-			ft_rr(&stack_a);
-			go_to_right_node2(&stack_a, &stack_b, nb);
-			go_to_right_node2(&stack_1, &stack_2, nb);
-		}
-	}
-	if (stack_b->rank < (size_2 /2 + 1) && stack_b->rank != 1)
-	{
-		while (stack_b->rank != 1)
-		{
-			stack_2->r++;
-			ft_r(&stack_b);
-			go_to_right_node2(&stack_a, &stack_b, nb);
-			go_to_right_node2(&stack_1, &stack_2, nb);
-		}
-	}
-	else if (stack_b->rank != 1)
-	{
-		while (stack_b->rank != 1)
-		{
-			stack_2->rr++;
-			ft_rr(&stack_b);
-			go_to_right_node2(&stack_a, &stack_b, nb);
-			go_to_right_node2(&stack_1, &stack_2, nb);
-		}
-	}
-	free_stack(stack_a);
-	free_stack(stack_b);
+		 stack_a->rr = (max - stack_a->rank )+ 1;
 }
 
 void	bring_number_up_b(t_list	**stack_b, t_list **stack_a, int nb)

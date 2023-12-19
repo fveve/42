@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:03:04 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/18 13:22:19 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/19 16:08:40 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
 	{
 		current = *stack_2;
 		*stack_2 = (*stack_2)->next;
-		while ((*stack_1)->pos != (*stack_2)->pos + y )
+		while ((*stack_1)->pos != (*stack_2)->pos  +y )
 		{
 			if (*stack_2 == current)
 				y++;
@@ -42,63 +42,29 @@ void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
 
 void	false_bring_number_up(t_list *stack_1, t_list *stack_2, int nb)
 {
-	t_list *stack_a;
-	t_list	*stack_b;
+
 	int size_1 ;
 	int size_2 ;
+	int max_1;
+	int max_2;
 
 	size_1 = lst_size(stack_1);
 	size_2 = lst_size(stack_2);
-	stack_a = lst_dup(stack_1);
-	stack_b = lst_dup(stack_2);
-	go_to_right_node(&stack_a, &stack_b, nb);
+	max_1 = go_to_max_rank(&stack_1);
+	max_2 = go_to_max_rank(&stack_2);
 	go_to_right_node(&stack_1, &stack_2, nb);
 	stack_1->r = 0;
 	stack_1->rr = 0;
 	stack_2->rr = 0;
 	stack_2->r = 0;
-	if ( stack_a->rank < (size_1 /2 + 1) &&  stack_a->rank != 1)
-	{
-		while ( stack_a->rank != 1)
-		{
-			 stack_1->r++;			
-			ft_r(&stack_a);
-			go_to_right_node(&stack_a, &stack_b, nb);
-			go_to_right_node(&stack_1, &stack_2, nb);
-		}
-	}
-	else if ( stack_a->rank != 1)
-	{
-		while ( stack_a->rank != 1)
-		{
-			 stack_1->rr++;
-			ft_rr(&stack_a);
-			go_to_right_node(&stack_a, &stack_b, nb);
-			go_to_right_node(&stack_1, &stack_2, nb);
-		}
-	}
-	if (stack_b->rank < (size_2 / 2 + 1) && stack_b->rank != 1)
-	{
-		while (stack_b->rank != 1)
-		{
-			stack_2->r++;
-			ft_r(&stack_b);
-			go_to_right_node(&stack_a, &stack_b, nb);
-			go_to_right_node(&stack_1, &stack_2, nb);
-		}
-	}
-	else if (stack_b->rank != 1)
-	{
-		while (stack_b->rank != 1)
-		{
-			stack_2->rr++;
-			ft_rr(&stack_b);
-			go_to_right_node(&stack_a, &stack_b, nb);
-			go_to_right_node(&stack_1, &stack_2, nb);
-		}
-	}
-	free_stack(stack_a);
-	free_stack(stack_b);
+	if ( stack_1->rank <= (size_1 /2 + 1) &&  stack_1->rank != 1)
+			 stack_1->r = stack_1->rank - 1;			
+	else if ( stack_1->rank != 1)
+		 stack_1->rr =( max_1 - stack_1->rank) + 1;
+	if ( stack_2->rank <= (size_2 /2 + 1) &&  stack_2->rank != 1)
+			 stack_2->r = stack_2->rank - 1;			
+	else if ( stack_2->rank != 1)
+		 stack_2->rr = (max_2 - stack_2->rank )+ 1;
 }
 
 
@@ -112,44 +78,20 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 	go_to_right_node(stack_1, stack_2, nb);
 	if ((*stack_1)->r && (*stack_2)->r)
 	{
-		if ((*stack_1)->r > (*stack_2)->r)
+		while ((*stack_1)->r &&  (*stack_2)->r)
 		{
-			rr = (*stack_1)->r - (*stack_2)->r;
-			(*stack_1)->r -= rr;
-			(*stack_2)->r -= rr;
-		}
-		else if ((*stack_1)->r < (*stack_2)->r)
-		{
-			rr = (*stack_2)->r - (*stack_1)->r;
-			(*stack_1)->r -= rr;
-			(*stack_2)->r -= rr;
-		}
-		else if ((*stack_1)->r == (*stack_2)->r)
-		{
-			rr = (*stack_1)->r;
-			(*stack_1)->r = 0;
-			(*stack_2)->r = 0;
+			rr++;
+			(*stack_1)->r--;
+			(*stack_2)->r--;
 		}
 	}
 	if ((*stack_1)->rr && (*stack_2)->rr)
 	{
-		if ((*stack_1)->rr > (*stack_2)->rr)
+		while ((*stack_1)->rr &&  (*stack_2)->rr)
 		{
-			rr = (*stack_1)->rr - (*stack_2)->rr;
-			(*stack_1)->rr -= rr;
-			(*stack_2)->rr -= rr;
-		}
-		else if ((*stack_1)->rr < (*stack_2)->rr)
-		{
-			rr = (*stack_2)->rr - (*stack_1)->rr;
-			(*stack_1)->rr -= rr;
-			(*stack_2)->rr -= rr;
-		}
-		else if ((*stack_1)->rr == (*stack_2)->rr)
-		{
-			rr = (*stack_1)->rr;
-			(*stack_1)->rr = 0;
-			(*stack_2)->rr = 0;
+			rr++;
+			(*stack_1)->rr--;
+			(*stack_2)->rr--;
 		}
 		rr *= -1;
 	}
@@ -159,50 +101,35 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 {
 	int	r;
-	int ra;
-	int rb;
-	int rra;
-	int rrb;
-
-	ra = 0;
-	rb = 0;
-	rra = 0;
-	rrb = 0;
 	r = convert_rotate2(stack_a, stack_b, nb);
 	go_to_right_node(stack_a, stack_b, nb);
-	if ((*stack_a)->r)
-		ra = (*stack_a)->r;
-	if ((*stack_a)->rr)
-		rra = (*stack_a)->rr;
-	if ((*stack_b)->r)
-		rb = (*stack_b)->r;
-	if ((*stack_b)->rr)
-		rrb = (*stack_b)->rr;
-	while (ra)
+	while ((*stack_a)->r > 0)
 	{			
 		ft_r(stack_a);
 		write(1, "ra\n", 3);
-		ra--;
+		go_to_right_node(stack_a, stack_b, nb);
+		(*stack_a)->r--;
 	}
-	while (rra)
+	while ((*stack_a)->rr > 0)
 	{
 		ft_rr(stack_a);
 		write(1, "rra\n", 4);
-		rra--;
+		go_to_right_node(stack_a, stack_b, nb);
+		(*stack_a)->rr--;
 	}
-	while (rb)
+	while ((*stack_b)->r > 0)
 	{
-		(*stack_b)->r--;
 		ft_r(stack_b);
 		write(1, "rb\n", 3);
-		rb--;
+		go_to_right_node(stack_a, stack_b, nb);
+		(*stack_b)->r--;
 	}
-	while (rrb)
+	while ((*stack_b)->rr > 0)
 	{
-		(*stack_b)->rr--;
 		ft_rr(stack_b);
 		write(1, "rrb\n", 4);
-		rrb--;
+		go_to_right_node(stack_a, stack_b, nb);
+		(*stack_b)->rr--;
 	}
 	if (r > 0)
 	{
@@ -218,8 +145,8 @@ void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 	{
 		while (r < 0)
 		{
-			ft_r(stack_a);
-			ft_r(stack_b);
+			ft_rr(stack_a);
+			ft_rr(stack_b);
 			write(1, "rrr\n", 4);
 			r++;
 		}

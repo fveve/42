@@ -27,36 +27,6 @@ int	is_valid(t_list	*stack)
 	return (1);
 }
 
-void	sort_3_numbers2(t_list **stack_a)
-{
-	t_list 	*smallest;
-	t_list 	*biggest;
-
-	smallest = *stack_a;
-	biggest = *stack_a;
-	while (!is_smallest(smallest))
-		smallest = smallest->next;
-	while (!is_biggest(biggest))
-		biggest = biggest->next;
-	if ((smallest->rank == 2 && biggest->rank == 3) || (smallest->rank == 3 && biggest->rank == 1) || (smallest->rank == 1 && biggest->rank == 2))
-	{
-		ft_swap(stack_a);
-		write(1, "sa\n", 3);
-	}
-	while (!is_biggest(biggest))
-		biggest = biggest->next;
-	if (biggest->rank == 2)
-	{
-		ft_r(stack_a);
-		write(1, "ra\n", 3);
-	}
-	else if (biggest->rank == 3)
-	{
-		ft_rr(stack_a);
-		write(1, "rra\n", 4);
-	}
-}
-
 void	bring_min_up(t_list	**stack, int min)
 {
 	t_list *current;
@@ -81,6 +51,35 @@ void	bring_min_up(t_list	**stack, int min)
 			write(1, "rra\n", 4);
 			go_to_node(stack, current);
 		}
+	}
+}
+void	sort_3_numbers(t_list **stack_a)
+{
+	t_list 	*smallest;
+	t_list 	*biggest;
+
+	smallest = *stack_a;
+	biggest = *stack_a;
+	while (!is_smallest(smallest))
+		smallest = smallest->next;
+	while (!is_biggest(biggest))
+		biggest = biggest->next;
+	if ((smallest->rank == 2 && biggest->rank == 3) || (smallest->rank == 3 && biggest->rank == 1) || (smallest->rank == 1 && biggest->rank == 2))
+	{
+		ft_swap(stack_a);
+		write(1, "sa\n", 3);
+	}
+	while (!is_smallest(smallest))
+		smallest = smallest->next;
+	if (smallest->rank == 2)
+	{
+		ft_r(stack_a);
+		write(1, "ra\n", 3);
+	}
+	else if (smallest->rank == 3)
+	{
+		ft_rr(stack_a);
+		write(1, "rra\n", 4);
 	}
 }
 
@@ -115,6 +114,7 @@ void	bring_min_up_b(t_list	**stack, int min)
 void	sort_stack(t_stack *stack)
 {
 	t_list *min;
+	//int x;
 
 	min = stack->stack_a;
 	if (lst_size(stack->stack_a) > 3)
@@ -126,14 +126,41 @@ void	sort_stack(t_stack *stack)
 	}
 	while (lst_size(stack->stack_a) > 3)
 	{
-		printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));
+		/*x = 0;
+		while (x != 6)
+		{
+			printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			stack->stack_a = stack->stack_a->next;
+			stack->stack_b =stack->stack_b->next;
+			x++;
+		}
+		printf("  stack->stack_a    |       stack_b\n\n");
+		printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));*/
 		bring_number_up(&(stack->stack_a), &(stack->stack_b), find_cheapest(stack->stack_a, stack->stack_b));//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_a), &(stack->stack_b));
 		write(1, "pb\n", 3);
+	}/*
+	x = 0;
+	while (x != 6)
+	{
+		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+		stack->stack_a = stack->stack_a->next;
+		stack->stack_b =stack->stack_b->next;
+		x++;
 	}
-	sort_3_numbers2(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
+	printf("  stack->stack_a    |       stack_b\n\n");*/
+	sort_3_numbers(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
 	while (stack->stack_b)
 	{
+	/*x = 0;
+		while (x <= 6)
+		{
+			printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_b->rank);
+			stack->stack_a = stack->stack_a->next;
+			stack->stack_b =stack->stack_b->next;
+			x++;
+		}
+		printf("  stack->stack_a    |       stack_b\n\n");*/
 		bring_number_up_b( &(stack->stack_b),&(stack->stack_a), stack->stack_b->data);//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_b), &(stack->stack_a));
 		write(1, "pa\n", 3);
@@ -152,35 +179,35 @@ int main (int ac, char **av)
 	int x;
 
 	x = 0;
-	stack.stack_a = extract_stack(av);
+	stack->stack_a = extract_stack(av);
 	ac = ac;
-	stack.stack_b = NULL;
-	ft_push(&(stack.stack_a),&(stack.stack_b));
+	stack->stack_b = NULL;
+	ft_push(&(stack->stack_a),&(stack->stack_b));
 	write(1, "pb\n", 3);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
+	ft_push(&(stack->stack_a),&(stack->stack_b));
 	write(1, "pb\n\n", 3);
-	ft_r(&stack.stack_b);
+	ft_r(&stack->stack_b);
 	write(1, "rb\n", 3);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
+	ft_push(&(stack->stack_a),&(stack->stack_b));
 	write(1, "pb\n\n", 3);
-	ft_push(&(stack.stack_a),&(stack.stack_b));
+	ft_push(&(stack->stack_a),&(stack->stack_b));
 	write(1, "pb\n\n", 3);
-	ft_r(&stack.stack_b);
+	ft_r(&stack->stack_b);
 	write(1, "rb\n", 3);
-	ft_r(&stack.stack_b);
+	ft_r(&stack->stack_b);
 	write(1, "rb\n", 3);
-		ft_push(&(stack.stack_a),&(stack.stack_b));
+		ft_push(&(stack->stack_a),&(stack->stack_b));
 	write(1, "pb\n\n", 3);
 
 	x = 0;
 	while (x != 6)
 	{
-		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack.stack_a->data, stack.stack_a->rank,stack.stack_b->data,stack.stack_a->rank);
-		stack.stack_a = stack.stack_a->next;
-		stack.stack_b =stack.stack_b->next;
+		printf("data : %d, rank : %d | data : %d, rank : %d\n", stack->stack_a->data, stack->stack_a->rank,stack->stack_b->data,stack->stack_a->rank);
+		stack->stack_a = stack->stack_a->next;
+		stack->stack_b =stack->stack_b->next;
 		x++;
 	}
-	printf("  stack.stack_a    |       stack_b\n\n");
-	printf("%d\n", find_cheapest(stack.stack_a, stack.stack_b));
+	printf("  stack->stack_a    |       stack_b\n\n");
+	printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));
 }
 */
