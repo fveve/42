@@ -106,6 +106,8 @@ void	bring_number_up_b(t_list	**stack_b, t_list **stack_a, int nb)
 
 	ra = 0;
 	rra = 0;
+	(*stack_a)->r = 0;
+	(*stack_a)->rr = 0;
 	false_bring_number_up_b(*stack_b, *stack_a, nb);
 	go_to_right_node2(stack_b, stack_a, nb);
 	if ((*stack_a)->r)

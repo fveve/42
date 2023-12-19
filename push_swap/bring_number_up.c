@@ -109,6 +109,7 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 
 	rr = 0;
 	false_bring_number_up(*stack_1, *stack_2, nb);
+	go_to_right_node(stack_1, stack_2, nb);
 	if ((*stack_1)->r && (*stack_2)->r)
 	{
 		if ((*stack_1)->r > (*stack_2)->r)
@@ -117,13 +118,13 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 			(*stack_1)->r -= rr;
 			(*stack_2)->r -= rr;
 		}
-		if ((*stack_1)->r < (*stack_2)->r)
+		else if ((*stack_1)->r < (*stack_2)->r)
 		{
 			rr = (*stack_2)->r - (*stack_1)->r;
 			(*stack_1)->r -= rr;
 			(*stack_2)->r -= rr;
 		}
-		if ((*stack_1)->r == (*stack_2)->r)
+		else if ((*stack_1)->r == (*stack_2)->r)
 		{
 			rr = (*stack_1)->r;
 			(*stack_1)->r = 0;
@@ -138,13 +139,13 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 			(*stack_1)->rr -= rr;
 			(*stack_2)->rr -= rr;
 		}
-		if ((*stack_1)->rr < (*stack_2)->rr)
+		else if ((*stack_1)->rr < (*stack_2)->rr)
 		{
 			rr = (*stack_2)->rr - (*stack_1)->rr;
 			(*stack_1)->rr -= rr;
 			(*stack_2)->rr -= rr;
 		}
-		if ((*stack_1)->rr == (*stack_2)->rr)
+		else if ((*stack_1)->rr == (*stack_2)->rr)
 		{
 			rr = (*stack_1)->rr;
 			(*stack_1)->rr = 0;
@@ -168,7 +169,6 @@ void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 	rra = 0;
 	rrb = 0;
 	r = convert_rotate2(stack_a, stack_b, nb);
-	false_bring_number_up(*stack_a, *stack_b, nb);
 	go_to_right_node(stack_a, stack_b, nb);
 	if ((*stack_a)->r)
 		ra = (*stack_a)->r;
@@ -206,7 +206,7 @@ void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 	}
 	if (r > 0)
 	{
-		while (r >= 0)
+		while (r > 0)
 		{
 			ft_r(stack_a);
 			ft_r(stack_b);
@@ -216,7 +216,7 @@ void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 	}
 	else if (r < 0)
 	{
-		while (r <= 0)
+		while (r < 0)
 		{
 			ft_r(stack_a);
 			ft_r(stack_b);

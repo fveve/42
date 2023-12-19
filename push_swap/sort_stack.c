@@ -27,7 +27,7 @@ int	is_valid(t_list	*stack)
 	return (1);
 }
 
-void	sort_3_numbers(t_list **stack_a)
+void	sort_3_numbers2(t_list **stack_a)
 {
 	t_list 	*smallest;
 	t_list 	*biggest;
@@ -64,7 +64,7 @@ void	bring_min_up(t_list	**stack, int min)
 	while ((*stack)->data != min)
 		*stack = (*stack)->next;
 	current = *stack;
-	if ((*stack)->rank <= ((lst_size(*stack)) /2 + 1) && (*stack)->rank != 1)
+	if ((*stack)->rank < ((lst_size(*stack)) /2 ) && (*stack)->rank != 1)
 	{
 		while ((*stack)->rank != 1)
 		{
@@ -91,7 +91,7 @@ void	bring_min_up_b(t_list	**stack, int min)
 	while ((*stack)->data != min)
 		*stack = (*stack)->next;
 	current = *stack;
-	if ((*stack)->rank <= ((lst_size(*stack)) /2 + 1) && (*stack)->rank != 1)
+	if ((*stack)->rank <= ((lst_size(*stack)) / 2) && (*stack)->rank != 1)
 	{
 		while ((*stack)->rank != 1)
 		{
@@ -126,11 +126,12 @@ void	sort_stack(t_stack *stack)
 	}
 	while (lst_size(stack->stack_a) > 3)
 	{
+		printf("%d\n", find_cheapest(stack->stack_a, stack->stack_b));
 		bring_number_up(&(stack->stack_a), &(stack->stack_b), find_cheapest(stack->stack_a, stack->stack_b));//bring cheapest to the top of the list && put stack_b in the correct order;
 		ft_push(&(stack->stack_a), &(stack->stack_b));
 		write(1, "pb\n", 3);
 	}
-	sort_3_numbers(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
+	sort_3_numbers2(&(stack->stack_a));//sort the 3 numbers with max 2 operations;
 	while (stack->stack_b)
 	{
 		bring_number_up_b( &(stack->stack_b),&(stack->stack_a), stack->stack_b->data);//bring cheapest to the top of the list && put stack_b in the correct order;
@@ -139,8 +140,7 @@ void	sort_stack(t_stack *stack)
 	}
 	while (!is_smallest(min))
 		min = min->next;
-	if (lst_size(stack->stack_a) > 3)
-		bring_min_up(&(stack->stack_a), min->data);//bring the min at the top of the list
+	bring_min_up(&(stack->stack_a), min->data);//bring the min at the top of the list
 }
 
 
