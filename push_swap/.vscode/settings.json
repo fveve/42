@@ -1,6 +1,0 @@
-{
-	"C_Cpp.errorSquiggles": "enabledIfIncludesResolve",
-	"files.associations": {
-		"push_swap.h": "c"
-	}
-}
