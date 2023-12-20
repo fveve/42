@@ -3,14 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:30:08 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/10 18:54:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/12/20 10:21:06 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	go_to_rank(t_list **list, int rank)
+{
+	t_list	*current;
+
+	if (*list)
+	{
+		current = *list;
+		while ((*list)->rank != rank)
+		{
+			if ((*list)->next == current)
+				return ;
+			*list = (*list)->next;
+		}
+	}
+}
+
+void	go_to_last(t_list	**lst)
+{
+	t_list	*current;
+
+	current = *lst;
+	if (*lst)
+	{
+		while ((*lst)->next != current)
+			*lst = (*lst)->next;
+	}
+}
+
+int	is_smallest_in_pos(t_list	*stack)
+{
+	t_list	*temp;
+
+	temp = stack;
+	stack = stack->next;
+	while (temp != stack)
+	{
+		if (temp->data > stack->data && stack != temp && stack->pos == -1)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
 
 int	ft_strlen(char *s)
 {

@@ -5,80 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 15:03:04 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/19 16:08:40 by arafa            ###   ########.fr       */
+/*   Created: 2023/12/20 09:37:37 by arafa             #+#    #+#             */
+/*   Updated: 2023/12/20 10:29:40 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	go_to_right_node(t_list **stack_1, t_list **stack_2, int nb)
+void	go_to_right_node2(t_list **stack_b, t_list **stack_a, int nb)
 {
 	t_list	*current;
-	int y;
+	int		y;
 
 	y = 1;
-	while ((*stack_1)->data != nb)
-		*stack_1 = (*stack_1)->next;
-	if (is_smallest_in_stack((*stack_1)->data, *stack_2) == 0 && is_biggest_in_stack((*stack_1)->data, *stack_2) == 0)
+	while ((*stack_b)->data != nb)
+		*stack_b = (*stack_b)->next;
+	if (!is_smallest_in_stack((*stack_b)->data, *stack_a)
+		&& is_biggest_in_stack((*stack_b)->data, *stack_a) == 0)
 	{
-		current = *stack_2;
-		*stack_2 = (*stack_2)->next;
-		while ((*stack_1)->pos != (*stack_2)->pos  +y )
+		current = *stack_a;
+		*stack_a = (*stack_a)->next;
+		while ((*stack_b)->pos != (*stack_a)->pos - y)
 		{
-			if (*stack_2 == current)
+			if (*stack_a == current && (*stack_b)->pos != (*stack_a)->pos - y)
 				y++;
-			*stack_2 = (*stack_2)->next;
+			if ((*stack_b)->pos != (*stack_a)->pos - y)
+				*stack_a = (*stack_a)->next;
 		}
 	}
 	else
 	{
-		while (!is_biggest(*stack_2))
-			*stack_2 = (*stack_2)->next;
+		while (!is_smallest(*stack_a))
+			*stack_a = (*stack_a)->next;
 	}
 }
 
-
-
-void	false_bring_number_up(t_list *stack_1, t_list *stack_2, int nb)
+int	convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 {
-
-	int size_1 ;
-	int size_2 ;
-	int max_1;
-	int max_2;
-
-	size_1 = lst_size(stack_1);
-	size_2 = lst_size(stack_2);
-	max_1 = go_to_max_rank(&stack_1);
-	max_2 = go_to_max_rank(&stack_2);
-	go_to_right_node(&stack_1, &stack_2, nb);
-	stack_1->r = 0;
-	stack_1->rr = 0;
-	stack_2->rr = 0;
-	stack_2->r = 0;
-	if ( stack_1->rank <= (size_1 /2 + 1) &&  stack_1->rank != 1)
-			 stack_1->r = stack_1->rank - 1;			
-	else if ( stack_1->rank != 1)
-		 stack_1->rr =( max_1 - stack_1->rank) + 1;
-	if ( stack_2->rank <= (size_2 /2 + 1) &&  stack_2->rank != 1)
-			 stack_2->r = stack_2->rank - 1;			
-	else if ( stack_2->rank != 1)
-		 stack_2->rr = (max_2 - stack_2->rank )+ 1;
-}
-
-
-
-int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
-{
-	int rr;
+	int	rr;
 
 	rr = 0;
 	false_bring_number_up(*stack_1, *stack_2, nb);
 	go_to_right_node(stack_1, stack_2, nb);
 	if ((*stack_1)->r && (*stack_2)->r)
 	{
-		while ((*stack_1)->r &&  (*stack_2)->r)
+		while ((*stack_1)->r && (*stack_2)->r)
 		{
 			rr++;
 			(*stack_1)->r--;
@@ -87,7 +58,7 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 	}
 	if ((*stack_1)->rr && (*stack_2)->rr)
 	{
-		while ((*stack_1)->rr &&  (*stack_2)->rr)
+		while ((*stack_1)->rr && (*stack_2)->rr)
 		{
 			rr++;
 			(*stack_1)->rr--;
@@ -101,10 +72,11 @@ int convert_rotate2(t_list **stack_1, t_list **stack_2, int nb)
 void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 {
 	int	r;
+
 	r = convert_rotate2(stack_a, stack_b, nb);
 	go_to_right_node(stack_a, stack_b, nb);
 	while ((*stack_a)->r > 0)
-	{			
+	{
 		ft_r(stack_a);
 		write(1, "ra\n", 3);
 		go_to_right_node(stack_a, stack_b, nb);
@@ -117,41 +89,5 @@ void	bring_number_up(t_list	**stack_a, t_list **stack_b, int nb)
 		go_to_right_node(stack_a, stack_b, nb);
 		(*stack_a)->rr--;
 	}
-	while ((*stack_b)->r > 0)
-	{
-		ft_r(stack_b);
-		write(1, "rb\n", 3);
-		go_to_right_node(stack_a, stack_b, nb);
-		(*stack_b)->r--;
-	}
-	while ((*stack_b)->rr > 0)
-	{
-		ft_rr(stack_b);
-		write(1, "rrb\n", 4);
-		go_to_right_node(stack_a, stack_b, nb);
-		(*stack_b)->rr--;
-	}
-	if (r > 0)
-	{
-		while (r > 0)
-		{
-			ft_r(stack_a);
-			ft_r(stack_b);
-			write(1, "rr\n", 3);
-			r--;
-		}
-	}
-	else if (r < 0)
-	{
-		while (r < 0)
-		{
-			ft_rr(stack_a);
-			ft_rr(stack_b);
-			write(1, "rrr\n", 4);
-			r++;
-		}
-	}
+	bring_number_up2(stack_a, stack_b, nb, r);
 }
-
-
-

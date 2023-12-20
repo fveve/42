@@ -6,24 +6,11 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:40:40 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/15 11:41:34 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/20 10:19:28 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*go_to_last2(t_list	*lst)
-{
-	t_list	*current;
-
-	current = lst;
-	if (lst && lst->next)
-	{
-		while (lst->next != current)
-			lst = lst->next;
-	}
-	return (lst);
-}
 
 void	go_to_node(t_list	**lst, t_list	*node)
 {
@@ -56,13 +43,19 @@ void	set_pos(t_list **stack)
 	}
 }
 
-int	go_to_max_data(t_list **list)
+int	is_valid(t_list	*stack)
 {
-	if ((*list)->next == NULL)
-		return (1);
-	while ((*list)->next != NULL && (*list)->data < (*list)->next->data)
-		*list = (*list)->next;
-	return ((*list)->data);
+	int	x;
+
+	x = go_to_max_rank(&stack);
+	while (x > 0)
+	{
+		if (stack->rank != stack->pos)
+			return (0);
+		stack = stack->next;
+		x--;
+	}
+	return (1);
 }
 
 void	set_rank(t_list *lst)

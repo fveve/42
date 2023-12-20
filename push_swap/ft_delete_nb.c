@@ -83,4 +83,3 @@ char	*ft_delete_nb(char *str)
 	free(str);
 	return (tab);
 }
-

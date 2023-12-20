@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 13:13:36 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/13 14:02:10 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/20 10:33:27 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,6 @@ t_list	*node_dup(t_list *lst1)
 	lst2->rr = lst1->rr;
 	lst2->next = NULL;
 	return (lst2);
-}
-
-t_list	*lst_dup(t_list	*list)
-{
-	t_list	*node;
-	t_list	*next;
-	t_list	*start;
-
-	start = node_dup(list);
-	node = start;
-	list = list->next;
-	while (start->data != list->data)
-	{
-		next = node_dup(list);
-		node->next = next;
-		node = node->next;
-		list = list->next;
-	}
-	node->next = start;
-	go_to_rank(&node, 1);
-	return (node);
 }
 
 void	free_stack(t_list	*stack)

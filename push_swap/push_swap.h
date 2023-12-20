@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:04:05 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/19 12:33:42 by arafa            ###   ########.fr       */
+/*   Updated: 2023/12/20 10:34:29 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_stack
 long int	ft_long_atoi(char *nptr);
 int			init_stack2(t_list	**stack, t_list	**node, char *str, int rank);
 int			init_stack(t_list	**stack, t_list	**node, char *str, int rank);
+int			find_cheapest(t_list *stack_a, t_list *stack_b);
 int			is_smallest_in_stack(int data, t_list *stack);
 int			is_biggest_in_stack(int data, t_list *stack);
-int			find_cheapest(t_list *stack_a, t_list *stack_b);
 int			verif_int_2(char *tab, int x, long int nb);
 int			is_smallest_in_pos(t_list	*stack);
 int			go_to_max_rank(t_list	**list);
@@ -51,15 +51,16 @@ int			is_biggest(t_list	*stack);
 int			count_numbers(char *str);
 int			is_valid(t_list	*stack);
 int			lst_size(t_list *lst);
-int			ft_atoi(char *str);
 int			ft_strlen(char *s);
+int			ft_atoi(char *str);
 char		*ft_delete_nb(char *str);
 char		*ft_strdup(char *s);
+void		bring_number_up2(t_list	**stack_a, t_list **stack_b, int nb, int r);
 void		false_bring_number_up(t_list *stack_1, t_list *stack_2, int nb);
-void 		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
-void 		bring_number_up_b(t_list **stack_a, t_list **stack_b, int nb);
+void		bring_number_up_b(t_list **stack_a, t_list **stack_b, int nb);
 void		go_to_right_node2(t_list **stack_1, t_list **stack_2, int nb);
-void		go_to_right_node(t_list **stack_1,t_list **stack_2, int nb);
+void		bring_number_up(t_list **stack_a, t_list **stack_b, int nb);
+void		go_to_right_node(t_list **stack_1, t_list **stack_2, int nb);
 //Ft_Push-----------------------------------------------------
 void		ft_push(t_list	**stack_1, t_list **stack_2);
 //------------------------------------------------------------
