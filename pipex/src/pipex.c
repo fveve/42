@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verif_2.c                                          :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/02 11:24:31 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/02 11:27:53 by arafa            ###   ########.fr       */
+/*   Created: 2023/12/22 09:39:15 by arafa             #+#    #+#             */
+/*   Updated: 2023/12/22 11:30:20 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/pipex.h"
 
-int	verif_int_2(char *tab, int x, long int nb)
+/*
+
+int main (int argc, char **argv, char *envp)
 {
-	while (tab[x])
-	{
-		if (((tab[x] <= '9' && tab[x] >= '0') || tab[x] == '-'
-				|| tab[x] == '+') && tab[x])
-		{
-			nb = ft_long_atoi(tab);
-			if (nb > 2147483647 || nb < -2147483648)
-			{
-				free(tab);
-				return (1);
-			}
-			if (count_numbers(tab) > 1)
-			{
-				tab = ft_delete_nb(tab);
-				x = 0;
-			}
-		}
-		x++;
-	}
-	free(tab);
+	char	**tab;
+	
+	//init the pipe and the fork
+	ft_init_pipe();
+	//check if there is any error in pipe, fork, or args;
+	ft_check_error();
+	//extract the arguments and stock it in a double tab with 
+	//the two first cases being respectively the two files;
+	tab = ft_extract_args(argv);
+	//executes the commands witn the pipes
+	ft_exec_cmd();
 	return (0);
-}
+}*/
