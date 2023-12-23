@@ -1,23 +1,28 @@
-NAME = pipex
-FLAGS += -g -Wall -Werror -Wextra
-CC = gcc
-VPATH = src
-SRC = $(wildcard $(VPATH)/*.c)
-OBJDIR = obj
-OBJ = $(SRC:$(VPATH)/%.c=$(OBJDIR)/%.o)
+NAME := pipex
 
-$(OBJDIR)/%.o: $(VPATH)/%.c
+CFLAGS += -ggdb -Wall -Werror -Wextra
 
-$(NAME): $(OBJDIR) $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+CC := gcc
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+vpath %.c src
+
+SRC := $(wildcard src/*.c)
+
+OBJDIR := obj
+
+OBJ	= $(addprefix $(OBJDIR)/,$(notdir $(SRC:%.c=%.o)))
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS)  -c $< -o $@
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $@
 
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJDIR)
+	rm -rf $(OBJ) $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)
