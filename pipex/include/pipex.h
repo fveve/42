@@ -13,6 +13,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include <signal.h>
 # include <sys/wait.h>
 # include <stdlib.h>
 # include <unistd.h>

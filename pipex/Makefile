@@ -17,7 +17,6 @@ $(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS)  -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
 
 all: $(NAME)
 
