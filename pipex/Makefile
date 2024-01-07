@@ -13,10 +13,12 @@ OBJDIR := obj
 OBJ	= $(addprefix $(OBJDIR)/,$(notdir $(SRC:%.c=%.o)))
 
 $(OBJDIR)/%.o: %.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS)  -c $< -o $@
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS)  -c $^ -o $@
 
-$(NAME): $(OBJ)
+$(NAME): 
+	
+
 
 all: $(NAME)
 

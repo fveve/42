@@ -14,15 +14,33 @@
 # define PIPEX_H
 
 # include <signal.h>
-# include <sys/wait.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
 # include <stdio.h>
+# include <fcntl.h>
+
+//Structure------------------------------------------------
+
+typedef struct s_cmd
+{
+	char *path;
+	char **args;
+} t_cmd;
 
 //Functions------------------------------------------------
-int ft_strlen(const char *s);
-int ft_strlen_tab(char **s);
-int	is_file(char *s);
+int 	ft_strlen(const char *s);
+int 	ft_strlen_tab(char **s, int x);
+int		is_file(char *s);
+int 	is_tiret(char *s);
+char	**extract_args(char **argv, int x);
+char	*ft_strdup2(const char *s);
+char	*ft_strdup3(const char *s);
 char	*ft_strdup(const char *s);
+void 	ft_check_args(int argc, char **argv);
+void	free_tab(char **tab);
+void	ft_check_pipe(void);
+void	ft_exec_cmd(char **tab, char **envp);
+
 #endif

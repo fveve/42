@@ -37,6 +37,8 @@ int is_correct_order(char **argv)
 	
 	x = 1;
 	trigger = 0;
+	if (!is_file(argv[x]))
+		return (1);
 	while (argv[x])
 	{
 		if (is_file(argv[x]) && trigger < 2)
@@ -48,12 +50,68 @@ int is_correct_order(char **argv)
 	return (0);
 }
 
-int main(int argc, char **argv)
+void ft_check_files(char	**argv)
 {
-	if (argc == 1)
+	char	**tab;
+	int x;
+
+	x = 1;
+	tab = extract_args(argv, x);
+	if (access(tab[0], R_OK) == -1)
 	{
-		printf("error\n");
+		perror("file1");
+		free_tab(tab);
 		exit(0);
 	}
-	printf("%d", is_correct_order(argv));
+	if (access(tab[1], W_OK) == -1)
+	{
+		perror("file2");
+		free_tab(tab);
+		exit(0);
+	}
+	free_tab(tab);
+}
+
+void ft_check_args(int argc, char **argv)
+{
+	if (argc < 4)
+	{
+		write(1, "Error\n", 6);
+		exit(0);
+	}
+	else if (is_correct_order(argv) == 1 || check_files(argv) == 1)
+	{
+		write(1, "Error\n", 6);
+		exit(0);
+	}
+	ft_check_files(argv);
+}
+
+void	ft_check_pipe(void)
+{
+	pid_t	pid;
+	char	*buffer;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+	{
+		perror("pipe");
+		exit(0);
+	}
+	pid = fork();
+	buffer = NULL;
+	if (pid < 0)
+	{
+		perror("fork");
+		exit(0);
+	}
+	if (read(fd[0], buffer, 0) == -1)
+	{
+		perror("read");
+		exit(0);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	if (pid != 0)
+		exit(0);
 }
