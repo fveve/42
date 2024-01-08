@@ -12,6 +12,73 @@
 
 #include "../include/pipex.h"
 
+int is_path(char *s)
+{
+	char	*path;
+	int		x;
+
+	x = 0;
+	path = "PATH";
+	while (s[x - 1] != 'H')
+	{
+		if (path[x] != s[x])
+			return(0);
+		x++;
+	}
+	return (1);
+}
+
+
+char *find_path(t_cmd *cmd,char **env)
+{
+	char	**tab;
+	char	*path;
+	int 	x;
+
+	x = 0;
+	while (env[x])
+	{
+		if (is_path(env[x]))
+		{
+			tab = ft_split(env[x], ":");
+			break;
+		}
+		x++;
+	}
+	x = 0;
+	path = ft_set_path(cmd->args, tab[x]);
+	while (access(path, F_OK) == -1 && tab[x])
+	{
+			free(path);
+			path = ft_set_path(cmd->args, tab[x]);
+			x++;
+	}
+	if (access(path, X_OK) == -1)
+	{
+		perror("path :");
+		free(path);
+		free_tab(cmd->args);
+		free(cmd);
+		exit(0);
+	}
+	return(path);
+}
+
+char	*ft_set_path(char **cmd, char *p)
+{
+	char *path;
+	int x;
+
+	path = malloc(sizeof(char) * (ft_strlen(p) + ft_strlen(cmd) + 1));
+	x = 0;
+	while (p[x])
+		*path++ = p[x++];
+	x = 0;
+	while (cmd[x])
+		*path++ = cmd[x++];
+	return (path);
+}
+
 int	is_file(char *s)
 {
 	int x;
@@ -28,68 +95,20 @@ int	is_file(char *s)
 	return (0);
 }
 
-/*
-char	**extract_args(char **argv)
+t_cmd	*extract_tab(char **argv, char **env)
 {
-	char	**tab;
-	int 	x;
-	int 	z;
+	t_cmd	*cmd;
+	int		x;
+	int		y;
 
 	x = 1;
-	z = 0;
-	tab = malloc(sizeof(char *) * ((ft_strlen_tab(argv) * 2) + 2));
-	while (z <= 1 && argv[x])
-	{
-		if (is_file(argv[x]))
-			tab[z++] = ft_strdup(argv[x++]);
-		x++;
-	}
-	x = 2;
+	y = 0;
+	cmd = malloc(sizeof(t_cmd) * (ft_strlen_tab(argv) + 1));
 	while (argv[x])
 	{
-		if (is_tiret(argv[x]))
-		{
-			tab[z] = ft_strdup2(argv[x]);
-			z++;
-			tab[z++] = ft_strdup3(argv[x++]);
-			tab[z++] = NULL;
-		}
-		else if (!is_file(argv[x]))
-			tab[z++] = ft_strdup(argv[x++]);
-		else
-			x++;
+		cmd->args = ft_split(argv[x], ' ');
+		cmd->path = ft_find_path(cmd, env);
+		x++;
 	}
-	tab[z] = malloc(sizeof(char) * 2);
-	tab[z][1] = '\0';
-	tab[z++][0] = '\n';
-	tab[z] = NULL;
-	return (tab);
-}
-*/
-char	**extract_args(char **argv, int x)
-{
-	char **tab;
-	int z;
-
-	z = 0;
-	tab = malloc(sizeof(char *) * 3);
-	if (is_file(argv[x]) && argv[x + 1])
-	{
-		while (z <= 1 && argv[x])
-		{
-			if (is_file(argv[x]))
-				tab[z++] = ft_strdup(argv[x++]);
-			x++;
-		}
-		tab[z] = NULL;
-	}
-	else
-	{
-		//tab = malloc(sizeof(char *) * (ft_strlen_tab(argv, x) + 1));
-		tab[z++] = ft_strdup2(argv[x]);
-		if (is_tiret(argv[x]))
-			tab[z++] = ft_strdup3(argv[x]);
-		tab[z] = NULL;
-	}
-	return (tab);
+	return (cmd);
 }

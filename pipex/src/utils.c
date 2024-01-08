@@ -39,14 +39,14 @@ int ft_strlen(const char *s)
 }
 
 
-int ft_strlen_tab(char **s, int x)
+int ft_strlen_tab(char **s)
 {
-	int count;
+	int x;
 
-	count = 1;
-	if (is_tiret(s[x]))
-			count += is_tiret(s[x]);
-	return (count);
+	x = 1;
+	while (s[x])
+		x++;
+	return (x - 1);
 }
 
 char	*ft_strdup(const char *s)
@@ -64,45 +64,5 @@ char	*ft_strdup(const char *s)
 		x++;
 	}
 	tab[x] = '\0';
-	return (tab);
-}
-
-char	*ft_strdup2(const char *s)
-{
-	char	*tab;
-	int		x;
-
-	x = 0;
-	while (s[x] != '-')
-		x++;
-	tab = malloc(x + 1);
-	if (!tab)
-		return (NULL);
-	x = 0;
-	while (s[x] != '-')
-	{
-		tab[x] = s[x];
-		x++;
-	}
-	tab[x] = '\0';
-	return (tab);
-}
-
-char	*ft_strdup3(const char *s)
-{
-	char	*tab;
-	int z;
-	int		x;
-
-	x = 0;
-	z = 0;
-	while (s[x] != '-')
-		x++;
-	tab = malloc((ft_strlen(s) - x) + 1);
-	if (!tab)
-		return (NULL);
-	while (s[x])
-		tab[z++] = s[x++];
-	tab[z++] = '\0';
 	return (tab);
 }

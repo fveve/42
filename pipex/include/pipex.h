@@ -31,12 +31,12 @@ typedef struct s_cmd
 
 //Functions------------------------------------------------
 int 	ft_strlen(const char *s);
-int 	ft_strlen_tab(char **s, int x);
+int 	ft_strlen_tab(char **s);
 int		is_file(char *s);
 int 	is_tiret(char *s);
+char	*ft_substr(char const *s, int start, int len);
 char	**extract_args(char **argv, int x);
-char	*ft_strdup2(const char *s);
-char	*ft_strdup3(const char *s);
+char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 void 	ft_check_args(int argc, char **argv);
 void	free_tab(char **tab);

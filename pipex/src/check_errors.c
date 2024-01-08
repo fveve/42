@@ -87,6 +87,8 @@ void ft_check_args(int argc, char **argv)
 	ft_check_files(argv);
 }
 
+//A refaire ||
+//		    \/
 void	ft_check_pipe(void)
 {
 	pid_t	pid;
@@ -112,6 +114,4 @@ void	ft_check_pipe(void)
 	}
 	close(fd[0]);
 	close(fd[1]);
-	if (pid != 0)
-		exit(0);
 }
