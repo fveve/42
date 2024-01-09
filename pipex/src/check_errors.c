@@ -50,29 +50,27 @@ int is_correct_order(char **argv)
 	return (0);
 }
 
-void ft_check_files(char	**argv)
+void ft_check_files(char	**argv, char **env)
 {
-	char	**tab;
-	int x;
+	t_cmd	*cmd;
 
-	x = 1;
-	tab = extract_args(argv, x);
-	if (access(tab[0], R_OK) == -1)
+	cmd = extract_tab(argv, env);
+	if (access(cmd[0].args[0], R_OK) == -1)
 	{
 		perror("file1");
-		free_tab(tab);
+		free_cmd(cmd);
 		exit(0);
 	}
-	if (access(tab[1], W_OK) == -1)
+	if (access(cmd[1].args[1], W_OK) == -1)
 	{
 		perror("file2");
-		free_tab(tab);
+		free_cmd(cmd);
 		exit(0);
 	}
-	free_tab(tab);
+	free_cmd(cmd);
 }
 
-void ft_check_args(int argc, char **argv)
+void ft_check_args(int argc, char **argv, char **env)
 {
 	if (argc < 4)
 	{
@@ -84,7 +82,7 @@ void ft_check_args(int argc, char **argv)
 		write(1, "Error\n", 6);
 		exit(0);
 	}
-	ft_check_files(argv);
+	ft_check_files(argv, env);
 }
 
 //A refaire ||

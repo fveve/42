@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:51:25 by arafa             #+#    #+#             */
-/*   Updated: 2024/01/08 13:13:56 by arafa            ###   ########.fr       */
+/*   Updated: 2024/01/09 12:10:18 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 
-	tab = (char **)malloc(sizeof(char *) * (countword(s, c) + 1));
+	tab = (char **)malloc(sizeof(char *) * (countword(s, c) + 2));
 	if (!tab)
 	{
 		free (tab);

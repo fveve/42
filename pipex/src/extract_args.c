@@ -75,7 +75,7 @@ char *find_path(t_cmd *cmd, int y, char **env)
 	free_tab(tab);
 	if (access(path, F_OK && X_OK) == -1)
 	{
-		perror("cmd ");
+		perror("cmd");
 		free(path);
 		free_cmd(cmd);
 		exit(0);
@@ -105,6 +105,7 @@ t_cmd	*extract_tab(char **argv, char **env)
 		t_cmd	*cmd;
 	int 	x;
 	int 	y;
+	int 	z;
 
 	x = 1;
 	y = 0;
@@ -119,8 +120,13 @@ t_cmd	*extract_tab(char **argv, char **env)
 	while (argv[x])
 	{
 		if (!is_file(argv[x]))
-		{
+		{		
+			z = 0;
 			cmd[y].args = ft_split(argv[x], ' ');
+			while (cmd[y].args[z])
+				z++;
+			cmd[y].args[z++] = ft_strdup(cmd[0].args[0]); 
+			cmd[y].args[z] = NULL; 
 			cmd[y].path = find_path(cmd,y, env);
 			x++;
 			y++;
@@ -130,18 +136,3 @@ t_cmd	*extract_tab(char **argv, char **env)
 	}
 	return (cmd);
 }
-
-/*
-int main (int argc, char **argv, char **env)
-{
-	t_cmd	*cmd;
-	int x;
-	
-	argc = argc;
-	x = 0;
-	cmd = extract_tab(argv, env);
-	while (cmd[x].args)
-		printf("%s\n", cmd[x++].args[0]);
-
-	free_cmd(cmd);
-}*/
