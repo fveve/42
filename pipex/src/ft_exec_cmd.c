@@ -1,22 +1,17 @@
 #include "../include/pipex.h"
 
-int is_number(char c)
+pid_t init_pipe(t_cmd *cmd)
 {
-	return (c >= '0' && c <= '9');
-}
+	pid_t	pid;
+	int		pipe_fd[2];
 
-int is_tiret(char *s)
-{
-	int x;
-
-	x = 0;
-	while (s[x])
+	pid = fork();
+	if (pipe(pipe_fd) == -1)
 	{
-		if (s[x] == '-')
-			return (1);
-		x++;
+		perror("pipe");
+		free_cmd(cmd);
+		exit(0);
 	}
-	return (0);
 }
 
 void	ft_exec_cmd(t_cmd *cmd, char **envp)
@@ -28,10 +23,10 @@ void	ft_exec_cmd(t_cmd *cmd, char **envp)
 
 	fd_2 = open(cmd[1].args[0], O_RDWR);
 	x = 2;
-	while (cmd[x].path)
+	while (cmd[x +1].path)
 	{
-		pipe(pipe_fd);
 		pid = fork();
+		pipe(pipe_fd);
 		if (pid == 0)
 		{
 			close(pipe_fd[0]);
@@ -41,21 +36,21 @@ void	ft_exec_cmd(t_cmd *cmd, char **envp)
 				perror("execve");
 				exit(0);
 			}
-			close(pipe_fd[1]);
 		}
 		else
 		{
 			x++;
 			close(pipe_fd[1]);
+			dup2(pipe_fd[0], 1);
 			if (execve(cmd[x].path, cmd[x].args, envp) == -1)
 			{
 				perror("execve");
 				exit(0);
 			}
-			close(pipe_fd[0]);
 		}
 		x++;
 	}
+	dup2(3, pipe_fd[1]);
 	free_cmd(cmd);
 	close(fd_2);
 }
