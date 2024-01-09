@@ -42,5 +42,6 @@ void 	ft_check_args(int argc, char **argv);
 void	free_tab(char **tab);
 void	ft_check_pipe(void);
 void	ft_exec_cmd(char **tab, char **envp);
-
+void	free_cmd(t_cmd *cmd);
+t_cmd	*init_cmd(int len);
 #endif

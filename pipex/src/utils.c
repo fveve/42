@@ -11,7 +11,21 @@
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+t_cmd	*init_cmd(int len)
+{
+	t_cmd	*cmd;
+	int x;
 
+	x = 0;
+	cmd = malloc(sizeof(t_cmd) * (len + 1));
+	while (x <= len)
+	{
+		cmd[x].args = NULL;
+		cmd[x].path = NULL;
+		x++;
+	}
+	return (cmd);
+}
 void	free_tab(char **tab)
 {
 	int	x;
@@ -19,12 +33,31 @@ void	free_tab(char **tab)
 	x = 0;
 	if (tab)
 	{
-	while(tab[x])
-	{
-		free(tab[x]);
-		x++;
+		while(tab[x])
+		{
+			free(tab[x]);
+			x++;
+		}
+		free(tab);
 	}
-	free(tab);
+}
+
+void	free_cmd(t_cmd *cmd)
+{
+	int	x;
+
+	x = 0;
+	if (cmd)
+	{
+		while(cmd[x].args)
+		{
+			if (cmd[x].args)
+				free_tab(cmd[x].args);
+			if (cmd[x].path)
+				free(cmd[x].path);
+			x++;
+		}
+		free(cmd);
 	}
 }
 

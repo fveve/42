@@ -12,6 +12,7 @@
 
 #include "../include/pipex.h"
 
+
 int is_path(char *s)
 {
 	char	*path;
@@ -28,8 +29,26 @@ int is_path(char *s)
 	return (1);
 }
 
+char	*ft_set_path(char *cmd, char *p)
+{
+	char *path;
+	int x;
+	int	y;
 
-char *find_path(t_cmd *cmd,char **env)
+	path = malloc(sizeof(char) * (ft_strlen(p) + ft_strlen(cmd) + 2));
+	x = 0;
+	y = 0;
+	while (p[x])
+		path[y++] = p[x++];
+	path[y++] = '/';
+	x = 0;
+	while (cmd[x])
+		path[y++] = cmd[x++];
+	path[y] = '\0';
+	return (path);
+}
+
+char *find_path(t_cmd *cmd, int y, char **env)
 {
 	char	**tab;
 	char	*path;
@@ -40,43 +59,28 @@ char *find_path(t_cmd *cmd,char **env)
 	{
 		if (is_path(env[x]))
 		{
-			tab = ft_split(env[x], ":");
+			tab = ft_split(env[x], ':');
 			break;
 		}
 		x++;
 	}
 	x = 0;
-	path = ft_set_path(cmd->args, tab[x]);
-	while (access(path, F_OK) == -1 && tab[x])
+	path = ft_set_path(cmd[y].args[0], tab[x]);
+	while (access(path, F_OK && X_OK) == -1 && tab[x])
 	{
 			free(path);
-			path = ft_set_path(cmd->args, tab[x]);
+			path = ft_set_path(cmd[y].args[0], tab[x]);
 			x++;
 	}
-	if (access(path, X_OK) == -1)
+	free_tab(tab);
+	if (access(path, F_OK && X_OK) == -1)
 	{
-		perror("path :");
+		perror("cmd ");
 		free(path);
-		free_tab(cmd->args);
-		free(cmd);
+		free_cmd(cmd);
 		exit(0);
 	}
 	return(path);
-}
-
-char	*ft_set_path(char **cmd, char *p)
-{
-	char *path;
-	int x;
-
-	path = malloc(sizeof(char) * (ft_strlen(p) + ft_strlen(cmd) + 1));
-	x = 0;
-	while (p[x])
-		*path++ = p[x++];
-	x = 0;
-	while (cmd[x])
-		*path++ = cmd[x++];
-	return (path);
 }
 
 int	is_file(char *s)
@@ -103,12 +107,23 @@ t_cmd	*extract_tab(char **argv, char **env)
 
 	x = 1;
 	y = 0;
-	cmd = malloc(sizeof(t_cmd) * (ft_strlen_tab(argv) + 1));
+	cmd = init_cmd(ft_strlen_tab(argv));
 	while (argv[x])
 	{
-		cmd->args = ft_split(argv[x], ' ');
-		cmd->path = ft_find_path(cmd, env);
+		cmd[y].args = ft_split(argv[x], ' ');
+		cmd[y].path = find_path(cmd,y, env);
 		x++;
+		y++;
 	}
 	return (cmd);
+}
+
+int main (int argc, char **argv, char **env)
+{
+	t_cmd	*cmd;
+	
+	argc = argc;
+	cmd = extract_tab(argv, env);
+	printf("%s\n", cmd[0].path);
+	free_cmd(cmd);
 }
