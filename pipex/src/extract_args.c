@@ -99,31 +99,49 @@ int	is_file(char *s)
 	return (0);
 }
 
+
 t_cmd	*extract_tab(char **argv, char **env)
 {
-	t_cmd	*cmd;
-	int		x;
-	int		y;
+		t_cmd	*cmd;
+	int 	x;
+	int 	y;
 
 	x = 1;
 	y = 0;
 	cmd = init_cmd(ft_strlen_tab(argv));
+	while (y <= 1 && argv[x])
+	{
+		if (is_file(argv[x]))
+			cmd[y++].args = ft_split(argv[x], ' ');
+		x++;
+	}
+	x = 2;
 	while (argv[x])
 	{
-		cmd[y].args = ft_split(argv[x], ' ');
-		cmd[y].path = find_path(cmd,y, env);
-		x++;
-		y++;
+		if (!is_file(argv[x]))
+		{
+			cmd[y].args = ft_split(argv[x], ' ');
+			cmd[y].path = find_path(cmd,y, env);
+			x++;
+			y++;
+		}
+		else
+			x++;
 	}
 	return (cmd);
 }
 
+/*
 int main (int argc, char **argv, char **env)
 {
 	t_cmd	*cmd;
+	int x;
 	
 	argc = argc;
+	x = 0;
 	cmd = extract_tab(argv, env);
-	printf("%s\n", cmd[0].path);
+	while (cmd[x].args)
+		printf("%s\n", cmd[x++].args[0]);
+
 	free_cmd(cmd);
-}
+}*/

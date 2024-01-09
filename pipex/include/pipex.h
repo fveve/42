@@ -21,15 +21,14 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-//Structure------------------------------------------------
-
+//Structure-------------------------------------------------
 typedef struct s_cmd
 {
 	char *path;
 	char **args;
 } t_cmd;
 
-//Functions------------------------------------------------
+//Functions-------------------------------------------------
 int 	ft_strlen(const char *s);
 int 	ft_strlen_tab(char **s);
 int		is_file(char *s);
@@ -43,5 +42,6 @@ void	free_tab(char **tab);
 void	ft_check_pipe(void);
 void	ft_exec_cmd(char **tab, char **envp);
 void	free_cmd(t_cmd *cmd);
+t_cmd	*extract_tab(char **argv, char **env);
 t_cmd	*init_cmd(int len);
 #endif
