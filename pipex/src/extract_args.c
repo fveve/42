@@ -105,7 +105,6 @@ t_cmd	*extract_tab(char **argv, char **env)
 		t_cmd	*cmd;
 	int 	x;
 	int 	y;
-	int 	z;
 
 	x = 1;
 	y = 0;
@@ -120,13 +119,8 @@ t_cmd	*extract_tab(char **argv, char **env)
 	while (argv[x])
 	{
 		if (!is_file(argv[x]))
-		{		
-			z = 0;
+		{
 			cmd[y].args = ft_split(argv[x], ' ');
-			while (cmd[y].args[z])
-				z++;
-			cmd[y].args[z++] = ft_strdup(cmd[0].args[0]); 
-			cmd[y].args[z] = NULL; 
 			cmd[y].path = find_path(cmd,y, env);
 			x++;
 			y++;

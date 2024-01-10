@@ -1,66 +1,90 @@
 #include "../include/pipex.h"
 
-pid_t init_pipe(t_cmd *cmd)
+int	ft_exec_cmd(t_cmd cmd, char **envp, int trigger, int file_fd, int file_fd2, int *fd, pid_t pid)
 {
-	pid_t	pid;
-	int		pipe_fd[2];
-
-	pid = fork();
-	if (pipe(pipe_fd) == -1)
+	if (!trigger)
 	{
-		perror("pipe");
-		free_cmd(cmd);
-		exit(0);
-	}
-}
-
-void	ft_exec_cmd(t_cmd *cmd, char **envp)
-{
-	int 	pipe_fd[2];
-	int 	fd_2;
-	int 	pid;
-	int		x;
-
-	fd_2 = open(cmd[1].args[0], O_RDWR);
-	x = 2;
-	while (cmd[x +1].path)
-	{
-		pid = fork();
-		pipe(pipe_fd);
-		if (pid == 0)
+		if (!pid)
 		{
-			close(pipe_fd[0]);
-			dup2(pipe_fd[1],2);
-			if (execve(cmd[x].path, cmd[x].args, envp) == -1)
+			dup2(file_fd, 0);
+			dup2(fd[1], 1);
+			if (execve(cmd.path, cmd.args, envp) == -1)
 			{
 				perror("execve");
-				exit(0);
+				return (-1);
 			}
+			exit(1);
 		}
-		else
+	}
+	else
+	{
+		if (pid)
 		{
-			x++;
-			close(pipe_fd[1]);
-			dup2(pipe_fd[0], 1);
-			if (execve(cmd[x].path, cmd[x].args, envp) == -1)
+			close(fd[1]);
+			wait(NULL);
+			dup2(fd[0], STDIN_FILENO);
+			printf("%s\n", cmd.args[0]);
+			dup2(file_fd2, STDOUT_FILENO);
+			if (execve(cmd.path, cmd.args, envp) == -1)
 			{
 				perror("execve");
-				exit(0);
+				return (-1);
 			}
 		}
-		x++;
 	}
-	dup2(3, pipe_fd[1]);
-	free_cmd(cmd);
-	close(fd_2);
+	return (0);
 }
 
 int main (int argc, char **argv, char **envp)
 {
+	int file_fd;
+	int file_fd2;
+		int	fd[2];
+	pid_t	pid;
+	
 	t_cmd	*cmd;
+	int x;
 
 	argc = argc;
 	cmd = extract_tab(argv, envp);
-	ft_exec_cmd(cmd, envp);
-
+	x = 2;
+	file_fd = open(cmd[0].args[0], R_OK);
+	file_fd2 = open(cmd[1].args[0], W_OK);
+	while (cmd[x + 1].args)
+	{
+		if (pipe(fd) == -1)
+		{
+			perror("pipe");
+			return (-1);
+		}
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			return (-1);
+		}
+		if (ft_exec_cmd(cmd[x], envp, 0, file_fd, file_fd2, fd, pid) == -1)
+		{
+			free_cmd(cmd);
+			exit(1);
+		}
+		x++;
+	}
+	if (pipe(fd) == -1)
+		{
+			perror("pipe");
+			return (-1);
+		}
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+			return (-1);
+		}
+	if (ft_exec_cmd(cmd[x], envp, 1, file_fd, file_fd2, fd, pid) == -1)
+	{
+		free_cmd(cmd);
+		exit(1);
+	}
+	free_cmd(cmd);
 }
