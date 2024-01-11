@@ -20,7 +20,7 @@ int is_path(char *s)
 
 	x = 0;
 	path = "PATH";
-	while (s[x - 1] != 'H')
+	while (s[x - 1] != 'H' && path[x])
 	{
 		if (path[x] != s[x])
 			return(0);
@@ -85,24 +85,17 @@ char *find_path(t_cmd *cmd, int y, char **env)
 
 int	is_file(char *s)
 {
-	int x;
-
-	x = 0;
 	if (!s)
 		return (0);
-	while (s[x])
-	{
-		if (s[x] == '.')
-			return (1);
-		x++;
-	}
+	if (access(s, F_OK) == 0)
+		return (1);
 	return (0);
 }
 
 
 t_cmd	*extract_tab(char **argv, char **env)
 {
-		t_cmd	*cmd;
+	t_cmd	*cmd;
 	int 	x;
 	int 	y;
 
@@ -130,3 +123,28 @@ t_cmd	*extract_tab(char **argv, char **env)
 	}
 	return (cmd);
 }
+
+/*
+int main (int argc, char **argv, char **env)
+{
+	t_cmd	*cmd;
+	int x;
+	int y;
+	
+	argc = argc;
+	x = 0;
+	cmd = extract_tab(argv, env);
+	while (cmd[x].args)
+	{
+		y = 0;
+		while (cmd[x].args[y])
+		{
+			printf("%s\n", cmd[x].args[y]);
+			y++;
+		}
+		x++;
+	}
+
+
+	free_cmd(cmd);
+}*/
