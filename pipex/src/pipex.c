@@ -12,11 +12,12 @@
 
 #include "../include/pipex.h"
 
-int main(int argc, char **argv, char **envp)
+
+int	main(int argc, char **argv, char **envp)
 {
-	t_data	data;
-	int x;
 	t_cmd	*cmd;
+	t_data	data;
+	int		x;
 
 	ft_check_args(argc, argv, envp, &data);
 	cmd = extract_tab(argv, envp);
@@ -29,9 +30,9 @@ int main(int argc, char **argv, char **envp)
 		x++;
 	}
 	if (execve(cmd[x].path, cmd[x].args, envp) == -1)
-		{
-			perror("execve");
-			free_cmd(cmd);
-			exit (1);
-		}
+	{
+		perror("execve");
+		free_cmd(cmd);
+		exit (0);
+	}
 }

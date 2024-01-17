@@ -12,11 +12,23 @@
 
 #include "../include/pipex.h"
 
-int is_correct_order(char **argv)
+void	ft_put_str(char *s)
 {
-	int x;
-	int trigger;
-	
+	int	x;
+
+	x = 0;
+	while (s[x])
+	{
+		write(1, &s[x], 1);
+		x++;
+	}
+}
+
+int	is_correct_order(char **argv)
+{
+	int	x;
+	int	trigger;
+
 	x = 1;
 	trigger = 0;
 	if (!is_file(argv[x]))
@@ -25,71 +37,68 @@ int is_correct_order(char **argv)
 	{
 		if (is_file(argv[x]) && trigger < 2)
 			trigger++;
-		else if(trigger == 2 && argv[x])
+		else if (trigger == 2 && argv[x])
 			return (1);
 		x++;
 	}
 	return (0);
 }
 
-void ft_check_files(char	**argv, char **env, t_data *data)
+int	is_file2(char *s)
 {
-	t_cmd	*cmd;
+	int	x;
 
-	cmd = extract_tab(argv, env);
-	if (access(cmd[0].args[0], R_OK) == -1)
+	x = 0;
+	while (s[x++])
+	{
+		if (s[x] == '.')
+			return (1);
+	}
+	return (0);
+}
+
+void	ft_check_files(char **argv, int ac, t_data *data)
+{
+	if (access(argv[1], R_OK) == -1)
 	{
 		perror("file1 : ");
-		free_cmd(cmd);
-		exit(1);
+		exit(0);
 	}
-	if (access(cmd[1].args[1], W_OK) == -1)
+	if (access(argv[ac - 1], F_OK) == -1)
 	{
-		data->output = open(cmd[1].args[0] , O_CREAT , W_OK, R_OK);
-		if (data->input < 0)
+		if (is_file2(argv[ac - 1]))
 		{
-			perror("file2 : ");
-			free_cmd(cmd);
-			exit(1);
+			data->output = open(argv[ac - 1], O_CREAT | O_TRUNC, 0777);
+			if (data->output < 0)
+			{
+				perror("file2 ");
+				close(data->output);
+				exit(0);
+			}
 		}
 	}
-	free_cmd(cmd);
-}
-
-void	ft_empty(int output, char **argv, char **env)
-{
-	char	buffer[1024];
-	t_cmd	*cmd;
-
-	cmd = extract_tab(argv, env);
-	if (read(output, buffer, 10) == -1)
-	{	
-		perror("file2 : ");
-		free(cmd);
-		exit(1);
+	if (access(argv[ac - 1], W_OK) == -1 || access(argv[ac - 1], R_OK) == -1)
+	{
+		ft_put_str("Error\n");
+		close(data->output);
+		exit(0);
 	}
-	if (buffer[0])
-		if (unlink(cmd[1].args[0]) == -1)
-		{
-			perror("unlink : ");
-			free_cmd(cmd);
-			exit(1);
-		}
-	free_cmd(cmd);
 }
 
-void ft_check_args(int argc, char **argv, char **env, t_data *data)
+void	ft_check_args(int argc, char **argv, char **env, t_data *data)
 {
+	data->output = 0;
 	if (argc < 5)
 	{
 		write(1, "Error\n", 6);
-		exit(1);
+		exit(0);
 	}
 	else if (is_correct_order(argv) == 1)
 	{
 		write(1, "Error\n", 6);
-		exit(1);
+		exit(0);
 	}
-	ft_empty(data->output, argv, env);
-	ft_check_files(argv, env, data);
+	ft_check_files(argv, argc, data);
+	env = env;
+	//ft_empty(data->output, argv, env);
 }

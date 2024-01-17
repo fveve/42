@@ -1,5 +1,5 @@
 NAME = pipex
-CFLAGS += -Wall -Werror -Wextra
+CFLAGS += -g -Wall -Werror -Wextra
 CC = gcc
 
 vpath %.c src
