@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+
 //Structure-------------------------------------------------
 typedef struct s_cmd
 {
@@ -29,8 +30,13 @@ typedef struct s_cmd
 	char **args;
 } t_cmd;
 
+typedef struct s_data
+{
+	int input;
+	int output;
+}t_data;
 //Functions-------------------------------------------------
-int	ft_exec_cmd(t_cmd cmd, char **envp, int trigger, int file_fd, int file_fd2, int *fd, pid_t pid);
+
 int 	ft_strlen(const char *s);
 int 	ft_strlen_tab(char **s);
 int		is_file(char *s);
@@ -39,6 +45,8 @@ char	*ft_substr(char const *s, int start, int len);
 char	**extract_args(char **argv, int x);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
+void ft_check_args(int argc, char **argv, char **env, t_data *data);
+void exec_child(t_cmd *cmd, int x,int output, char **envp);
 void	free_tab(char **tab);
 void	ft_check_pipe(void);
 void	free_cmd(t_cmd *cmd);

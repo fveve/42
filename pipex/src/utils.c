@@ -65,12 +65,11 @@ int ft_strlen(const char *s)
 {
 	int x;
 
-	x = 0;
+	x = 1;
 	while (s[x])
 		x++;
 	return (x);
 }
-
 
 int ft_strlen_tab(char **s)
 {
@@ -82,20 +81,49 @@ int ft_strlen_tab(char **s)
 	return (x - 1);
 }
 
-char	*ft_strdup(const char *s)
+
+char	*ft_substr(char const *s, int start, int len)
 {
 	char	*tab;
 	int		x;
+	int		y;
 
-	x = 0;
-	tab = malloc(ft_strlen(s) + 1);
-	if (!tab)
-		return (NULL);
-	while (s[x])
+	if (ft_strlen(s) <= start || s == NULL)
 	{
-		tab[x] = s[x];
-		x++;
+		tab = malloc(sizeof(char));
+		tab[0] = '\0';
+		return (tab);
 	}
-	tab[x] = '\0';
+	else if (len >= ft_strlen(s))
+		tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	else
+		tab = malloc(sizeof(char) * (len + 1));
+	if (tab == NULL)
+	{
+		free(tab);
+		return (NULL);
+	}
+	x = start;
+	y = 0;
+	while (s[x] && y < len)
+		tab[y++] = s[x++];
+	tab[y] = '\0';
 	return (tab);
+}
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = ft_strlen(s);
+	str = (char *)malloc(sizeof(*str) * (j + 1));
+	while (i < j)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

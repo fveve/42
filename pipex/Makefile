@@ -1,24 +1,19 @@
-NAME := pipex
-
-CFLAGS += -ggdb -Wall -Werror -Wextra
-
-CC := gcc
+NAME = pipex
+CFLAGS += -Wall -Werror -Wextra
+CC = gcc
 
 vpath %.c src
 
-SRC := $(wildcard src/*.c)
+SRC = $(wildcard src/*.c)
+OBJDIR = obj
+OBJ	= $(SRC:src/%.c=$(OBJDIR)/%.o)
 
-OBJDIR := obj
-
-OBJ	= $(addprefix $(OBJDIR)/,$(notdir $(SRC:%.c=%.o)))
-
-$(OBJDIR)/%.o: %.c
+$(OBJDIR)/%.o: src/%.c
 	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS)  -c $^ -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): 
-	
-
+$(NAME): $(OBJ)
+		$(CC)  $(CFLAGS) $(OBJ) -o $(NAME)
 
 all: $(NAME)
 

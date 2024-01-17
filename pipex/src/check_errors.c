@@ -12,24 +12,6 @@
 
 #include "../include/pipex.h"
 
-int check_files(char **argv)
-{
-	int nb_f;
-	int x;
-
-	x = 1;
-	nb_f = 0;
-	while (argv[x])
-	{
-		if (is_file(argv[x]))
-			nb_f++;
-		x++;
-	}
-	if (nb_f != 2)
-		return (1);
-	return (0);
-}
-
 int is_correct_order(char **argv)
 {
 	int x;
@@ -50,66 +32,64 @@ int is_correct_order(char **argv)
 	return (0);
 }
 
-void ft_check_files(char	**argv, char **env)
+void ft_check_files(char	**argv, char **env, t_data *data)
 {
 	t_cmd	*cmd;
 
 	cmd = extract_tab(argv, env);
 	if (access(cmd[0].args[0], R_OK) == -1)
 	{
-		perror("file1");
+		perror("file1 : ");
 		free_cmd(cmd);
-		exit(0);
+		exit(1);
 	}
 	if (access(cmd[1].args[1], W_OK) == -1)
 	{
-		perror("file2");
-		free_cmd(cmd);
-		exit(0);
+		data->output = open(cmd[1].args[0] , O_CREAT , W_OK, R_OK);
+		if (data->input < 0)
+		{
+			perror("file2 : ");
+			free_cmd(cmd);
+			exit(1);
+		}
 	}
 	free_cmd(cmd);
 }
 
-void ft_check_args(int argc, char **argv, char **env)
+void	ft_empty(int output, char **argv, char **env)
 {
-	if (argc < 4)
-	{
-		write(1, "Error\n", 6);
-		exit(0);
+	char	buffer[1024];
+	t_cmd	*cmd;
+
+	cmd = extract_tab(argv, env);
+	if (read(output, buffer, 10) == -1)
+	{	
+		perror("file2 : ");
+		free(cmd);
+		exit(1);
 	}
-	else if (is_correct_order(argv) == 1 || check_files(argv) == 1)
-	{
-		write(1, "Error\n", 6);
-		exit(0);
-	}
-	ft_check_files(argv, env);
+	if (buffer[0])
+		if (unlink(cmd[1].args[0]) == -1)
+		{
+			perror("unlink : ");
+			free_cmd(cmd);
+			exit(1);
+		}
+	free_cmd(cmd);
 }
 
-//A refaire ||
-//		    \/
-void	ft_check_pipe(void)
+void ft_check_args(int argc, char **argv, char **env, t_data *data)
 {
-	pid_t	pid;
-	char	*buffer;
-	int		fd[2];
-
-	if (pipe(fd) == -1)
+	if (argc < 5)
 	{
-		perror("pipe");
-		exit(0);
+		write(1, "Error\n", 6);
+		exit(1);
 	}
-	pid = fork();
-	buffer = NULL;
-	if (pid < 0)
+	else if (is_correct_order(argv) == 1)
 	{
-		perror("fork");
-		exit(0);
+		write(1, "Error\n", 6);
+		exit(1);
 	}
-	if (read(fd[0], buffer, 0) == -1)
-	{
-		perror("read");
-		exit(0);
-	}
-	close(fd[0]);
-	close(fd[1]);
+	ft_empty(data->output, argv, env);
+	ft_check_files(argv, env, data);
 }

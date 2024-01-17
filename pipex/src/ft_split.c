@@ -12,34 +12,7 @@
 
 #include "../include/pipex.h"
 
-char	*ft_substr(char const *s, int start, int len)
-{
-	char	*tab;
-	int		x;
-	int		y;
 
-	if (ft_strlen(s) <= start || s == NULL)
-	{
-		tab = malloc(sizeof(char));
-		tab[0] = '\0';
-		return (tab);
-	}
-	else if (len >= ft_strlen(s))
-		tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	else
-		tab = malloc(sizeof(char) * (len + 1));
-	if (tab == NULL)
-	{
-		free(tab);
-		return (NULL);
-	}
-	x = start;
-	y = 0;
-	while (s[x] && y < len)
-		tab[y++] = s[x++];
-	tab[y] = '\0';
-	return (tab);
-}
 
 static int	countword(char const *s, char c)
 {
@@ -71,6 +44,7 @@ static char	**fill(char const *s, char c, char **tab)
 	int	string_end;
 	int	x;
 	int	y;
+	int trigger;
 
 	x = 0;
 	y = -1;
@@ -78,18 +52,28 @@ static char	**fill(char const *s, char c, char **tab)
 	string_end = 0;
 	while (++y < countword(s, c))
 	{
+		trigger = 0;
 		while (s[x] == c)
 			x++;
-		string_start = x;
-		if (s[x++] == '\'')
-			while (s[x] != '\'')
-				x++;
-		while (s[x] != c)
+		if (s[x] == '\'')
+		{
+			trigger = 1;
 			x++;
+		}
+		string_start = x;
+		if (!trigger)
+			while (s[x] != c )
+				x++;
+		else
+			while (s[x] != '\'' )
+				x++;
 		string_end = x;
 		tab[y] = ft_substr(s, string_start, string_end - string_start);
 		if (!tab[y])
 			return (NULL);
+		if (trigger)
+			while (s[x] != c)
+				x++;
 	}
 	return (tab);
 }
@@ -98,7 +82,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 
-	tab = (char **)malloc(sizeof(char *) * (countword(s, c) + 2));
+	tab = (char **)malloc(sizeof(char *) * (countword(s, c) + 1));
 	if (!tab)
 	{
 		free (tab);
@@ -108,6 +92,7 @@ char	**ft_split(char const *s, char c)
 	tab = fill(s, c, tab);
 	return (tab);
 }
+
 /*
 int    main(int argc, char **argv)
 {

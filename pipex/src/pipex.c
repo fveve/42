@@ -12,19 +12,26 @@
 
 #include "../include/pipex.h"
 
-
-/*
 int main(int argc, char **argv, char **envp)
 {
-	char	**tab;
+	t_data	data;
 	int x;
+	t_cmd	*cmd;
 
+	ft_check_args(argc, argv, envp, &data);
+	cmd = extract_tab(argv, envp);
 	x = 2;
-	ft_check_args(argc, argv);
-	ft_check_pipe();
-	argc = argc;
-	tab = extract_args(argv, x);
-	envp = envp;
-	ft_exec_cmd(tab, envp);
-	return (0);
-}*/
+	data.input = open(cmd[0].args[0], R_OK);
+	dup2(data.input, 0);
+	while (x < argc - 2)
+	{
+		exec_child(cmd, x, data.output, envp);
+		x++;
+	}
+	if (execve(cmd[x].path, cmd[x].args, envp) == -1)
+		{
+			perror("execve");
+			free_cmd(cmd);
+			exit (1);
+		}
+}
