@@ -39,7 +39,7 @@ void	exec_child(t_cmd *cmd, int x, int output, char **envp)
 
 	if (pipe(fd) == -1)
 	{
-		perror("pipe : ");
+		perror("pipe ");
 		free_cmd(cmd);
 		exit(1);
 	}

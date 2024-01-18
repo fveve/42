@@ -12,7 +12,6 @@
 
 #include "../include/pipex.h"
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
@@ -31,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	if (execve(cmd[x].path, cmd[x].args, envp) == -1)
 	{
-		perror("execve");
+		perror("execve ");
 		free_cmd(cmd);
 		exit (0);
 	}

@@ -24,26 +24,6 @@ void	ft_put_str(char *s)
 	}
 }
 
-int	is_correct_order(char **argv)
-{
-	int	x;
-	int	trigger;
-
-	x = 1;
-	trigger = 0;
-	if (!is_file(argv[x]))
-		return (1);
-	while (argv[x])
-	{
-		if (is_file(argv[x]) && trigger < 2)
-			trigger++;
-		else if (trigger == 2 && argv[x])
-			return (1);
-		x++;
-	}
-	return (0);
-}
-
 int	is_file2(char *s)
 {
 	int	x;
@@ -51,30 +31,34 @@ int	is_file2(char *s)
 	x = 0;
 	while (s[x++])
 	{
-		if (s[x] == '.')
+		if (s[x] == '.' && s[x + 1])
 			return (1);
 	}
 	return (0);
+}
+
+void	verify_data(int output)
+{
+	if (output < 0)
+	{
+		perror("file2 ");
+		exit(0);
+	}
 }
 
 void	ft_check_files(char **argv, int ac, t_data *data)
 {
 	if (access(argv[1], R_OK) == -1)
 	{
-		perror("file1 : ");
+		perror("file1 ");
 		exit(0);
 	}
 	if (access(argv[ac - 1], F_OK) == -1)
 	{
 		if (is_file2(argv[ac - 1]))
 		{
-			data->output = open(argv[ac - 1], O_CREAT | O_TRUNC, 0777);
-			if (data->output < 0)
-			{
-				perror("file2 ");
-				close(data->output);
-				exit(0);
-			}
+			data->output = open(argv[ac - 1], O_CREAT, 0700);
+			verify_data(data->output);
 		}
 	}
 	if (access(argv[ac - 1], W_OK) == -1 || access(argv[ac - 1], R_OK) == -1)
@@ -83,6 +67,8 @@ void	ft_check_files(char **argv, int ac, t_data *data)
 		close(data->output);
 		exit(0);
 	}
+	else
+		data->output = open(argv[ac - 1], O_WRONLY | O_TRUNC);
 }
 
 void	ft_check_args(int argc, char **argv, char **env, t_data *data)
@@ -93,12 +79,6 @@ void	ft_check_args(int argc, char **argv, char **env, t_data *data)
 		write(1, "Error\n", 6);
 		exit(0);
 	}
-	else if (is_correct_order(argv) == 1)
-	{
-		write(1, "Error\n", 6);
-		exit(0);
-	}
 	ft_check_files(argv, argc, data);
 	env = env;
-	//ft_empty(data->output, argv, env);
 }

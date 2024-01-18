@@ -69,17 +69,15 @@ int	is_file(char *s)
 	return (0);
 }
 
-t_cmd	*set_args(char **argv, t_cmd *cmd)
+t_cmd	*set_args(char **argv, t_cmd *cmd, int *y)
 {
 	int		x;
-	int		y;
 
-	x = 0;
-	y = 0;
-	while (y <= 1 && argv[x])
+	x = 1;
+	while ((*y) <= 1 && argv[x])
 	{
 		if (is_file(argv[x]))
-			cmd[y++].args = ft_split(argv[x], ' ');
+			cmd[(*y)++].args = ft_split(argv[x], ' ');
 		x++;
 	}
 	return (cmd);
@@ -94,7 +92,7 @@ t_cmd	*extract_tab(char **argv, char **env)
 	x = 1;
 	y = 0;
 	cmd = init_cmd(ft_strlen_tab(argv));
-	cmd = set_args(argv, cmd);
+	cmd = set_args(argv, cmd, &y);
 	x = 2;
 	while (argv[x])
 	{
