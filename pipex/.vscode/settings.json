@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"stdio.h": "c",
-		"errno.h": "c",
-		"fcntl.h": "c",
-		"pipex.h": "c"
-	}
-}
