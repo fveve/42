@@ -5,28 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:10:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/22 16:10:48 by marvin           ###   ########.fr       */
+/*   Created: 2024/01/24 11:53:30 by marvin            #+#    #+#             */
+/*   Updated: 2024/01/24 11:53:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	input(int key, t_data	*data)
+//idle animation
+/*
+int	render_player(t_data *data)
 {
-	printf("%d\n", key);
-	data = data;
 	return (0);
-}
-
-
-
-int main(void)
-{
-	t_data	data;
-
-	init_data(&data);
-	mlx_key_hook(data.window, input, &data);
-	//mlx_loop_hook(data.mlx, ft_render, &data);
-	mlx_loop(data.mlx);
-}
+}*/
