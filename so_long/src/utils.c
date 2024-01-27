@@ -15,10 +15,15 @@
 void	ft_put_str(char *s)
 {
 	int x;
+	int i;
 
 	x = 0;
-	while (s[x++])
-		write(1, &s[x], 1);
+	while (s[x])
+	{
+		i = write(1, &s[x], 1);
+		x++;
+	}
+	i = i;
 }
 
 void	free_anim(t_anim *anim, void *mlx)
@@ -37,13 +42,15 @@ void	free_anim(t_anim *anim, void *mlx)
 
 void	ft_mess_error(t_data *data, char *s)
 {
-	ft_put_str(s);
+	if (s)
+		ft_put_str(s);
 	free_anim(&data->forward, data->mlx);
 	free_anim(&data->backward, data->mlx);
-	free_anim(&data->idle, data->mlx);
 	free_anim(&data->medal, data->mlx);
 	if (data->window)
-		mlx_destroy_window(data->mlx, data->window);
+		mlx_destroy_window(data->mlx, data->window);	
 	if (data->mlx)
-		free(data->mlx);
+		mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	exit(0);
 }

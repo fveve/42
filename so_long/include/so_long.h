@@ -24,23 +24,24 @@
 //STRUCTURES----------------------------------
 typedef struct s_anim
 {
-	void *frame1;
-	void *frame2;
-	void *frame3;
-	void *frame4;
-	void *frame5;
+	char	*frame1;
+	char	*frame2;
+	char	*frame3;
+	char	*frame4;
+	char	*frame5;
+	void	*current;
 	int		frame_count;
-	int		x;
-	int		y;
 }	t_anim;
 typedef struct s_data 
 {
 	void	*mlx;
 	void	*window;
-	t_anim	idle;
+	int		trigger;
 	t_anim	forward;
 	t_anim	backward;
 	t_anim	medal;
+	int		x;
+	int		y;
 }	t_data;
 
 //FUNCTIONS-----------------------------------------------------------
@@ -48,9 +49,5 @@ void	ft_mess_error(t_data *data, char *s);
 //INIT----------------------------------------------------------------
 void	init_data(t_data *data);
 //--------------------------------------------------------------------
-int	render_player(t_data *data);
-int		get_t(int t);
-int		get_r(int r);
-int		get_g(int g);
-int		get_b(int b);
+int	ft_render(t_data *data);
 #endif
