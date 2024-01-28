@@ -12,6 +12,32 @@
 
 #include "../include/so_long.h"
 
+char *ft_itoa(int nb)
+{
+	char	*tab;
+	int temp;
+	int size;
+
+	size = 0;
+	temp = nb;
+	if (nb == 0)
+		size = 1;
+	while (temp > 0)
+	{
+		size++;
+		temp /= 10;
+	}
+	tab = malloc(sizeof(char) * size + 1);
+	tab[size--] = '\0';
+	while (size >= 0)
+	{
+		tab[size] = nb%10 + 48;
+		nb /= 10;
+		size--;
+	}
+	return (tab);
+}
+
 void	ft_put_str(char *s)
 {
 	int x;
@@ -54,3 +80,4 @@ void	ft_mess_error(t_data *data, char *s)
 	free(data->mlx);
 	exit(0);
 }
+

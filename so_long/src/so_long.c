@@ -19,19 +19,28 @@ int	input(int key, t_data	*data)
 	{
 		data->trigger = 1;
 		data->x -= 100;
+		data->moves++;
 	}
-	else if (key == 65362)
-		printf("up : %d\n", key);
-	else if (key == 65363)
+	else if (key == 65362 && data->y >= 100)
+	{
+		//data->trigger = 2;
+		data->y -= 100;
+		data->moves++;
+	}
+	else if (key == 65363 && data->x < data->screen_x - 100)
 	{
 		data->trigger = 0;
 		data->x += 100;
+		data->moves++;
 	}
-	else if (key == 65364)
-		printf("down : %d\n", key);
+	else if (key == 65364 && data->y < data->screen_y - 100 )
+	{
+		//data->trigger = 3;
+		data->y += 100;
+		data->moves++;
+	}
 	else if (key == 65307)
 		ft_mess_error(data, "congrats !\n");
-	data = data;
 	return (0);
 }
 

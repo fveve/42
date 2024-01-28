@@ -104,10 +104,13 @@ void init_data(t_data *data)
 	data->trigger = 0;
 	data->x = 0;
 	data->y = 0;
+	data->moves = 0;
+	data->screen_x = 1000;//need modification : ft_get_screen_size()
+	data->screen_y = 1000;//need modification: ft_get_screen_size()
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		ft_mess_error(data, "Mlx Error\n");
-	data->window = mlx_new_window(data->mlx, 1000, 1000, "boxeo");
+	data->window = mlx_new_window(data->mlx, data->screen_x, data->screen_y, "boxeo");
 	if (!data->window)
 		ft_mess_error(data, "Window Error\n");
 	init_forward(data, &data->forward, data->mlx);

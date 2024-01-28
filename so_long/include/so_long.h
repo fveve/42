@@ -36,12 +36,15 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*window;
-	int		trigger;
 	t_anim	forward;
 	t_anim	backward;
 	t_anim	medal;
+	int		trigger;
 	int		x;
 	int		y;
+	int 	screen_x;
+	int 	screen_y;
+	int 	moves;
 }	t_data;
 
 //FUNCTIONS-----------------------------------------------------------
@@ -49,5 +52,7 @@ void	ft_mess_error(t_data *data, char *s);
 //INIT----------------------------------------------------------------
 void	init_data(t_data *data);
 //--------------------------------------------------------------------
+int create_trgb(int t, int r, int g, int b);
 int	ft_render(t_data *data);
+char *ft_itoa(int nb);
 #endif
