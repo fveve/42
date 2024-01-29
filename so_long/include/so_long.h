@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+b/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Untitled-2                                         :+:      :+:    :+:   */
@@ -20,6 +20,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include "../lib/printf/ft_printf.h"
+# include "../lib/get_next_line/get_next_line.h"
 
 //STRUCTURES----------------------------------
 typedef struct s_anim
@@ -32,6 +35,14 @@ typedef struct s_anim
 	void	*current;
 	int		frame_count;
 }	t_anim;
+
+typedef struct s_tile
+{
+	char	type;
+	int		pos_x;
+	int		pos_y;
+}	t_tile;
+
 typedef struct s_data 
 {
 	void	*mlx;
@@ -39,6 +50,7 @@ typedef struct s_data
 	t_anim	forward;
 	t_anim	backward;
 	t_anim	medal;
+	t_tile	*tile_set;
 	int		trigger;
 	int		x;
 	int		y;

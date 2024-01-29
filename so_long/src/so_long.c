@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:10:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/22 16:10:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:57:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	input(int key, t_data	*data)
 	}
 	else if (key == 65362 && data->y >= 100)
 	{
-		//data->trigger = 2;
 		data->y -= 100;
 		data->moves++;
 	}
@@ -35,12 +34,12 @@ int	input(int key, t_data	*data)
 	}
 	else if (key == 65364 && data->y < data->screen_y - 100 )
 	{
-		//data->trigger = 3;
 		data->y += 100;
 		data->moves++;
 	}
 	else if (key == 65307)
 		ft_mess_error(data, "congrats !\n");
+	printf("Moves : %d", data->moves);
 	return (0);
 }
 
