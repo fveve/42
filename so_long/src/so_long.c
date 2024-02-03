@@ -15,40 +15,69 @@
 
 int	input(int key, t_data	*data)
 {
-	if (key == 65361 && data->x >= 100)
-	{
-		data->trigger = 1;
-		data->x -= 100;
-		data->moves++;
-	}
-	else if (key == 65362 && data->y >= 100)
-	{
-		data->y -= 100;
-		data->moves++;
-	}
-	else if (key == 65363 && data->x < data->screen_x - 100)
-	{
-		data->trigger = 0;
-		data->x += 100;
-		data->moves++;
-	}
-	else if (key == 65364 && data->y < data->screen_y - 100 )
-	{
-		data->y += 100;
-		data->moves++;
-	}
-	else if (key == 65307)
+
+		if ((key == 65361  && data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] != '1' && data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] != 'E' ) || (data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] == 'E' && data->collec == 0))
+		{
+			if (data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] == 'C')
+			{
+				data->collec--;
+				data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] = '0';
+			}
+			printf("Moves : %d\n", data->moves);//need to be changed
+			data->trigger = 1;
+			data->x -= data->forward.width;
+			data->moves++;
+		}
+			else if ((key == 65363 && data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] != '1' && data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] != 'E') || (data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] == 'E' && data->collec == 0))
+		{
+				if (data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ]  == 'C')
+			{
+				data->collec--;
+				data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] = '0';
+			}
+			printf("Moves : %d\n %d", data->moves, data->collec);//need to be changed
+			data->trigger = 0;
+			data->x += data->forward.width;
+			data->moves++;
+			
+
+		}
+		else if ((key == 65362 && data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] != '1' && data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] != 'E') || (data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->collec == 0))
+		{
+			if (data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] == 'C')
+			{
+				data->collec--;
+				data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] = '0';
+			}
+			printf("Moves : %d\n", data->moves);//need to be changed
+			data->y -= data->forward.height;
+			data->moves++;
+
+		}
+		else if ((key == 65364  && data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] != '1' && data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] != 'E')|| (data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->collec == 0))
+		{
+			if (data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] == 'C')
+			{
+				data->collec--;
+				data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] = '0';
+			}
+			printf("Moves : %d\n", data->moves);//need to be changed
+			data->y += data->forward.height;
+			data->moves++;
+		}
+	if (key == 65307)
 		ft_mess_error(data, "congrats !\n");
-	printf("Moves : %d", data->moves);
+
 	return (0);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_data	data;
 
-
-	init_data(&data);
+/*SPRITE NEED TO BE RESIZED TO 60 * 60  ?*/
+	argc = argc;
+	init_data(&data, argv[1]);
 	mlx_key_hook(data.window, input, &data);
 	mlx_loop_hook(data.mlx, ft_render, &data);
 	mlx_loop(data.mlx);

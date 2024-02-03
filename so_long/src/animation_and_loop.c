@@ -11,46 +11,49 @@
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-//forward animation - need opti ?
-
-void	render_forward(t_anim *forward, t_data *data)
+// render map
+void	print_map(t_data *data, char **tile_set)
 {
-	if (forward->frame_count == 0)
-		forward->current = forward->frame1;
-	if (forward->frame_count == 250)
-		forward->current = forward->frame2;
-	if (forward->frame_count == 500)
-		forward->current = forward->frame3;
-	if (forward->frame_count == 750)
-		forward->current = forward->frame4;
-	if (forward->frame_count == 1000)
+	int	x;
+	int	y;
+
+	x = 0;
+	while (tile_set[x])
 	{
-		forward->current = forward->frame5;
-		forward->frame_count = 0;
+		y = 0;
+		
+		while(tile_set[x][y])
+		{
+			if (tile_set[x][y] == '1')
+				mlx_put_image_to_window(data->mlx, data->window, data->bag, y * SIZE_X, x * SIZE_Y);
+			if (tile_set[x][y] == '0')
+					mlx_put_image_to_window(data->mlx, data->window, data->floor, y * SIZE_X, x * SIZE_Y);
+			if (tile_set[x][y] == 'C')
+				render_anim(&data->medal, data, y * 100, x * 100);
+			y++;
+		}
+		x++;
 	}
-	mlx_put_image_to_window(data->mlx, data->window, forward->current, data->x, data->y);
-	forward->frame_count++;
 }
-//walking animation
-void	render_backward(t_anim *backward, t_data *data)
-{
-	if (backward->frame_count == 0)
-		backward->current = backward->frame1;
-	if (backward->frame_count == 250)
-		backward->current = backward->frame2;
-	if (backward->frame_count == 500)
-		backward->current = backward->frame3;
-	if (backward->frame_count == 750)
-		backward->current = backward->frame4;
-	if (backward->frame_count == 1000)
-	{
-		backward->current = backward->frame5;
-		backward->frame_count = 0;
-	}
 
-	mlx_put_image_to_window(data->mlx, data->window, backward->current, data->x, data->y);
-	backward->frame_count++;
+//animation - need opti ?
+void	render_anim(t_anim *anim, t_data *data, int x, int y)
+{
+	if (anim->frame_count == 0)
+		anim->current = anim->frame1;
+	if (anim->frame_count == SIZE_X / 2)
+		anim->current = anim->frame2;
+	if (anim->frame_count == SIZE_X / 1.5)
+		anim->current = anim->frame3;
+	if (anim->frame_count == SIZE_X )
+		anim->current = anim->frame4;
+	if (anim->frame_count == SIZE_X * 1.5)
+	{
+		anim->current = anim->frame5;
+		anim->frame_count = 0;
+	}
+	mlx_put_image_to_window(data->mlx, data->window, anim->current, x, y);
+	anim->frame_count++;
 }
 
 void	print_moves(t_data *data)
@@ -60,17 +63,19 @@ void	print_moves(t_data *data)
 
 	color = create_trgb(255, 255, 100, 100);
 	tab = ft_itoa(data->moves);
-	mlx_string_put(data->mlx, data->window, data->screen_x / 90 , data->screen_y / 90 + 10, color, tab);
+	mlx_string_put(data->mlx, data->window, 10, 10, color, tab);
 	free(tab);
 }
 
 int	ft_render(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->window);
+		print_map(data, data->tile_set);
 	if (data->trigger == 0)
-		render_forward(&data->forward, data);
+		render_anim(&data->forward, data, data->x, data->y);
 	else /*if (data->trigger == 1)*/
-		render_backward(&data->backward, data);
+		render_anim(&data->backward, data, data->x, data->y);
 	print_moves(data);
+
 	return (0);
 }

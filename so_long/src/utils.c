@@ -12,6 +12,16 @@
 
 #include "../include/so_long.h"
 
+void	free_tab(char **tab)
+{
+	int	x;
+
+	x = 0;
+	while (tab[x])
+		free(tab[x++]);
+	free(tab);
+}
+
 char *ft_itoa(int nb)
 {
 	char	*tab;
@@ -73,6 +83,12 @@ void	ft_mess_error(t_data *data, char *s)
 	free_anim(&data->forward, data->mlx);
 	free_anim(&data->backward, data->mlx);
 	free_anim(&data->medal, data->mlx);
+	if (data->bag)
+		mlx_destroy_image(data->mlx, data->bag);
+	if (data->floor)
+		mlx_destroy_image(data->mlx, data->floor);
+	if (data->tile_set)
+		free_tab(data->tile_set);
 	if (data->window)
 		mlx_destroy_window(data->mlx, data->window);	
 	if (data->mlx)
