@@ -79,10 +79,11 @@ void	free_anim(t_anim *anim, void *mlx)
 void	ft_mess_error(t_data *data, char *s)
 {
 	if (s)
-		ft_put_str(s);
+		ft_put_str(s);//need to add printf ?
 	free_anim(&data->forward, data->mlx);
 	free_anim(&data->backward, data->mlx);
 	free_anim(&data->medal, data->mlx);
+	free_anim(&data->door, data->mlx);
 	if (data->bag)
 		mlx_destroy_image(data->mlx, data->bag);
 	if (data->floor)

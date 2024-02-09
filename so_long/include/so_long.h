@@ -48,6 +48,7 @@ typedef struct s_data
 	t_anim	forward;
 	t_anim	backward;
 	t_anim	medal;
+	t_anim	door;
 	char	**tile_set;
 	int		trigger;
 	int		x;

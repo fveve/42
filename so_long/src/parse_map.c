@@ -31,24 +31,28 @@ char	**array_dup(char **tab)
 	return (dup);
 }
 
-void	set_collectibles(t_data *data, char **tile_set)
+int	set_collectibles(t_data *data, char **tile_set)
 {
 	int	x;
 	int	y;
+	int	collec;
 
 	x = 0;
-
+	collec = 0;
 	while(tile_set[x])
 	{
-			y = 0;
+		y = 0;
 		while (tile_set[x][y])
 		{
 			if (tile_set[x][y] == 'C')
-				data->collec++;
+				collec++;
 			y++;
 		}
 		x++;
 	}
+	if (collec == 0)
+		ft_mess_error(data, "No collectibles : (\n");
+	return (collec);
 }
 
 char	**fill_map(char **tile_set,char *tab, int x)
@@ -99,7 +103,46 @@ void	verify_letters(t_data *data, char **tile_set, char c)
 			ft_mess_error(data, "Wrong map 2\n");
 }
 
-void verify_map(t_data *data,char **tile_set)
+void	verify_outline(t_data *data, char **tile)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (tile[y])
+	{
+		if (tile[y][x] != '1')
+			ft_mess_error(data, "Wrong map outline\n");
+		y++;
+	}
+	y = 0;
+	while (tile[y][x])
+	{
+		if (tile[y][x] != '1')
+			break;
+		x++;
+	}
+	while (tile[y])
+	{
+		if (!tile[y][x - 1] || tile[y][x - 1] != '1')
+			ft_mess_error(data, "Wrong map outline1\n");
+		y++;
+	}
+	x = 0;
+	y--;
+	while (tile[y][x])
+	{
+		if ((!tile[y][x] && tile[y][x + 1])  ||( tile[y][x] != '1' && tile[y][x] != '\r'  && tile[y][x] != '\n' && tile[y][x] != '\0'))
+		{
+			printf("%c\n",tile[y][x] );
+			ft_mess_error(data, "Wrong map outline 2\n");
+		}
+		x++;
+	}
+}
+
+void	verify_map(t_data *data,char **tile_set)
 {
 	int	x;
 	int y;
@@ -120,6 +163,7 @@ void verify_map(t_data *data,char **tile_set)
 	}
 	verify_letters(data, tile_set, 'P');
 	verify_letters(data, tile_set, 'E');
+	verify_outline(data, tile_set);
 	//need path_finding
 }
 
@@ -139,7 +183,6 @@ void	parse_map(t_data *data, char *path)
 	{
 		if (!tab)
 			ft_mess_error(data, "File problem\n");
-
 		data->tile_set = fill_map(data->tile_set, tab, x);
 		free(tab);
 		x++;
@@ -150,9 +193,10 @@ void	parse_map(t_data *data, char *path)
 			x++;
 	while (data->tile_set[y])
 		y++;
-	set_collectibles(data, data->tile_set);
+	data->collec = set_collectibles(data, data->tile_set);
 	data->screen_x = x * SIZE_X;
 	data->screen_y = y * SIZE_Y;
+	printf("collectible : %d\n", data->collec);
 	printf("screen_x : %d\n", data->screen_x);
 	printf("screen_y : %d\n", data->screen_y);
 	close(fd);

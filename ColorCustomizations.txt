@@ -1,0 +1,133 @@
+ "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+		"scope": [
+			// Comments
+			"comment",
+			"punctuation.definition.comment",
+			"string.comment"
+		  ],
+		  "settings": {
+			"foreground": "#ff7f7f" // Light red for comments
+		  }
+		},
+		{
+			"scope": [
+			  // ... other scopes ...
+			"variable.language",
+			"support.variable",
+			"variable.name",
+			"variable.parameter",
+			"variable.other",
+			"variable.other.readwrite",
+			"variable",
+			],
+			"settings": {
+			  "foreground": "#ffffff" // Change this to white
+			}
+		  },
+		{
+		  "scope": [
+			// Keywords
+			"storage.type",
+			"support.function",
+			"keyword",
+			"keyword.operator.logical",
+			"entity.name.class",
+			"support.type",
+			"support.constant",
+			"keyword.operator"
+		  ],
+		  "settings": {
+			"foreground": "#ff0000" // Light red for keywords, variables, and operators
+		  }
+		},
+		{
+		  "scope": [
+			// Strings
+			"string",
+			"punctuation.definition.string"
+		  ],
+		  "settings": {
+			"foreground": "#ffaaaa" // Light red for strings
+		  }
+		},
+		{
+		  "scope": [
+			// Numbers, Functions, Classes, Types, Tags, Brackets, Pointers
+			"constant.numeric",
+			"entity.name.function",
+			"support.class",
+			"entity.name.type",
+			"entity.name.tag",
+			"entity.other.attribute-name",
+			"punctuation.section.block.begin",
+			"punctuation.section.block.end",
+			"punctuation.section.parens.begin",
+			"punctuation.section.parens.end",
+			"punctuation.section.braces.begin",
+			"punctuation.section.braces.end",
+			"punctuation.section.array.begin",
+			"punctuation.section.array.end",
+			"punctuation.definition.pointer",
+			"insertSpaceBeforeFunctionParenthesis"
+		  ],
+		  "settings": {
+			"foreground": "#ffffff" // White for various elements
+		  }
+		}
+	],
+    
+    
+  },
+	  "workbench.colorCustomizations": {
+		"activityBar.background": "#1a1a1a", // Dark activity bar
+		"activityBar.foreground": "#ff0000", // Red activity bar icon
+		"activityBarBadge.background": "#ff0000", // Red activity bar badge
+		"sideBar.background": "#1a1a1a", // Dark sidebar
+		"editorBracketHighlight.unexpectedBracket.foreground": "#00FFFF",
+		"editorBracketHighlight.foreground1": "#f90303",
+		"editorBracketHighlight.foreground2": "#ff0000",
+		"editorBracketHighlight.foreground3" :  "#ffffff",
+		"editorBracketHighlight.foreground4" :  "#ff0000",
+		"editorBracketHighlight.foreground5" :  "#ffffff",
+		"editorBracketHighlight.foreground6" :  "#ff0000",
+		"sideBar.foreground": "#ff0000", // Red sidebar text
+		"sideBarSectionHeader.background": "#330000", // Dark red sidebar section headers
+		"editor.background": "#1a1a1a", // Dark editor background
+		"editor.foreground": "#ffffff", //  editor text
+		"editor.lineHighlightBackground": "#660000", // Dark red line highlight
+		"editorLineNumber.foreground": "#ff0000", // Red line numbers
+		"editorCursor.foreground": "#ff0000", // Red cursor
+		"editor.selectionBackground": "#660000", // Dark red selection
+		"editor.selectionHighlightBackground": "#660000", // Dark red selection highlight
+		"editorBracketMatch.background": "#660000", // Dark red bracket matching
+		"editorHoverWidget.background": "#330000", // Dark red hover widget
+		"editorWidget.background": "#330000", // Dark red editor widget
+		"tab.activeBackground": "#660000", // Dark red active tab
+		"tab.inactiveBackground": "#1a1a1a", // Dark inactive tab
+		"statusBar.background": "#1a1a1a", // Dark status bar
+		"statusBar.foreground": "#ff0000", // Red status bar text
+		"statusBar.border": "#660000", // Dark red status bar border
+		"statusBarItem.hoverBackground": "#330000", // Dark red status bar item hover
+		"titleBar.activeBackground": "#1a1a1a", // Dark title bar
+		"titleBar.inactiveBackground": "#1a1a1a", // Dark inactive title bar
+		"titleBar.activeForeground": "#ff0000", // Red title bar text (active)
+		"titleBar.inactiveForeground": "#ff0000",  // Red title bar text (inactive)
+	},
+	"git.postCommitCommand": "push",
+	"git.autofetch": true,
+	"editor.semanticTokenColorCustomizations": {
+
+	},
+	"settingsSync.ignoredExtensions": [
+		"brapifra.c-compiler",
+		"harikrishnan94.cxx-compiler-explorer",
+		"formulahendry.code-runner",
+		"ms-vscode.cmake-tools",
+		"fougas.msys2",
+		"christian-kohler.path-intellisense",
+		"ms-python.python",
+		"blackboxapp.blackbox",
+		"ms-vscode.cpptools"
+	],
