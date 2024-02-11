@@ -15,7 +15,7 @@
 # define SO_LONG_H
 # define SIZE_Y 100
 # define SIZE_X 100
-
+# define SPEED 200
 //INCLUDES------------------------------------
 
 # include <mlx.h>
@@ -61,15 +61,17 @@ typedef struct s_data
 
 //FUNCTIONS-----------------------------------------------------------
 void	ft_mess_error(t_data *data, char *s);
-//INIT----------------------------------------------------------------
+//INIT DATA-----------------------------------------------------------
 void	init_data(t_data *data, char *path);
 //--------------------------------------------------------------------
 int create_trgb(int t, int r, int g, int b);
 //RENDER--------------------------------------------------------------
 void	render_anim(t_anim *anim, t_data *data, int x, int y);
 int	ft_render(t_data *data);
-//INIT_MAP-----------------------------------------------------------
+//INIT_MAP------------------------------------------------------------
 void	parse_map(t_data *data, char *path);
+//PATHFINDING---------------------------------------------------------
+void	check_path(t_data *data, char **tile_set);
 //UTILS---------------------------------------------------------------
 char *ft_itoa(int nb);
 void	free_tab(char **tab);

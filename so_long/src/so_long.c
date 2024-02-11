@@ -22,7 +22,7 @@ int	input(int key, t_data	*data)
 				data->collec--;
 				data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] = '0';
 			}
-			else if (data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] == 'E'  && data->door.frame_count >= SIZE_X * 1.5)
+			else if (data->tile_set[data->y / SIZE_Y ][(data->x - data->forward.width )/SIZE_X ] == 'E'  && data->door.frame_count >= SPEED * 1.5)
 			{
 				printf("Congrats ! you won in %d moves1.", data->moves);//need to replace with real printf
 				ft_mess_error(data, "\0");
@@ -40,7 +40,7 @@ int	input(int key, t_data	*data)
 				data->collec--;
 				data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] = '0';
 			}
-			else if (data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] == 'E' && data->door.frame_count >= SIZE_X * 1.5)
+			else if (data->tile_set[data->y / SIZE_Y ][(data->x + data->forward.width)/SIZE_X ] == 'E' && data->door.frame_count >= SPEED * 1.5)
 			{
 				printf("Congrats ! you won in %d moves. 2", data->moves);//need to replace with real printf
 				ft_mess_error(data, "\0");
@@ -58,7 +58,7 @@ int	input(int key, t_data	*data)
 				data->collec--;
 				data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] = '0';
 			}
-			else if (data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->door.frame_count >= SIZE_X * 1.5)
+			else if (data->tile_set[(data->y - data->forward.height) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->door.frame_count >= SPEED * 1.5)
 			{
 				printf("Congrats ! you won in %d moves. 3", data->moves);//need to replace with real printf
 				ft_mess_error(data, "\0");
@@ -74,7 +74,7 @@ int	input(int key, t_data	*data)
 				data->collec--;
 				data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] = '0';
 			}
-			if (data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->door.frame_count >= SIZE_X * 1.5)
+			if (data->tile_set[(data->y + data->forward.height + 60) / SIZE_Y ][data->x /SIZE_X ] == 'E' && data->door.frame_count >= SPEED * 1.5)
 			{
 				printf("Congrats ! you won in %d moves. 4", data->moves);//need to replace with real printf
 				ft_mess_error(data, "\0");
@@ -89,7 +89,7 @@ int	input(int key, t_data	*data)
 	return (0);
 }
 
-/*
+
 int main(int argc, char **argv)
 {
 	t_data	data;
@@ -101,4 +101,3 @@ int main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, ft_render, &data);
 	mlx_loop(data.mlx);
 }
-*/

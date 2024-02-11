@@ -177,16 +177,25 @@ void	check_path(t_data *data, char **tile_set)
 		go_to_collec(map,'C', &x, &y);
 		if (!find_path(map, x, y, 0))
 		{
-			printf("collec : %d\n", collec);
+			printf("collec : %d\n", collec);//NEED TO BE REMOVED
 			free_tab(map);
 			ft_mess_error(data, "Need space for collectible\n");
 		}
 		free_tab(map);
 		collec--;
 	}
-	ft_mess_error(data, "DONE\n");
+	map = create_map(tile_set);
+	go_to_collec(map,'E', &x, &y);
+	if (!find_path(map, x, y, 0))
+	{
+		free_tab(map);
+		ft_mess_error(data, "Need space for exit\n");
+	}
+	free_tab(map);
+	printf("DONE\n");
 }
 
+/*
 int main (int argc, char **argv)
 {
 	t_data	data;
@@ -194,4 +203,4 @@ int main (int argc, char **argv)
 	argc = argc;
 	parse_map(&data, argv[1]);
 	check_path(&data, data.tile_set);
-}
+}*/

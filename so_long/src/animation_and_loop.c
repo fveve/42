@@ -29,7 +29,7 @@ void	print_map(t_data *data, char **tile_set)
 			if (tile_set[x][y] == '0')
 				mlx_put_image_to_window(data->mlx, data->window, data->floor, y * SIZE_X, x * SIZE_Y);
 			if (tile_set[x][y] == 'C')
-				render_anim(&data->medal, data, y * 100, x * 100);
+				render_anim(&data->medal, data, y * SIZE_X, x * SIZE_Y);
 			if (tile_set[x][y] == 'E' && data->collec > 0)
 				mlx_put_image_to_window(data->mlx, data->window, data->door.frame1, y * SIZE_X, x * SIZE_Y);
 			y++;
@@ -56,16 +56,16 @@ void	render_door(t_anim *anim, t_data *data)
 	}
 	if (anim->frame_count == 0)
 		anim->current = anim->frame1;
-	if (anim->frame_count == SIZE_X / 2)
+	if (anim->frame_count == SPEED / 2)
 		anim->current = anim->frame2;
-	if (anim->frame_count == SIZE_X / 1.5)
+	if (anim->frame_count == SPEED / 1.5)
 		anim->current = anim->frame3;
-	if (anim->frame_count == SIZE_X )
+	if (anim->frame_count == SPEED )
 		anim->current = anim->frame4;
-	if (anim->frame_count == SIZE_X * 1.5)
+	if (anim->frame_count == SPEED * 1.5)
 		anim->current = anim->frame5;
 	mlx_put_image_to_window(data->mlx, data->window, anim->current, x * SIZE_X, y * SIZE_Y);
-	if ( anim->frame_count < SIZE_X * 1.5)
+	if ( anim->frame_count < SPEED * 1.5)
 		 anim->frame_count++;
 }
 
@@ -74,13 +74,13 @@ void	render_anim(t_anim *anim, t_data *data, int x, int y)
 {
 	if (anim->frame_count == 0)
 		anim->current = anim->frame1;
-	if (anim->frame_count == 25)
+	if (anim->frame_count == SPEED / 2)
 		anim->current = anim->frame2;
-	if (anim->frame_count == 50)
+	if (anim->frame_count == SPEED / 1.5)
 		anim->current = anim->frame3;
-	if (anim->frame_count == 75)
+	if (anim->frame_count == SPEED)
 		anim->current = anim->frame4;
-	if (anim->frame_count ==100)
+	if (anim->frame_count == SPEED * 1.5)
 	{
 		anim->current = anim->frame5;
 		anim->frame_count = 0;

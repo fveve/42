@@ -200,6 +200,7 @@ void	parse_map(t_data *data, char *path)
 	printf("screen_x : %d\n", data->screen_x);
 	printf("screen_y : %d\n", data->screen_y);
 	close(fd);
+	check_path(data, data->tile_set);
 }
 
 
