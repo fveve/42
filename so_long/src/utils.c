@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:29:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/23 11:29:26 by marvin           ###   ########.fr       */
+/*   Updated: 2024/02/12 10:32:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	free_anim(t_anim *anim, void *mlx)
 void	ft_mess_error(t_data *data, char *s)
 {
 	if (s)
-		ft_put_str(s);//need to add printf ?
+		ft_put_str(s);
 	free_anim(&data->forward, data->mlx);
 	free_anim(&data->backward, data->mlx);
 	free_anim(&data->medal, data->mlx);
@@ -98,3 +98,17 @@ void	ft_mess_error(t_data *data, char *s)
 	exit(0);
 }
 
+char *ft_strdup(char *s)
+{
+	char	*tab;
+	int		x;
+
+	x = 0;
+	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	while (s[x])
+	{
+		tab[x] = s[x];
+		x++;
+	}
+	return (tab);
+}
