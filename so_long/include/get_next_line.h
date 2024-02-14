@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:09:15 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/12 10:32:21 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/13 11:38:26 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000000000000
+#  define BUFFER_SIZE 1024
 # endif
 
 # include <unistd.h>

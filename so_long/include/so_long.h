@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:12:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/12 10:31:16 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/14 13:27:23 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,16 @@ typedef struct s_data
 	int		collec;
 }	t_data;
 
-//FUNCTIONS-----------------------------------------------------------
-void	ft_mess_error(t_data *data, char *s);
+//INPUT---------------------------------------------------------------
+int	input(int key, t_data	*data);
 //INIT DATA-----------------------------------------------------------
 void	init_data(t_data *data, char *path);
 //--------------------------------------------------------------------
 int create_trgb(int t, int r, int g, int b);
 //RENDER--------------------------------------------------------------
 void	render_anim(t_anim *anim, t_data *data, int x, int y);
-int	ft_render(t_data *data);
+void	print_map(t_data *data, char **tile_set);
+int		ft_render(t_data *data);
 //INIT_MAP------------------------------------------------------------
 void	parse_map(t_data *data, char *path);
 //PATHFINDING---------------------------------------------------------
@@ -76,5 +77,7 @@ void	check_path(t_data *data, char **tile_set);
 //UTILS---------------------------------------------------------------
 char *ft_itoa(int nb);
 char *ft_strdup(char *s);
+void	go_to_collec(char **map,char c,  int *x, int *y);
+void	ft_mess_error(t_data *data, char *s);
 void	free_tab(char **tab);
 #endif
