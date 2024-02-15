@@ -30,8 +30,6 @@ void	print_map(t_data *data, char **tile_set)
 			if (tile_set[x][y] == '0')
 				mlx_put_image_to_window(data->mlx, data->window, data->floor,
 					y * SIZE_X, x * SIZE_Y);
-			if (tile_set[x][y] == 'C')
-				render_anim(&data->medal, data, y * SIZE_X, x * SIZE_Y);
 			if (tile_set[x][y] == 'E' && data->collec > 0)
 				mlx_put_image_to_window(data->mlx, data->window,
 					data->door.frame1, y * SIZE_X, x * SIZE_Y);
@@ -65,7 +63,6 @@ void	render_door(t_anim *anim, t_data *data)
 		anim->frame_count++;
 }
 
-//animation - need opti ?
 void	render_anim(t_anim *anim, t_data *data, int x, int y)
 {
 	if (anim->frame_count == 0)
@@ -98,13 +95,13 @@ void	print_moves(t_data *data)
 
 int	ft_render(t_data *data)
 {
-	mlx_clear_window(data->mlx, data->window);
 	if (data->trigger == 0)
 		render_anim(&data->forward, data, data->x, data->y);
 	else if (data->trigger == 1)
 		render_anim(&data->backward, data, data->x, data->y);
 	if (data->collec == 0)
 		render_door(&data->door, data);
+	render_medal(data, data->tile_set);
 	print_moves(data);
 	return (0);
 }

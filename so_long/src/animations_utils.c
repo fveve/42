@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   Untitled-1                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:10:48 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/14 13:27:45 by arafa            ###   ########.fr       */
+/*   Created: 2024/02/15 12:48:18 by marvin            #+#    #+#             */
+/*   Updated: 2024/02/15 12:48:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	main(int argc, char **argv)
+void	render_medal(t_data *data, char **tile_set)
 {
-	t_data	data;
+	int	x;
+	int	y;
 
-	if (argc != 2)
-		return (0);
-	init_data(&data, argv[1]);
-	print_map(&data, data.tile_set);
-	mlx_key_hook(data.window, input, &data);
-	mlx_loop_hook(data.mlx, ft_render, &data);
-	mlx_loop(data.mlx);
+	x = 0;
+	while (tile_set[x])
+	{
+		y = 0;
+		while (tile_set[x][y])
+		{
+			if (tile_set[x][y] == 'C')
+				render_anim(&data->medal, data, y * SIZE_X, x * SIZE_Y);
+			y++;
+		}
+		x++;
+	}
 }

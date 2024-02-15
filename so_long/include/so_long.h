@@ -15,7 +15,7 @@
 # define SO_LONG_H
 # define SIZE_Y 100
 # define SIZE_X 100
-# define SPEED 200
+# define SPEED 2000
 //INCLUDES------------------------------------
 
 # include <mlx.h>
