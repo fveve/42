@@ -12,6 +12,8 @@
 
 #include "../include/so_long.h"
 
+void	render_medal(t_data *data, char **tile_set);
+
 // render map
 void	print_map(t_data *data, char **tile_set)
 {

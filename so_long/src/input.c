@@ -99,7 +99,6 @@ void	key_down(t_data *data)
 
 int	input(int key, t_data	*data)
 {
-	mlx_clear_window(data->mlx, data->window);
 	print_map(data, data->tile_set);
 	if (key == 65361
 		&& data->tile_set[data->y / SIZE_Y][(data->x - SIZE_X) / SIZE_X] != '1')

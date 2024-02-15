@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 		return (0);
 	init_data(&data, argv[1]);
 	print_map(&data, data.tile_set);
-	mlx_key_hook(data.window, input, &data);
 	mlx_loop_hook(data.mlx, ft_render, &data);
+	mlx_key_hook(data.window, input, &data);
 	mlx_loop(data.mlx);
 }
