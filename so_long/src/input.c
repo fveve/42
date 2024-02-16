@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:27:28 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/16 12:57:15 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 14:45:17 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	key_left(t_data *data)
 			ft_printf("Congrats ! you won in %d moves1.", data->moves);
 			ft_mess_error(data);
 		}
-		else
-			data->trigger = 1;
+		data->trigger = 1;
 		data->x -= SIZE_X;
 		data->moves++;
 		ft_printf("Moves : %d\n", data->moves);
@@ -56,8 +55,7 @@ void	key_right(t_data *data)
 			ft_printf("Congrats ! you won in %d moves. 2", data->moves);
 			ft_mess_error(data);
 		}
-		else
-			data->trigger = 0;
+		data->trigger = 0;
 		data->x += SIZE_X;
 		data->moves++;
 		ft_printf("Moves : %d\n", data->moves);
@@ -80,6 +78,7 @@ void	key_up(t_data *data)
 				== 'E' && data->door.frame_count >= SPEED * 1.5)
 		{
 			ft_printf("Congrats ! you won in %d moves. 3", data->moves);
+			ft_mess_error(data);
 		}
 		data->y -= SIZE_Y;
 		data->moves++;
