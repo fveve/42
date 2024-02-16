@@ -71,15 +71,16 @@ void	verify_outline(t_data *data, char **tile)
 	x = 0;
 	y = 0;
 	max = 0;
-	while (tile[0][max] != '\n')
+	while (tile[0][max] != '\n' && tile[y][max] != '\r' && tile[y][max])
 		max++;
 	while (tile[y])
 	{
 		x = 0;
-		while (tile[y][x] && tile[y][x] != '\n')
+		while (tile[y][x] && tile[y][x] != '\n' && tile[y][x] != '\r')
 			x++;
 		if (x != max || tile[y][0] != '1')
 		{
+			ft_printf("%d\n%d\n%d\n", x, max, y);
 			ft_printf("wrong map outline1\n");
 			ft_mess_error(data);
 		}
