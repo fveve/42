@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:43:54 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/13 13:50:48 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 12:55:32 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	init_forward(t_data *data, t_anim *fd, void *mlx)
 	fd->frame5 = mlx_xpm_file_to_image(mlx,
 			"./sprite/xpm/forward/forward5.xpm", &x, &y);
 	if (!fd->frame1 || !fd->frame2 || !fd->frame3 || !fd->frame4 || !fd->frame5)
-		ft_mess_error(data, "forward animation error\n");
+	{
+		ft_printf("forward animation error\n");
+		ft_mess_error(data);
+	}
 }
 
 void	init_backward(t_data *data, t_anim *bd, void *mlx)
@@ -72,7 +75,10 @@ void	init_backward(t_data *data, t_anim *bd, void *mlx)
 	bd->frame5 = mlx_xpm_file_to_image(mlx,
 			"./sprite/xpm/backward/backward5.xpm", &x, &y);
 	if (!bd->frame1 || !bd->frame2 || !bd->frame3 || !bd->frame4 || !bd->frame5)
-		ft_mess_error(data, "backward animation error\n");
+	{
+		ft_printf("backward animation error\n");
+		ft_mess_error(data);
+	}
 }
 
 void	init_medal(t_data *data, t_anim *ml, void *mlx)
@@ -93,7 +99,10 @@ void	init_medal(t_data *data, t_anim *ml, void *mlx)
 	ml->frame5 = mlx_xpm_file_to_image(mlx,
 			"./sprite/xpm/medal/medal4.xpm", &x, &y);
 	if (!ml->frame1 || !ml->frame2 || !ml->frame3 || !ml->frame4 || !ml->frame5)
-		ft_mess_error(data, "medal animation error\n");
+	{
+		ft_printf("medal animation error\n");
+		ft_mess_error(data);
+	}
 }
 
 void	init_door(t_data *data, t_anim *dr, void *mlx)
@@ -114,5 +123,8 @@ void	init_door(t_data *data, t_anim *dr, void *mlx)
 	dr->frame5 = mlx_xpm_file_to_image(mlx,
 			"./sprite/xpm/door/door5.xpm", &x, &y);
 	if (!dr->frame1 || !dr->frame2 || !dr->frame3 || !dr->frame4 || !dr->frame5)
-		ft_mess_error(data, "door animation error\n");
+	{
+		ft_printf("door animation error\n");
+		ft_mess_error(data);
+	}
 }

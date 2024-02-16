@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:00:48 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/14 11:44:27 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 14:08:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**fill_map(char **tile_set, char *tab, int x)
 		temp = array_dup(tile_set);
 		free_tab(tile_set);
 	}
-	tile_set = malloc(sizeof(char *) * (x + 1));
+	tile_set = malloc(sizeof(char *) * (x + 8));
 	x = 0;
 	if (temp)
 		while (temp[y])
@@ -65,7 +65,10 @@ void	verify_letters(t_data *data, char **tile_set, char c)
 		x++;
 	}
 	if (trigger != 1)
-		ft_mess_error(data, "Wrong map 2\n");
+	{
+		ft_printf("wrong map\n");
+		ft_mess_error(data);
+	}
 }
 
 void	verify_outline2(t_data *data, char **tile, int y)
@@ -77,9 +80,12 @@ void	verify_outline2(t_data *data, char **tile, int y)
 	while (tile[y][x])
 	{
 		if ((!tile[y][x] && tile[y][x + 1]) || (tile[y][x] != '1'
-			&& tile[y][x] != '\r' && tile[y][x] != '\n'
-			&& tile[y][x] != '\0'))
-			ft_mess_error(data, "Wrong map outline 2\n");
+		&& tile[y][x] != '\r' && tile[y][x] != '\n'
+		&& tile[y][x] != '\0'))
+		{
+			ft_printf("wrong map outline\n");
+			ft_mess_error(data);
+		}
 		x++;
 	}
 }
@@ -91,7 +97,7 @@ void	parse_map2(t_data *data)
 
 	x = 0;
 	y = 0;
-	while (data->tile_set[0][x] != '\r' && data->tile_set[0][x] != '\n')
+	while (data->tile_set[0][x] != '\n')
 		x++;
 	while (data->tile_set[y])
 		y++;
@@ -109,7 +115,10 @@ void	parse_map(t_data *data, char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		ft_mess_error(data, "File problem1\n");
+	{
+		ft_printf("file problem\n");
+		ft_mess_error(data);
+	}
 	x = 1;
 	tab = get_next_line(fd);
 	while (tab)

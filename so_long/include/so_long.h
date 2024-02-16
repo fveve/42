@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:12:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/14 13:27:23 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 13:54:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	parse_map(t_data *data, char *path);
 //PATHFINDING---------------------------------------------------------
 void	check_path(t_data *data, char **tile_set);
 //UTILS---------------------------------------------------------------
+int		ft_mess_error(t_data *data);
 char *ft_itoa(int nb);
 char *ft_strdup(char *s);
 void	go_to_collec(char **map,char c,  int *x, int *y);
-void	ft_mess_error(t_data *data, char *s);
 void	free_tab(char **tab);
 #endif

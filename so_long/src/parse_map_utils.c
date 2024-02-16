@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:51:41 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/14 10:49:08 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 14:41:54 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	set_collectibles(t_data *data, char **tile_set)
 		x++;
 	}
 	if (collec == 0)
-		ft_mess_error(data, "No collectibles : (\n");
+	{
+		ft_printf("no collectible\n");
+		ft_mess_error(data);
+	}
 	return (collec);
 }
 
@@ -63,26 +66,23 @@ void	verify_outline(t_data *data, char **tile)
 {
 	int	x;
 	int	y;
+	int	max;
 
 	x = 0;
 	y = 0;
+	max = 0;
+	while (tile[0][max] != '\n')
+		max++;
 	while (tile[y])
 	{
-		if (tile[y][x] != '1')
-			ft_mess_error(data, "Wrong map outline\n");
-		y++;
-	}
-	y = 0;
-	while (tile[y][x])
-	{
-		if (tile[y][x] != '1')
-			break ;
-		x++;
-	}
-	while (tile[y])
-	{
-		if (!tile[y][x - 1] || tile[y][x - 1] != '1')
-			ft_mess_error(data, "Wrong map outline1\n");
+		x = 0;
+		while (tile[y][x] && tile[y][x] != '\n')
+			x++;
+		if (x != max || tile[y][0] != '1')
+		{
+			ft_printf("wrong map outline1\n");
+			ft_mess_error(data);
+		}
 		y++;
 	}
 	verify_outline2(data, tile, y);
@@ -105,7 +105,10 @@ void	verify_map(t_data *data, char **tile_set)
 				&& tile_set[x][y] != 'C' && tile_set[x][y] != 'E'
 				&& tile_set[x][y] != '\n'
 				&& tile_set[x][y] != '\r' && tile_set[x][y] != '\0')
-				ft_mess_error(data, "Wrong map\n");
+			{
+				ft_printf("wrong map\n");
+				ft_mess_error(data);
+			}
 		}
 		x++;
 	}

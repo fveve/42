@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:29:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/14 10:52:02 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 13:06:12 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,6 @@ char	*ft_itoa(int nb)
 	return (tab);
 }
 
-void	ft_put_str(char *s)
-{
-	int	x;
-	int	i;
-
-	x = 0;
-	while (s[x])
-	{
-		i = write(1, &s[x], 1);
-		x++;
-	}
-	i = i;
-}
-
 void	free_anim(t_anim *anim, void *mlx)
 {
 	if (anim->frame1)
@@ -76,10 +62,8 @@ void	free_anim(t_anim *anim, void *mlx)
 		mlx_destroy_image(mlx, anim->frame5);
 }
 
-void	ft_mess_error(t_data *data, char *s)
+int	ft_mess_error(t_data *data)
 {
-	if (s)
-		ft_put_str(s);
 	free_anim(&data->forward, data->mlx);
 	free_anim(&data->backward, data->mlx);
 	free_anim(&data->medal, data->mlx);

@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:40:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/14 10:47:36 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/16 13:05:13 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	check_exit(t_data *data)
 	if (!find_path(map, x, y, 0))
 	{
 		free_tab(map);
-		ft_mess_error(data, "Need space for exit\n");
+		ft_printf("need space for exit\n");
+		ft_mess_error(data);
 	}
 	free_tab(map);
 }
@@ -110,7 +111,8 @@ void	check_path(t_data *data, char **tile_set)
 		if (!find_path(map, x, y, 0))
 		{
 			free_tab(map);
-			ft_mess_error(data, "Need space for collectible\n");
+			ft_printf("need space for collectible\n");
+			ft_mess_error(data);
 		}
 		free_tab(map);
 		collec--;
