@@ -117,3 +117,31 @@ void	verify_map(t_data *data, char **tile_set)
 	verify_letters(data, tile_set, 'E');
 	verify_outline(data, tile_set);
 }
+
+void	is_ber(t_data *data, char *path)
+{
+	char	*ber;
+	int		x;
+	int		y;
+
+	ber = ".ber";
+	x = 0;
+	y = 0;
+	while (path[x] && path[x] != '.')
+		x++;
+	if (!path[x])
+	{
+		ft_printf("map file need to be finished by .ber\n");
+		ft_mess_error(data);
+	}
+	while (path[x])
+	{
+		if (path[x] != ber[y])
+		{
+			ft_printf("map file need to be finished by .ber\n");
+			ft_mess_error(data);
+		}
+		x++;
+		y++;
+	}
+}

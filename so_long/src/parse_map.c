@@ -20,6 +20,8 @@ char	**array_dup(char **tab);
 
 int		set_collectibles(t_data *data, char **tile_set);
 
+void	is_ber(t_data *data, char *path);
+
 char	**fill_map(char **tile_set, char *tab, int x)
 {
 	char	**temp;
@@ -113,6 +115,7 @@ void	parse_map(t_data *data, char *path)
 	int		fd;
 	int		x;
 
+	is_ber(data, path);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{

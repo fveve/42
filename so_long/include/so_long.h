@@ -24,7 +24,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../include/get_next_line.h"
-#include "../include/ft_printf.h"
+# include "../include/ft_printf.h"
 
 //STRUCTURES----------------------------------
 typedef struct s_anim
@@ -40,7 +40,7 @@ typedef struct s_anim
 	int		height;
 }	t_anim;
 
-typedef struct s_data 
+typedef struct s_data
 {
 	void	*mlx;
 	void	*window;
@@ -54,18 +54,18 @@ typedef struct s_data
 	int		trigger;
 	int		x;
 	int		y;
-	int 	screen_x;
-	int 	screen_y;
-	int 	moves;
+	int		screen_x;
+	int		screen_y;
+	int		moves;
 	int		collec;
 }	t_data;
 
 //INPUT---------------------------------------------------------------
-int	input(int key, t_data	*data);
+int		input(int key, t_data	*data);
 //INIT DATA-----------------------------------------------------------
 void	init_data(t_data *data, char *path);
 //--------------------------------------------------------------------
-int create_trgb(int t, int r, int g, int b);
+int		create_trgb(int t, int r, int g, int b);
 //RENDER--------------------------------------------------------------
 void	render_anim(t_anim *anim, t_data *data, int x, int y);
 void	print_map(t_data *data, char **tile_set);
@@ -76,8 +76,8 @@ void	parse_map(t_data *data, char *path);
 void	check_path(t_data *data, char **tile_set);
 //UTILS---------------------------------------------------------------
 int		ft_mess_error(t_data *data);
-char *ft_itoa(int nb);
-char *ft_strdup(char *s);
-void	go_to_collec(char **map,char c,  int *x, int *y);
+char	*ft_itoa(int nb);
+char	*ft_strdup(char *s);
+void	go_to_collec(char **map, char c, int *x, int *y);
 void	free_tab(char **tab);
 #endif
