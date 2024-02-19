@@ -27,7 +27,7 @@ void	key_left(t_data *data)
 		else if (data->tile_set[data->y / SIZE_Y][(data->x - SIZE_X) / SIZE_X]
 			== 'E' && data->door.frame_count >= SPEED * 1.5)
 		{
-			ft_printf("Congrats ! you won in %d moves1.", data->moves);
+			ft_printf("Congrats ! you won in %d moves.", data->moves);
 			ft_mess_error(data);
 		}
 		data->trigger = 1;
@@ -52,7 +52,7 @@ void	key_right(t_data *data)
 		else if (data->tile_set[data->y / SIZE_Y][(data->x + SIZE_X) / SIZE_X]
 				== 'E' && data->door.frame_count >= SPEED * 1.5)
 		{
-			ft_printf("Congrats ! you won in %d moves. 2", data->moves);
+			ft_printf("Congrats ! you won in %d moves.", data->moves);
 			ft_mess_error(data);
 		}
 		data->trigger = 0;
@@ -77,7 +77,7 @@ void	key_up(t_data *data)
 		else if (data->tile_set[(data->y - SIZE_Y) / SIZE_Y][data->x / SIZE_X]
 				== 'E' && data->door.frame_count >= SPEED * 1.5)
 		{
-			ft_printf("Congrats ! you won in %d moves. 3", data->moves);
+			ft_printf("Congrats ! you won in %d moves.", data->moves);
 			ft_mess_error(data);
 		}
 		data->y -= SIZE_Y;
@@ -103,7 +103,7 @@ void	key_down(t_data *data)
 		if (data->tile_set[(data->y + SIZE_Y + 60) / SIZE_Y][data->x / SIZE_X]
 				== 'E' && data->door.frame_count >= SPEED * 1.5)
 		{
-			ft_printf("Congrats ! you won in %d moves. 4", data->moves);
+			ft_printf("Congrats ! you won in %d moves.", data->moves);
 			ft_mess_error(data);
 		}
 		data->y += SIZE_Y;
