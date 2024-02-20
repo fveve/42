@@ -13,7 +13,6 @@
 #include "../include/so_long.h"
 
 void	verify_letters(t_data *data, char **tile_set, char c);
-
 void	verify_outline2(t_data *data, char **tile, int y);
 
 int	set_collectibles(t_data *data, char **tile_set)
@@ -80,7 +79,7 @@ void	verify_outline(t_data *data, char **tile)
 			x++;
 		if (x != max || tile[y][0] != '1' || tile[y][x - 1] != '1')
 		{
-			ft_printf("wrong map outline1\n");
+			ft_printf("wrong map outline\n");
 			ft_mess_error(data);
 		}
 		y++;

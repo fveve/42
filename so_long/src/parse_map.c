@@ -13,14 +13,11 @@
 #include "../include/so_long.h"
 
 void	verify_map(t_data *data, char **tile_set);
-
 void	verify_outline(t_data *data, char **tile);
-
-char	**array_dup(char **tab);
-
-int		set_collectibles(t_data *data, char **tile_set);
-
 void	is_ber(t_data *data, char *path);
+char	**array_dup(char **tab);
+int		set_collectibles(t_data *data, char **tile_set);
+int		is_square(t_data *data, char **map);
 
 char	**fill_map(char **tile_set, char *tab, int x)
 {
@@ -83,13 +80,14 @@ void	verify_outline2(t_data *data, char **tile, int y)
 	{
 		if ((!tile[y][x] && tile[y][x + 1]) || (tile[y][x] != '1'
 		&& tile[y][x] != '\r' && tile[y][x] != '\n'
-		&& tile[y][x] != '\0'))
+		&& tile[y][x] != '\0') || tile[0][x] != '1')
 		{
 			ft_printf("wrong map outline\n");
 			ft_mess_error(data);
 		}
 		x++;
 	}
+	is_square(data, tile);
 }
 
 void	parse_map2(t_data *data)
@@ -99,7 +97,7 @@ void	parse_map2(t_data *data)
 
 	x = 0;
 	y = 0;
-	while (data->tile_set[0][x] != '\n')
+	while (data->tile_set[0][x] != '\n' && data->tile_set[0][x] != '\r')
 		x++;
 	while (data->tile_set[y])
 		y++;
