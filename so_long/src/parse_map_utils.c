@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:51:41 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/16 14:41:54 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/20 14:31:43 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,15 @@ void	verify_outline(t_data *data, char **tile)
 	x = 0;
 	y = 0;
 	max = 0;
-	while (tile[0][max] != '\n' && tile[y][max] != '\r' && tile[y][max])
+	while (tile[0][max] != '\n' && tile[0][max] != '\r' && tile[0][max])
 		max++;
 	while (tile[y])
 	{
 		x = 0;
 		while (tile[y][x] && tile[y][x] != '\n' && tile[y][x] != '\r')
 			x++;
-		if (x != max || tile[y][0] != '1')
+		if (x != max || tile[y][0] != '1' || tile[y][x - 1] != '1')
 		{
-			ft_printf("%d\n%d\n%d\n", x, max, y);
 			ft_printf("wrong map outline1\n");
 			ft_mess_error(data);
 		}
@@ -120,28 +119,24 @@ void	verify_map(t_data *data, char **tile_set)
 
 void	is_ber(t_data *data, char *path)
 {
-	char	*ber;
+	char	*reb;
 	int		x;
 	int		y;
 
-	ber = ".ber";
+	reb = "reb.";
 	x = 0;
 	y = 0;
-	while (path[x] && path[x] != '.')
-		x++;
-	if (!path[x])
-	{
-		ft_printf("map file need to be finished by .ber\n");
-		ft_mess_error(data);
-	}
 	while (path[x])
+		x++;
+	x--;
+	while (x != 0 && reb[y])
 	{
-		if (path[x] != ber[y])
+		if (path[x] != reb[y])
 		{
 			ft_printf("map file need to be finished by .ber\n");
 			ft_mess_error(data);
 		}
-		x++;
+		x--;
 		y++;
 	}
 }

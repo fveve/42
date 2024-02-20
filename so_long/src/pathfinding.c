@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:40:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/16 13:05:13 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/20 14:06:07 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int		is_player(char	**map, int y, int x);
 
 int	find_path2(char **map, int x, int y)
 {
-	if (map[y][x + 1] != '1' && map[y][x + 1] != '2')
+	if (map[y][x + 1] != '1' && map[y][x + 1] != '2'&& map[y][x + 1] != 'E')
 	{
 		x++;
 		if (find_path(map, x, y, 1) || find_path2(map, x, y))
 			return (1);
 	}
-	if (map[y + 1][x] != '1' && map[y + 1][x] != '2')
+	if (map[y + 1][x] != '1' && map[y + 1][x] != '2' && map[y + 1][x] != 'E')
 	{
 		y++;
 		if (find_path(map, x, y, 1) || find_path2(map, x, y))
@@ -41,13 +41,13 @@ int	find_path(char **map, int x, int y, int trigger)
 	{
 		if (trigger == 1)
 			map[y][x] = '1';
-		if (x != 0 && map[y][x - 1] != '1' && map[y][x - 1] != '2')
+		if (x != 0 && map[y][x - 1] != '1' && map[y][x - 1] != '2' && map[y][x - 1] != 'E')
 		{
 			x--;
 			if (find_path(map, x, y, 1) || find_path2(map, x, y))
 				return (1);
 		}
-		if (y != 0 && map[y - 1][x] != '1' && map[y - 1][x] != '2')
+		if (y != 0 && map[y - 1][x] != '1' && map[y - 1][x] != '2'  && map[y - 1][x] != 'E')
 		{
 			y--;
 			if (find_path(map, x, y, 1) || find_path2(map, x, y))

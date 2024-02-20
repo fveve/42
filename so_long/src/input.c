@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:27:28 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/16 14:45:17 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/20 11:59:17 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,6 @@ int	input(int key, t_data	*data)
 		!= '1')
 		key_down(data);
 	if (key == 65307)
-	{
-		ft_printf("escaped !\n");
 		ft_mess_error(data);
-	}
 	return (0);
 }

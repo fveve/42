@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 10:37:56 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/12 10:32:43 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/20 12:00:30 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,3 @@ int	ft_printf(const char *format, ...)
 	va_end(arg);
 	return (count);
 }
-
-/*
-#include <stdio.h>
-
-int	main()
-{
-//char *tst = NULL;
-//void *tst2 = 0;
-//	long long unsigned *bid = __LONG_MAX__;
-
-printf("%d\n", ft_printf("%d", 45698));
-printf("%d\n", printf("%d", 45698));
-}
-*/

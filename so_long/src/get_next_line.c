@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 08:39:41 by arafa             #+#    #+#             */
-/*   Updated: 2024/02/12 10:18:58 by arafa            ###   ########.fr       */
+/*   Updated: 2024/02/20 11:57:51 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-/*
-int	main()
-{
-	char	*tab;
-	int	fd;
-
-	fd = open("tbo.txt", O_RDONLY);
-	tab = get_next_line(fd);
-	printf("%s", tab);
-	free(tab);
-	tab = get_next_line(fd);
-	printf("%s", tab);
-	free(tab);
-	tab = get_next_line(fd);
-	printf("%s", tab);
-	free(tab);
-}
-*/
