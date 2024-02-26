@@ -1,0 +1,3 @@
+[submodule "true_minishell"]
+	path = true_minishell
+	url = ./true_minishell
