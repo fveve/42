@@ -1,11 +1,11 @@
-vpath %.c src
+
 
 NAME = minishell
 CFLAGS += -g -Wall -Werror -Wextra
 CC = gcc
 SRC = $(wildcard src/*.c)
 OBJDIR = obj
-OBJ	= $(SRC:src/%.c=$(OBJDIR)/%.o)
+
  
 $(OBJDIR)/%.o: src/%.c
 	mkdir -p $(OBJDIR)
