@@ -83,11 +83,11 @@ static char     **add_env_variable(t_mini *mini, char *new_env_var)
     return (new_env);
 }
 
-void    unset_cmd(t_mini *mini, t_cmd *cmd)
+void    unset_cmd(t_mini *mini, char *cmd)
 {
     char **command;
 
-    command = ft_split(cmd->input_str, ' ');
+    command = ft_split(cmd, ' ');
     if (!command[1])
         return ;
     else if (does_var_exist(mini, command[1]) == 0)

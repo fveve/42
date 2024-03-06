@@ -15,7 +15,6 @@
 
 #include "minishell.h"
 
-
 //Structure-------------------------------------------------
 typedef struct s_mini
 {
@@ -38,6 +37,7 @@ typedef struct s_data
 	t_mini	mini;
 }t_data;
 
+
 typedef struct s_split
 {
 	char	**tab;
@@ -46,13 +46,15 @@ typedef struct s_split
 	int		j;
 	int		pipesave;
 }			t_split;
+
 //Functions-------------------------------------------------
 int 	is_tiret(char *s);
 int		is_path(char *s);
 char	*ft_substr(char const *s, int start, int len);
 char	**extract_args(char **argv, int x);
 void 	ft_check_args(int argc, char **argv, char **env, t_data *data);
-void 	exec_child(t_data data);
 void	verify_path(char *path, t_cmd *cmd);
+void	exec_child(t_data data, int x);
 void	free_tab(char **tab);
+
 #endif

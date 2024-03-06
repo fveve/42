@@ -113,12 +113,12 @@ int	dir_access(char **path)
 	}
 }
 
-int	cd_cmd(t_mini *mini, t_cmd *cmd)
+int	cd_cmd(t_mini *mini, char *cmd)
 {
 	char	**command;
 	char	*path;
 
-	command = ft_split(cmd->input_str, ' ');
+	command = ft_split(cmd, ' ');
 	if(ft_strlen2(command) == 1)
 		path = ft_strdup(get_env_path(mini, 2));
 	else if (ft_strncmp(command[1], "-", 1) == 0)

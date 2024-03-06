@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-void echo_cmd(t_cmd *cmd)
+void echo_cmd(char *cmd)
 {
     char **command;
 
-    command = ft_split(cmd->input_str, ' ');
+    command = ft_split(cmd, ' ');
     printf("%s\n", command[1]);
     free_tab(command);
 }

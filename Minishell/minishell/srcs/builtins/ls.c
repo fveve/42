@@ -13,17 +13,17 @@
 #include "minishell.h"
 
 
-void ls_cmd(t_cmd *cmd)
+void ls_cmd(char *cmd)
 {
     char **command;
     DIR *dir;
     struct dirent *entry;
 
-    command = ft_split(cmd->input_str, ' ');
+    command = ft_split(cmd, ' ');
     if (!command[1])
     {
         char *cmd_without_arg;
-        cmd_without_arg = ft_strjoin(cmd->input_str, " .");
+        cmd_without_arg = ft_strjoin(cmd, " .");
         free_tab(command);
         command = ft_split(cmd_without_arg, ' ');
     }

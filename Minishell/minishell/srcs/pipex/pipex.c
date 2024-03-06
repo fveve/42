@@ -12,13 +12,21 @@
 
 #include "minishell.h"
 
+void	exec_cmd(t_data *data, char *cmd);
+
 //need to be modified
 void	pipex(t_data data)
 {
-	while (data.cmd.pipes >= 0)
+	int x;
+
+	x = 0;
+	dup2(data.input, 0);
+	while (data.cmd.pipes > 0)
 	{
-		exec_child(data);
+		printf("1\n");
+		exec_child(data, x);
+		x++;
 		data.cmd.pipes--;
 	}
-	exec(&data.mini, &data.cmd);
+	exec_cmd(&data, data.cmd.cmds[x]);
 }

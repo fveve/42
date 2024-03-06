@@ -35,16 +35,23 @@ void init_mini(t_mini *mini, char **env)
     mini->env[j] = NULL;
 }
 
+void	init_data (t_data *data, char **env)
+{
+	init_mini(&data->mini , env);
+	data->input = 0;
+	data->output = 1;
+}
+
 int main(int argc, char **argv, char **env) 
 {
-	t_mini mini;
+	t_data data;
 	
 	(void)argc;
 	(void)argv;
-	init_mini(&mini , env);
+	init_data(&data, env);
 	signal(SIGINT, handle_signal);
 	signal(SIGQUIT, SIG_IGN);
-	loop(&mini);
+	loop(&data);
    //je renter fonctipon
 
     return 0;

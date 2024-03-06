@@ -1,8 +1,8 @@
 NAME = minishell
 
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I includes
+CFLAGS = -g -Wall -Wextra -Werror -I includes
 
 HEADER = minishell.h
 
@@ -18,10 +18,13 @@ MAIN = main manager signal
 
 TOOLS = free_utils libutils ft_split_enhanced tools
 
+PIPEX = ft_exec_cmd pipex utils
+
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/tools/, $(TOOLS))) \
 	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 	$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
+	$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
 	  #$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
 	  #$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  

@@ -63,11 +63,12 @@ static char     **add_env_variable(t_mini *mini, char *new_env_var)
     new_env = utils(mini, new_env_var);
     return (new_env);
 }
-void    export_cmd(t_mini *mini, t_cmd *cmd)
+
+void    export_cmd(t_mini *mini, char *cmd)
 {
     char **command;
 
-    command = ft_split(cmd->input_str, ' ');
+    command = ft_split(cmd, ' ');
     if (!command[1])
         return ;
     else

@@ -14,7 +14,7 @@
 
 int	is_command(char *str, int x)//check if the word is a command or not
 {
-	char *word;
+	char	*word;
 	int		end;
 
 	end = x;
@@ -33,7 +33,21 @@ int	is_command(char *str, int x)//check if the word is a command or not
 	return(0);
 }
 
-char	*extract_cmds(t_cmd *cmd, char *str)//keep only the commands
+int is_only_zeros(char *s)
+{
+	int x;
+
+	x = 0;
+	while (s[x])
+	{
+		if (s[x] != '0')
+			return (0);
+		x++;
+	}
+	return (1);
+}
+
+char	*extract_cmds(t_data *data, t_cmd *cmd, char *str)//keep only the commands
 {
 	int 	x;
 
@@ -47,15 +61,18 @@ char	*extract_cmds(t_cmd *cmd, char *str)//keep only the commands
 			str[x] = '0';
 		x++;
 	}
+	if (is_only_zeros(str))
+	{
+		printf("command dont exist\n");
+		loop(data);
+	}
 	return (str);
 }
 
 //s'occupe d'executer les commandes
-void    exec(t_data *data, t_cmd *cmd)
+void    exec(t_data *data)
 {
-	cmd->cmds = ft_split(extract_cmds(cmd, cmd->input_str), '0');
-	if (cmd->pipes)
-		pipex
+	pipex(*data);
 }
 
 /*void execution_process(void)

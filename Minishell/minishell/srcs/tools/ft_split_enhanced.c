@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_enhanced.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:51:25 by arafa             #+#    #+#             */
-/*   Updated: 2024/03/01 16:43:04 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:17:13 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_substr(char const *s, int start, int len)
-{
-	char	*tab;
-	int		x;
-	int		y;
-
-	if (ft_strlen(s) <= start || s == NULL)
-	{
-		tab = malloc(sizeof(char));
-		tab[0] = '\0';
-		return (tab);
-	}
-	else if (len >= ft_strlen(s))
-		tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	else
-		tab = malloc(sizeof(char) * (len + 1));
-	if (tab == NULL)
-	{
-		free(tab);
-		return (NULL);
-	}
-	x = start;
-	y = 0;
-	while (s[x] && y < len)
-		tab[y++] = s[x++];
-	tab[y] = '\0';
-	return (tab);
-}
 
 static int	countword(char const *s, char c)
 {

@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-int exit_manager(t_mini *mini)
+int exit_manager(t_data *data)
 {
-    free_mini(mini);
+    free_mini(&data->mini);
     exit(0);
 }

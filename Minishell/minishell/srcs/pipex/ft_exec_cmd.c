@@ -22,7 +22,27 @@ void	set_parent(int *fd, int output, pid_t pid)
 	}
 }
 
-void	exec_child(t_data data)
+void	exec_cmd(t_data *data, char *cmd)
+{
+	   if (ft_strncmp(cmd, "pwd", 3) == 0)
+			pwd_cmd();
+	   else if (ft_strncmp(cmd, "cd", 2) == 0)
+			cd_cmd(&data->mini, cmd);
+	   else if (ft_strncmp(cmd, "ls", 2) == 0)
+			ls_cmd(cmd);
+	   else if (ft_strncmp(cmd, "env", 3) == 0)
+			env_cmd(data->mini.env);
+	   else if (ft_strncmp(cmd, "export", 6) == 0)
+	   		export_cmd(&data->mini, cmd);
+	   else if (ft_strncmp(cmd, "unset", 5) == 0)
+			unset_cmd(&data->mini, cmd);
+	   else if (ft_strncmp(cmd, "exit", 4) == 0)
+			exit_manager(data);
+	   else if (ft_strncmp(cmd, "echo", 4) == 0)
+			echo_cmd(cmd);
+}
+
+void	exec_child(t_data data, int x)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -44,7 +64,7 @@ void	exec_child(t_data data)
 	{
 		close(fd[0]);
 		dup2(fd[1], 1);
-		exec(&data.mini, &data.cmd);
+		exec_cmd(&data, data.cmd.cmds[x]);
 	}
 	set_parent(fd, data.output, pid);
 }
