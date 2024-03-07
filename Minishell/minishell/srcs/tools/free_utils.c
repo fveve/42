@@ -18,26 +18,31 @@ void	free_tab(char **tab)
 	size_t	i;
 
 	i = 0;
-	while (!tab[i])
+	if (tab)
 	{
-		free(tab[i]);
-		i++;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	free(tab);
 }
 
 void	free_mini(t_mini *mini)
 {
 	free_tab(mini->env);
 }
+
 void free_cmd(t_cmd *cmd)
 {
-	free(cmd->input_str);
+	free_tab(cmd->cmds);
 }
 
 char	**free_export_unset(char *env_one_line)
 {
 	char **new_env;
+
 	new_env = ft_split(env_one_line, ' ');
 	free(env_one_line);
 	return (new_env);

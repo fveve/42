@@ -38,6 +38,8 @@ void init_mini(t_mini *mini, char **env)
 void	init_data (t_data *data, char **env)
 {
 	init_mini(&data->mini , env);
+	data->cmd.cmds = NULL;
+	data->cmd.input_str = NULL;
 	data->input = 0;
 	data->output = 1;
 }

@@ -12,16 +12,19 @@
 
 #include "minishell.h"
 
-char	*extract_cmds(t_data *data, t_cmd *cmd, char *str);//keep only the commands
+char	*extract_cmds(t_cmd *cmd, char *str);//keep only the commands
 
 
-void	init_cmd(t_data *data, t_cmd *cmd, char *input_str)
+void	init_cmd(t_cmd *cmd, char *input_str)
 {
-	cmd->cmds = NULL;
-	cmd->input_str = NULL;
+	char	*temp;
+
 	cmd->pipes = -1;
 	cmd->input_str = ft_strdup(input_str);
-	cmd->cmds = ft_split(extract_cmds(data, cmd, cmd->input_str), '0');
+	temp = extract_cmds(cmd, cmd->input_str);
+	cmd->cmds = ft_split(temp, '0');
+	it_works(cmd->cmds);
+	free(temp);
 }
 
 //loop qui fait la loop a l'inifini et envoie au manager les commandes
@@ -32,7 +35,6 @@ void loop(t_data *data)
     {
         char *input_str;
         input_str = readline("\033[38;5;197mminishell : \033[0m");
-		init_cmd(data, &data->cmd, input_str);
         if (input_str == NULL)
         {
             rl_clear_history();
@@ -41,8 +43,9 @@ void loop(t_data *data)
         }
         else
         {
-            add_history(input_str);
-            exec(data);
+        	add_history(input_str);
+			init_cmd(&data->cmd, input_str);
+            /*exec(data);*/
 			free_cmd(&data->cmd);
         }
 		free(input_str);

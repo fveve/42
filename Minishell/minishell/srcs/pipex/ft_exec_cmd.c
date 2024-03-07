@@ -44,9 +44,11 @@ void	exec_cmd(t_data *data, char *cmd)
 
 void	exec_child(t_data data, int x)
 {
+	char	**temp;
 	pid_t	pid;
 	int		fd[2];
 
+	temp = ft_split(data.cmd.cmds[x], ' ');
 	if (pipe(fd) == -1)
 	{
 		perror("pipe : ");
@@ -67,4 +69,5 @@ void	exec_child(t_data data, int x)
 		exec_cmd(&data, data.cmd.cmds[x]);
 	}
 	set_parent(fd, data.output, pid);
+	free_tab(temp);
 }
