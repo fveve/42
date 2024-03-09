@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int	is_pipes(char *str)
+{
+	int	x;
+
+	x = 0;
+	while (str[x])
+	{
+		if (str[x] == '|')
+			return (1);
+		x++;
+	}
+	return (0);
+}
+
 int	is_command(char *str, int x)//check if the word is a command or not
 {
 	char	*word;
@@ -36,7 +50,7 @@ int	is_command(char *str, int x)//check if the word is a command or not
 	free(word);
 	return(0);
 }
-
+/*
 char	*extract_cmds(t_cmd *cmd, char *str)//keep only the commands
 {
 	int 	x;
@@ -51,16 +65,16 @@ char	*extract_cmds(t_cmd *cmd, char *str)//keep only the commands
 		{
 			while (is_command(str, x) && str[x])
 				x++;
-			while(!is_command(str,x) && str[x + 1])
+			while(!is_command(str,x) && str[x])
 				x++;
-			if (str[x] != '\0')
-				str[x] = '0';
+
 		}
 		else
 			x++;
 	}
+	printf("str : %s, x : %d\n" , str, x);
 	return (str);
-}
+}*/
 
 //s'occupe d'executer les commandes
 void    exec(t_data *data)

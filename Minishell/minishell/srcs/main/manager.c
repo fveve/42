@@ -14,17 +14,49 @@
 
 char	*extract_cmds(t_cmd *cmd, char *str);//keep only the commands
 
+char	**remove_space(char **cmd)
+{
+	char	*temp;
+	int	x;
+	int	y;
+	int	z;
+
+	x = 0;
+	while (cmd[x])
+	{
+		printf("x : %d\n", x);
+		y = 0;
+		z = 0;
+		temp = ft_strdup(cmd[x]);
+		while (temp[z] == ' ')
+			z++;
+		while (cmd[x][y])
+			cmd[x][y++] = temp[z++];
+		cmd[x][y] = '\0';
+		free(temp);
+		x++;
+	}
+	return (cmd);
+}
+
+int	is_pipes(char *str);
 
 void	init_cmd(t_cmd *cmd, char *input_str)
 {
-	char	*temp;
-
 	cmd->pipes = -1;
 	cmd->input_str = ft_strdup(input_str);
-	temp = extract_cmds(cmd, cmd->input_str);
-	cmd->cmds = ft_split(temp, '0');
+	if (is_pipes(input_str))
+	{
+		cmd->cmds = ft_split(input_str, "|");
+		cmd->cmds = remove_space(cmd->cmds);
+	}
+	else
+	{
+		cmd->cmds = malloc(sizeof(char *) * 2);
+		cmd->cmds[0] = ft_strdup(input_str);
+		cmd->cmds[1] = NULL;
+	}	
 	it_works(cmd->cmds);
-	free(temp);
 }
 
 //loop qui fait la loop a l'inifini et envoie au manager les commandes

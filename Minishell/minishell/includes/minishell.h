@@ -61,7 +61,7 @@ char	**free_export_unset(char *env_one_line);
 void	free_mini(t_mini *mini);
 
 /*--------SRCS/TOOLS/FT_SPLIT----*/
-char	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char *c);
 
 /*--------srcs/TOOLS/LIBUTILS---*/
 int		ft_strncmp(const char *s1, const char *s2, size_t size);

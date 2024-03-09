@@ -12,7 +12,21 @@
 
 #include "minishell.h"
 
-static int	countword(char const *s, char c)
+int	is_sep(char c, char *sep)
+{
+	int	x;
+
+	x = 0;
+	while (sep[x])
+	{
+		if (sep[x] == c)
+			return (1);
+		x++;
+	}
+	return (0);
+}
+
+static int	countword(char const *s, char *c)
 {
 	int	x;
 	int	i;
@@ -21,7 +35,7 @@ static int	countword(char const *s, char c)
 	i = 0;
 	while (x < ft_strlen(s))
 	{
-		while (s[x] == c && s[x])
+		while (is_sep(s[x], c) && s[x])
 			x++;
 		if (s[x] == '\'')
 		{
@@ -33,27 +47,27 @@ static int	countword(char const *s, char c)
 			while (s[x] != '\"')
 				x++;
 		}
-		if (s[x] != c && s[x])
+		if (!is_sep(s[x], c) && s[x])
 			i++;
-		while (s[x] != c && s[x])
+		while (!is_sep(s[x], c) && s[x])
 			x++;
 	}
 	return (i);
 }
 
-void	fill2(char const *s, char c, int *x, int trigger)
+void	fill2(char const *s, char *c, int *x, int trigger)
 {
 	if (!trigger)
-		while (s[*x] != c && s[*x])
+		while (!is_sep(s[*x], c) && s[*x])
 			(*x)++;
 	else
 		while (s[*x] != '\''  && s[*x] != '\"')
 			(*x)++;
 }
 
-void	fill3(char const *s, char c, int *x, int *trigger)
+void	fill3(char const *s, char *c, int *x, int *trigger)
 {
-	while (s[*x] == c && s[*x])
+	while (is_sep(s[*x], c) && s[*x])
 		(*x)++;
 	while (s[*x] == '\'' || s[*x] == '\"')
 	{
@@ -62,7 +76,7 @@ void	fill3(char const *s, char c, int *x, int *trigger)
 	}
 }
 
-static char	**fill(char const *s, char c, char **tab)
+static char	**fill(char const *s, char *c, char **tab)
 {
 	int	string_start;
 	int	string_end;
@@ -85,13 +99,13 @@ static char	**fill(char const *s, char c, char **tab)
 		if (!tab[y])
 			return (NULL);
 		if (trigger)
-			while (s[x] != c && s[x])
+			while (!is_sep(s[x], c) && s[x])
 				x++;
 	}
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
 	char	**tab;
 

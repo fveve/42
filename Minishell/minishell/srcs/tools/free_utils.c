@@ -36,6 +36,8 @@ void	free_mini(t_mini *mini)
 
 void free_cmd(t_cmd *cmd)
 {
+	if (cmd->input_str)
+		free(cmd->input_str);
 	free_tab(cmd->cmds);
 }
 
@@ -43,7 +45,7 @@ char	**free_export_unset(char *env_one_line)
 {
 	char **new_env;
 
-	new_env = ft_split(env_one_line, ' ');
+	new_env = ft_split(env_one_line, " ");
 	free(env_one_line);
 	return (new_env);
 }
