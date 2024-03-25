@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:07:07 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/19 12:18:58 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:48:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	init_cmd(t_cmd *cmd, char *input_str)
 		cmd->cmds[0] = ft_strdup(input_str);
 		cmd->cmds[1] = NULL;
 	}
+	cmd->input_str = ft_strdup(input_str);
 }
 
 void	init_data(t_data *data, char **env)

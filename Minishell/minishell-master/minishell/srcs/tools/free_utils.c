@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:05:20 by leoherna          #+#    #+#             */
-/*   Updated: 2024/02/26 12:05:20 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:49:01 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void free_cmd(t_cmd *cmd)
 {
 	if (cmd->cmds)
 		free_tab(cmd->cmds);
+	if (cmd->input_str)
+		free(cmd->input_str);
 }
 
 char	**free_export_unset(char *env_one_line)

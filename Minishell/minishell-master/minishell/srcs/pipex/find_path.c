@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:46:09 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/18 14:46:09 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/25 14:14:16 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	verify_path(char *path)
 	if (access(path, F_OK && X_OK) == -1)
 	{
 
-		printf("Error1 : no such file or directory");
+		printf("Error : no such file or directory");
 		free(path);
 		exit(0);
 	}
@@ -44,7 +44,6 @@ char	*ft_set_path(char *cmd, char *p)
 	int		y;
 
 	path = malloc(sizeof(char) * (ft_strlen(p) + ft_strlen(cmd) + 2));
-	printf ("cmd : %s\n", cmd);
 	x = 0;
 	y = 0;
 	while (p[x])
@@ -64,6 +63,7 @@ char	*find_path(char *cmd, char **env)
 	int		x;
 
 	x = 0;
+	env2 = NULL;
 	while (env[x])
 	{
 		if (is_path(env[x]))

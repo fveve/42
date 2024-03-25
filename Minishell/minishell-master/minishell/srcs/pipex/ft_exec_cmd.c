@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:31:14 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/17 15:31:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/25 14:12:27 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	exec_cmd2(t_data *data, char *cmd)
 	{
 		tab = ft_split(cmd, " "); 
 		path = find_path(tab[0], data->mini.env);
-		//if (execve(path, tab, data->mini.env) == -1)
-		//	perror("execve  : "); 
+		if (execve(path, tab, data->mini.env) == -1)
+			perror("execve  : "); 
 		free_tab(tab);
 		free(path);
+		exit(0);
 	}
 }
 
@@ -65,17 +66,15 @@ void	exec_cmd(t_data *data, char *cmd)
 			exit_manager(data);
 	   else if (ft_strncmp(cmd, "echo", 4) == 0)
 			echo_cmd(cmd);
-		else
+		else if (data->cmd.input_str[0])
 			exec_cmd2(data, cmd);
 }
 
 void	exec_child(t_data data, int x)
 {
-	char	**temp;
 	pid_t	pid;
 	int		fd[2];
 
-	temp = ft_split(data.cmd.cmds[x], " ");
 	if (pipe(fd) == -1)
 	{
 		perror("pipe : ");
@@ -96,5 +95,4 @@ void	exec_child(t_data data, int x)
 		exec_cmd(&data, data.cmd.cmds[x]);
 	}
 	set_parent(fd, data.output, pid);
-	free_tab(temp);
 }

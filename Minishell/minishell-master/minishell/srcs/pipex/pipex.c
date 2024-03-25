@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 09:39:15 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/22 11:30:20 by arafa            ###   ########.fr       */
+/*   Updated: 2024/03/25 13:59:21 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	pipex(t_data data)
 	int x;
 
 	x = 0;
-	dup2(data.input, 0);
+	if (data.input)
+		dup2(data.input, 0);
 	while (data.cmd.pipes > 0)
 	{
-		printf("1\n");
 		exec_child(data, x);
 		x++;
 		data.cmd.pipes--;

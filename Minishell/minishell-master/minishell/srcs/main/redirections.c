@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 14:58:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/02/27 14:58:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:10 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	go_to_file(char *input_str, int *y, int trigger)
 	{
 		while (input_str[*y] == ' ')
 			(*y)++;
-		while (input_str[*y + 1] != ' ')
+		while (input_str[*y] != ' ')
 			(*y)++;
 		printf("start2 : %c", input_str[*y]);
 	}
@@ -76,7 +76,6 @@ void	set_fd(t_data *data, char *input_str)
 				set_file(data, file, 3);
 			break;
 		}
-		else
 			x++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:11:25 by leoherna          #+#    #+#             */
-/*   Updated: 2024/02/22 14:11:25 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:11:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void loop(t_data *data)
     {
         char *input_str;
         input_str = readline("\033[38;5;197mminishell : \033[0m");
-        if (input_str == NULL)
+        if (!input_str)
         {
             rl_clear_history();
             printf("^D\n");

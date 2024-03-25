@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:10:20 by arafa             #+#    #+#             */
-/*   Updated: 2023/12/22 11:44:15 by arafa            ###   ########.fr       */
+/*   Updated: 2024/03/25 13:38:32 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_mini
 typedef struct s_cmd
 {
 	char	**cmds;
+	char	*input_str;
 	int		pipes;
 } t_cmd;
 
