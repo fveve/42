@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:05:20 by leoherna          #+#    #+#             */
-/*   Updated: 2024/03/25 13:49:01 by arafa            ###   ########.fr       */
+/*   Updated: 2024/03/27 13:34:42 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	free_tab(char **tab)
 	size_t	i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -30,8 +32,7 @@ void	free_mini(t_mini *mini)
 {
 	if (mini->env)
 		free_tab(mini->env);
-	if (mini->export_env)
-		free_tab(mini->export_env);
+
 	if (mini->cwd)
 		free(mini->cwd);
 }

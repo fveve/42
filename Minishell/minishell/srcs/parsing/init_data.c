@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:07:07 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/25 13:48:05 by arafa            ###   ########.fr       */
+/*   Updated: 2024/03/27 13:12:56 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void init_mini2(t_mini *mini, char **env)
             mini->export_env[j][i] = env[j][i];
             i++;
         }
+  		mini->export_env[j][i] = '\0';
         i = 0;
         j++;
     }

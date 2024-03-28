@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:31:14 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/25 14:12:27 by arafa            ###   ########.fr       */
+/*   Updated: 2024/03/27 13:15:14 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	exec_cmd(t_data *data, char *cmd)
 			exit_manager(data);
 	   else if (ft_strncmp(cmd, "echo", 4) == 0)
 			echo_cmd(cmd);
+		else if (ft_strncmp(cmd, "$", 1) == 0)
+			dollar_cmd(&(data->mini), &(data->cmd));
 		else if (data->cmd.input_str[0])
 			exec_cmd2(data, cmd);
 }
