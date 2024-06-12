@@ -1,0 +1,41 @@
+NAME = philo
+
+CC = cc
+
+CFLAGS = -g -Wall -Wextra -Werror -I include
+
+HEADER = philo.h
+
+SRCS = main parsing check_args 
+
+SRC = $(addsuffix .c, $(addprefix src/, $(SRCS)))
+
+OBJ = $(SRC:c=o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	@echo "\033[0;32mMinishell Compiled !"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@echo "\n\033[0m./philo to execute the program !"
+
+%.o: %.c
+	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r\n" $@
+	@${CC} ${CFLAGS} -c $< -o $@
+
+clean:
+	@echo "\nRemoving binaries..."
+	@rm -f $(OBJ)
+	@echo "\033[0m"
+
+fclean:
+	@echo "Deleting objects..."
+	@rm -f $(OBJ)
+	@echo "\nDeleting executable..."
+	@rm -f $(NAME)
+	@echo "\033[0m"
+
+re: fclean all
+
+
+.PHONY: clean fclean re 
