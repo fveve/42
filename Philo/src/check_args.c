@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:25:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/10 21:25:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/15 11:35:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,42 +104,28 @@ int	is_number(char *input)
 	return (0);
 }
 
-void	ft_putstr(char *input)
-{
-	int	x;
-
-	x = 0;
-	if (!input)
-		return ;
-	while (input[x])
-	{
-		write(1, &input[x], 1);
-		x++;
-	};
-}
-
-int	check_args(t_philo *philo, int argc, char **input)
+int	check_args(t_param *param, int argc, char **input)
 {
 	int	x;
 
 	x = 1;
 	if (argc != 5 && argc != 6)
 	{
-		ft_putstr("Error : wrong number of arguments\n");
+		printf("Error : wrong number of arguments\n");
 		exit(0);
 	}
 	while (input[x])
 	{
 		if (!is_number(input[x]))
 		{
-			ft_putstr("Please only input numbers\n");
+			printf("Please only input numbers\n");
 			exit(0);
 		}
 		x++;
 	}
 	if (parse_numbers(philo, argc, input))
 	{
-		ft_putstr("Error : Wrong arguments\n");
+		printf("Error : Wrong arguments\n");
 		exit(0);
 	}
 	return (0);

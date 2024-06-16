@@ -15,12 +15,12 @@ OBJ = $(SRC:c=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mMinishell Compiled !"
+	@echo "\033[0;32mPHILOSOPHERS Compiled !"
 	@$(CC) $(CFLAGS) -lpthread -o $(NAME) $(OBJ)
 	@echo "\n\033[0m./philo to execute the program !"
 
 %.o: %.c
-	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r\n" $@
+	@printf "\033[0;33mGenerating philo objects... %-33.33s\r\n" $@
 	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
