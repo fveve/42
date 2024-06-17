@@ -1,16 +1,20 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <pthread.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+# include <sys/time.h>
 //						  __________			          //
 //----------------------/*Structures*\-------------------//
 
 typedef struct s_param
 {
-	pthread_mutex_t	*fork;
+	pthread_mutex_t		*fork;
+	pthread_mutex_t		*death;
 	int				nb;
 }	t_param;
 
@@ -42,7 +46,12 @@ int		is_number(char *input);
 
 //parsing
 int		parse_numbers(int argc, char **argv);
-int		init_thread(t_philo *philo, char **argv, int argc);
+
+//thread
+void	init_thread(t_philo *philo);
+int		init_philo(t_philo *philo, char **argv, int argc);
+void	end_thread(t_philo *philo, t_param *param);
+
 //debug
 void	printf_int_tab(int *tab);
 //---------------------\*__________*/-------------------//

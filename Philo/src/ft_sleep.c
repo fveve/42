@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 18:15:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/17 14:35:42 by arafa            ###   ########.fr       */
+/*   Created: 2024/06/17 15:51:00 by arafa             #+#    #+#             */
+/*   Updated: 2024/06/17 15:56:01 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void free_all(t_philo *philo, t_param *param)
+void	ft_sleep(int id, int sleeping_time)
 {
-	int	nb;
-	
-	nb = philo->param->nb;
-	if (param->fork)
-		free(param->fork);
-	if (param->death)
-		free(param->death);
-	free(philo);
-}
-
-void	exit_manager(char *msg, t_philo *philo)
-{
-	printf("%s", msg);
-	free_all(philo, philo->param);
-	exit (0);
+	printf("philosopher[%d] : is sleeping\n", id);
+	if (usleep(sleeping_time) == -1)
+	{
+		printf("Error : usleep doesn't work\n");
+		return ;
+	}
 }

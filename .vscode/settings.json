@@ -4,7 +4,8 @@
 		"wait.h": "c",
 		"so_long.h": "c",
 		"minishell.h": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"unistd.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }
