@@ -6,7 +6,7 @@ CFLAGS = -g -Wall -Wextra -Werror -I include
 
 HEADER = philo.h
 
-SRCS = main parsing check_args 
+SRCS = main parsing check_args thread tools
 
 SRC = $(addsuffix .c, $(addprefix src/, $(SRCS)))
 
@@ -33,7 +33,6 @@ fclean:
 	@rm -f $(OBJ)
 	@echo "\nDeleting executable..."
 	@rm -f $(NAME)
-	@echo "\033[0m"
 
 re: fclean all
 

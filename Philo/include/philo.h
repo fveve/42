@@ -7,31 +7,42 @@
 #include <unistd.h>
 //						  __________			          //
 //----------------------/*Structures*\-------------------//
-typedef	struct s_param
+
+typedef struct s_param
 {
-	int	*args;
+	pthread_mutex_t	*fork;
+	int				nb;
 }	t_param;
 
 typedef struct s_philo
 {
-	int		id;
-	int		dead;
-	int		right_fork;
-	int		left_fork;
-	pthread thread;
-	t_param	param;
+	int					id;
+	int					dying_time;
+	int					eat_time;
+	int					sleep_time;
+	int					nb_of_dining;
+	pthread_mutex_t		right_fork;
+	pthread_mutex_t		left_fork;
+	pthread_t			thread;
+	t_param				*param;
 } t_philo;
 //---------------------\*__________*/-------------------//
 
 //						  __________					 //
 //----------------------/*Functions*\-------------------//
-int		check_args(t_param *param, int argc, char **input);
+int		check_args(int argc, char **input);
+//exit
+void	exit_manager(char *msg, t_philo *philo);
 //tools
-char	**ft_split(char const *s, char c);
 int		ft_atoi( char *nptr);
 int		ft_strlen(char *str);
+void	printf_int_tab(int *tab);
+char	*ft_strdup(char *input);
+int		is_number(char *input);
+
 //parsing
-int	parse_numbers(t_param *param, int argc, char **argv);
+int		parse_numbers(int argc, char **argv);
+int		init_thread(t_philo *philo, char **argv, int argc);
 //debug
 void	printf_int_tab(int *tab);
 //---------------------\*__________*/-------------------//
