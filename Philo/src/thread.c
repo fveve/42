@@ -6,37 +6,51 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 09:50:08 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/18 14:44:19 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/18 16:28:31 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_fork(t_philo *philo)
+long	convert_time(void)
 {
-	struct timeval	start;
-	struct timeval	time;
+	struct timeval start;
+	gettimeofday(&start, NULL);
+	return ((start.tv_usec / 1000) + (start.tv_sec * 1000));
+}
+
+int	check_fork(t_philo *philo)
+{
+	long	start;
+	long	time;
 
 	if (philo->param->is_someone_dead)
-		return ;
-	gettimeofday(&start, NULL);
+		return(1) ;
+	start = convert_time();
 	printf("{philosopher[%d] is thinking}\n", philo->id + 1);
-	pthread_mutex_lock(philo->param->fork);
-	gettimeofday(&time, NULL);
-	printf("\n\n time : %ld, max : %d\n\n", time.tv_sec - start.tv_sec, philo->eat_time);
-	if (time.tv_sec - start.tv_sec >= philo->eat_time && !philo->param->is_someone_dead)
+	pthread_mutex_lock(&philo->param->fork[philo->param->index]);
+	philo->param->is_taken[philo->param->index] = 1;
+	time = convert_time();
+	printf("\n\n time : %ld, max : %d\n\n",time - start, philo->eat_time);
+	if (time - start> philo->eat_time && !philo->param->is_someone_dead)
 	{
 		pthread_mutex_lock(philo->param->death);
-		if (!philo->param->is_someone_dead)
-			return ;
-		printf("{philosopher[%d] is dead :( }", philo->id);
+		if (philo->param->is_someone_dead)
+			return (1);
+		printf("{philosopher[%d] is dead :(}", philo->id + 1);
 		philo->param->is_someone_dead = 1;
 		pthread_mutex_unlock(philo->param->death);
-		return ;
+		return (1) ;
 	}
-	ft_sleep("eating}", philo->id, philo->eat_time);
-	pthread_mutex_unlock(philo->param->fork);
-	ft_sleep("sleeping}", philo->id, philo->sleep_time);
+	
+	ft_sleep("eating}", philo->id + 1, philo->eat_time);
+	pthread_mutex_unlock(&philo->param->fork[philo->param->index]);
+	if (philo->param->nb - 1== philo->param->index)
+		philo->param->index = 0;
+	else
+		philo->param->index++;
+	ft_sleep("sleeping}", philo->id + 1, philo->sleep_time);
+	return (0);
 }
 void	*ft_philosopher(void *p)
 {
@@ -44,7 +58,8 @@ void	*ft_philosopher(void *p)
 
 	philo = (t_philo *)p;
 	while (!philo->param->is_someone_dead)
-		check_fork(philo);
+		if (check_fork(philo))
+			break ;
 	return (NULL);
 }
 
@@ -54,8 +69,10 @@ int	init_mutex(t_philo *philo, t_param *param, int nb_philo)
 
 	i = -1;
 	param->fork = malloc(sizeof(pthread_mutex_t) * (nb_philo));
+	param->is_taken = malloc(sizeof(int) * (nb_philo));
 	param->death = malloc(sizeof(pthread_mutex_t));
 	param->is_someone_dead = 0;
+	param->index = 0;
 	if (!param->fork)
 		return (exit_manager("Error, fork mutex was not generated\n", philo), 1);
 	if (!param->death)
@@ -63,8 +80,11 @@ int	init_mutex(t_philo *philo, t_param *param, int nb_philo)
 	if (pthread_mutex_init(param->death, NULL) == -1)
 		return (exit_manager("Error, death mutex was not generated", philo), 1);
 	while(++i < nb_philo)
+	{
 		if (pthread_mutex_init(&param->fork[i], NULL) == -1)
 			return (exit_manager("Error, fork mutex was not generated\n", philo), 1);
+		param->is_taken[i] = 0;
+	}
 	return (0);
 }
 

@@ -15,8 +15,10 @@ typedef struct s_param
 {
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		*death;
+	int					*is_taken;
 	int					is_someone_dead;
-	int				nb;
+	int					index;
+	int					nb;
 }	t_param;
 
 typedef struct s_philo
