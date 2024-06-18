@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:15:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/17 14:35:42 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/18 10:54:50 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void free_all(t_philo *philo, t_param *param)
 {
 	int	nb;
-	
-	nb = philo->param->nb;
+
+	nb = param->nb;
 	if (param->fork)
 		free(param->fork);
 	if (param->death)
@@ -26,7 +26,7 @@ void free_all(t_philo *philo, t_param *param)
 
 void	exit_manager(char *msg, t_philo *philo)
 {
-	printf("%s", msg);
+	perror(msg);
 	free_all(philo, philo->param);
 	exit (0);
 }

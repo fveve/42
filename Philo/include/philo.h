@@ -15,6 +15,7 @@ typedef struct s_param
 {
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		*death;
+	int					is_someone_dead;
 	int				nb;
 }	t_param;
 
@@ -48,10 +49,11 @@ int		is_number(char *input);
 int		parse_numbers(int argc, char **argv);
 
 //thread
-void	init_thread(t_philo *philo);
-int		init_philo(t_philo *philo, char **argv, int argc);
+void	init_thread(t_philo *philo, t_param *param);
+t_philo	*init_philo(t_philo *philo,t_param *param, char **argv, int argc);
 void	end_thread(t_philo *philo, t_param *param);
-
+//usleep
+void	ft_sleep(char *msg, int id, int sleeping_time);
 //debug
 void	printf_int_tab(int *tab);
 //---------------------\*__________*/-------------------//

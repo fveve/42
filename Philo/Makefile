@@ -6,7 +6,7 @@ CFLAGS = -g -Wall -Wextra -Werror -I include
 
 HEADER = philo.h
 
-SRCS = main parsing check_args thread tools
+SRCS = main parsing check_args thread tools ft_sleep
 
 SRC = $(addsuffix .c, $(addprefix src/, $(SRCS)))
 
