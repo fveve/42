@@ -13,8 +13,6 @@
 
 #include "philo.h"
 
-
-
 int	parse_numbers(int argc, char **argv)
 {
 	int	*args;

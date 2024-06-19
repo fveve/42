@@ -14,7 +14,7 @@
 
 void	ft_sleep(char *msg, int id, int sleeping_time)
 {
-	printf("{philosopher[%d] is %s\n", id, msg);
+	printf("{philosopher[%d] is %s\n\n", id, msg);
 	if (usleep(sleeping_time * 1000) == -1)
 	{
 		printf("Error : usleep doesn't work\n");

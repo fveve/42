@@ -14,9 +14,7 @@
 
 void free_all(t_philo *philo, t_param *param)
 {
-	int	nb;
 
-	nb = param->nb;
 	if (param->fork)
 		free(param->fork);
 	if (param->death)

@@ -25,31 +25,52 @@ int	check_fork(t_philo *philo)
 	long	time;
 
 	if (philo->param->is_someone_dead)
+	{
+			if ( philo->param->index == 0)
+			pthread_mutex_unlock(&philo->param->fork[philo->param->nb - 1]);
+		else
+			pthread_mutex_unlock(&philo->param->fork[philo->param->index- 1]);
+		
+	
 		return(1) ;
+	}
 	start = convert_time();
-	printf("{philosopher[%d] is thinking}\n", philo->id + 1);
+	printf("{philosopher[%d] is thinking}\n\n", philo->id + 1);
 	pthread_mutex_lock(&philo->param->fork[philo->param->index]);
 	philo->param->is_taken[philo->param->index] = 1;
 	time = convert_time();
-	printf("\n\n time : %ld, max : %d\n\n",time - start, philo->eat_time);
+	if (philo->param->is_someone_dead)
+		return (1);
 	if (time - start> philo->eat_time && !philo->param->is_someone_dead)
 	{
 		pthread_mutex_lock(philo->param->death);
-		if (philo->param->is_someone_dead)
-			return (1);
-		printf("{philosopher[%d] is dead :( }\n", philo->id + 1);
+		printf("{philosopher[%d] is dead :( }\n\n", philo->id + 1);
 		philo->param->is_someone_dead = 1;
+		if ( philo->param->index == 0)
+			pthread_mutex_unlock(&philo->param->fork[philo->param->nb - 1]);
+		else
+			pthread_mutex_unlock(&philo->param->fork[philo->param->index- 1]);
 		pthread_mutex_unlock(philo->param->death);
 		return (1) ;
 	}
-	
 	ft_sleep("eating}", philo->id + 1, philo->eat_time);
 	pthread_mutex_unlock(&philo->param->fork[philo->param->index]);
-	if (philo->param->nb - 1== philo->param->index)
+	if (philo->param->nb - 1 == philo->param->index)
 		philo->param->index = 0;
 	else
 		philo->param->index++;
 	ft_sleep("sleeping}", philo->id + 1, philo->sleep_time);
+	
+	if (philo->param->is_someone_dead)
+	{
+			if ( philo->param->index == 0)
+			pthread_mutex_unlock(&philo->param->fork[philo->param->nb - 1]);
+		else
+			pthread_mutex_unlock(&philo->param->fork[philo->param->index- 1]);
+		
+	
+		return(1) ;
+	}
 	return (0);
 }
 void	*ft_philosopher(void *p)
@@ -132,12 +153,12 @@ void end_thread(t_philo *philo, t_param *param)
 	int	i;
 
 	i = -1;
-	nb = 3;
+	nb = param->nb;
 
 	(void)param;
 	while(++i < nb)
 	{
-		printf("nb : %d, i : %d\n", nb, i);
+		//printf("philo->id : %d\n\n", philo[i].id+ 1);
 		pthread_join(philo[i].thread, (void *)&philo[i]);	
 	}
 	pthread_mutex_destroy(param->death);
