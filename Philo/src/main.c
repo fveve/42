@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 10:30:54 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/18 12:52:15 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/19 08:51:04 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	main(int argc, char **argv)
 	philo = NULL;
 	check_args(argc, argv);
 	philo = init_philo(philo, &param, argv, argc);
+	init_thread(philo, &param);
 	end_thread(philo, philo[0].param);
 }

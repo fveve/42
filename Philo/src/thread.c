@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 09:50:08 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/18 16:28:31 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/19 09:16:31 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_fork(t_philo *philo)
 		pthread_mutex_lock(philo->param->death);
 		if (philo->param->is_someone_dead)
 			return (1);
-		printf("{philosopher[%d] is dead :(}", philo->id + 1);
+		printf("{philosopher[%d] is dead :( }\n", philo->id + 1);
 		philo->param->is_someone_dead = 1;
 		pthread_mutex_unlock(philo->param->death);
 		return (1) ;
@@ -59,7 +59,7 @@ void	*ft_philosopher(void *p)
 	philo = (t_philo *)p;
 	while (!philo->param->is_someone_dead)
 		if (check_fork(philo))
-			break ;
+			break;;
 	return (NULL);
 }
 
@@ -123,7 +123,6 @@ t_philo	*init_philo(t_philo *philo, t_param *param, char **argv, int argc)
 		philo[i].left_fork = param->fork[i];
 		philo[i].param = param;
 	}
-	init_thread(philo, param);
 	return (philo);
 }
 
@@ -132,19 +131,17 @@ void end_thread(t_philo *philo, t_param *param)
 	int	nb;
 	int	i;
 
-	i = 0;
-	nb = 1;
+	i = -1;
+	nb = 3;
 
 	(void)param;
-	while(i < nb)
+	while(++i < nb)
 	{
-		pthread_join(philo[i].thread, (void *)&philo[i]);
-		i++;
+		printf("nb : %d, i : %d\n", nb, i);
+		pthread_join(philo[i].thread, (void *)&philo[i]);	
 	}
 	pthread_mutex_destroy(param->death);
 	pthread_mutex_destroy(param->fork);	
-	free(param->fork);
-	free(param->death);
-	free(philo) ;
+	free_all(philo, param);
 	
 }

@@ -49,6 +49,7 @@ int		is_number(char *input);
 
 //parsing
 int		parse_numbers(int argc, char **argv);
+void free_all(t_philo *philo, t_param *param);
 
 //thread
 void	init_thread(t_philo *philo, t_param *param);
