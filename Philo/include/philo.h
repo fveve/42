@@ -28,6 +28,7 @@ typedef struct s_philo
 	int					eat_time;
 	int					sleep_time;
 	int					nb_of_dining;
+	int					has_eaten;
 	pthread_mutex_t		right_fork;
 	pthread_mutex_t		left_fork;
 	pthread_t			thread;
