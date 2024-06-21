@@ -6,10 +6,9 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 21:25:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/17 09:52:16 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/21 12:18:00 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "philo.h"
 
@@ -23,7 +22,7 @@ int	parse_numbers(int argc, char **argv)
 	while (argv[x])
 	{
 		args[x - 1] = ft_atoi(argv[x]);
-		if (args[x - 1] < 0 && x  - 1== 0)
+		if (args[x - 1] < 0 && x - 1 == 0)
 		{
 			free(args);
 			return (1);
@@ -36,7 +35,6 @@ int	parse_numbers(int argc, char **argv)
 		x++;
 	}
 	free(args);
-//	printf_int_tab(args);
 	return (0);
 }
 

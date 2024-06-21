@@ -6,22 +6,16 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 09:19:13 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/17 11:24:44 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/21 15:01:45 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	printf_int_tab(int *tab)
+void	ft_sleep2(t_philo *philo)
 {
-	int	x;
-
-	x = 0;
-	while (tab[x] != -1)
-	{
-		printf("tab[%d] : %d\n",x, tab[x]);
-		x++;
-	}
+	if (!philo->param->is_someone_dead)
+		ft_sleep(" is sleeping", philo->id + 1, philo->sleep_time, philo->param->start);
 }
 
 int	ft_strlen(char *str)

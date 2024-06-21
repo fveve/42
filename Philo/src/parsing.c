@@ -6,15 +6,14 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:15:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/19 08:26:07 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/21 12:14:44 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void free_all(t_philo *philo, t_param *param)
+void	free_all(t_philo *philo, t_param *param)
 {
-
 	if (param->fork)
 		free(param->fork);
 	if (param->death)
