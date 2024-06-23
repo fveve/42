@@ -12,11 +12,7 @@
 
 #include "philo.h"
 
-void	ft_sleep2(t_philo *philo)
-{
-	if (!philo->param->is_someone_dead)
-		ft_sleep(" is sleeping", philo->id + 1, philo->sleep_time, philo->param->start);
-}
+
 
 int	ft_strlen(char *str)
 {

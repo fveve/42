@@ -37,7 +37,12 @@ void	*ft_philosopher(void *p)
 				|| (philo->nb_of_dining
 					&& philo->has_eaten == philo->nb_of_dining))
 			|| check_fork(philo))
+		{
+				pthread_mutex_unlock(philo->right_fork);
+				pthread_mutex_unlock(philo->left_fork);
+				pthread_mutex_unlock(philo->param->death);
 			break ;
+		}
 	}
 	return (NULL);
 }
