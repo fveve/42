@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 09:50:08 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/21 15:42:38 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/24 15:37:10 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,26 @@
 
 long	convert_time(void);
 
-int		ft_death(t_philo *philo, int start, int time);
+int	ft_death(t_philo *philo);
 
 int		ft_think(t_philo *philo);
 
 int		check_fork(t_philo *philo);
 
+int	ft_take_fork(t_philo *philo);
+
 void	*ft_philosopher(void *p)
 {
 	t_philo	*philo;
-
 	philo = (t_philo *)p;
+	
+	if (philo->id % 2 == 0)
+		usleep(5000);
 	while (!philo->param->is_someone_dead
 		&& (philo->nb_of_dining
 			&& philo->has_eaten != philo->nb_of_dining))
 	{
-		if (philo->param->nb - 1 == philo->param->index)
-			philo->param->index = 0;
-		else
-			philo->param->index++;
-		if ((philo->param->is_someone_dead
-				|| (philo->nb_of_dining
-					&& philo->has_eaten == philo->nb_of_dining))
-			|| check_fork(philo))
-		{
-				pthread_mutex_unlock(philo->right_fork);
-				pthread_mutex_unlock(philo->left_fork);
-				pthread_mutex_unlock(philo->param->death);
-			break ;
-		}
+		check_fork(philo);
 	}
 	return (NULL);
 }
@@ -71,6 +62,7 @@ int	init_mutex(t_philo *philo, t_param *param, int nb_philo)
 	while (++i < nb_philo)
 		param->is_taken[i] = 0;
 	param->death = malloc(sizeof(pthread_mutex_t));
+	param->start_mutex = malloc(sizeof(pthread_mutex_t));
 	param->is_someone_dead = 0;
 	param->index = 0;
 	if (!param->fork)
@@ -79,10 +71,15 @@ int	init_mutex(t_philo *philo, t_param *param, int nb_philo)
 	if (!param->death)
 		return (exit_manager("Error, death mutex was not generated\n",
 				philo), 1);
+	if (!param->start_mutex)
+		return (exit_manager("Error, start_mutex mutex was not generated\n",
+				philo), 1);
 	if (pthread_mutex_init(param->death, NULL) == -1)
 		return (exit_manager("Error, death mutex was not generated",
 				philo), 1);
-
+	if (pthread_mutex_init(param->start_mutex, NULL) == -1)
+		return (exit_manager("Error, start_mutex mutex was not generated",
+				philo), 1);
 	ft_init_fork(philo, param, nb_philo);
 	param->is_taken = memset(param->is_taken, 0, nb_philo);
 	param->start = convert_time();
@@ -103,6 +100,7 @@ void	init_thread(t_philo *philo, t_param *param)
 				&ft_philosopher, &philo[i]) == -1)
 			exit_manager("Error, thread can't be created\n", philo);
 	}
+
 }
 
 t_philo	*init_philo(t_philo *philo, t_param *param, char **argv, int argc)
@@ -131,6 +129,8 @@ t_philo	*init_philo(t_philo *philo, t_param *param, char **argv, int argc)
 		philo[i].right_fork = 0;
 		philo[i].param = param;
 		philo[i].has_eaten = 0;
+		philo[i].time_start = 0;
+		philo[i].time_end = convert_time();
 	}
 	return (philo);
 }
@@ -145,7 +145,7 @@ void	end_thread(t_philo *philo, t_param *param)
 	while (++i < nb)
 		pthread_join(philo[i].thread, (void *)&philo[i]);
 	if (philo->has_eaten == philo->nb_of_dining)
-		printf("All philosophers has eaten\n");
+		printf("All philosophers have eaten\n");
 	pthread_mutex_destroy(param->death);
 	pthread_mutex_destroy(param->fork);
 	free_all(philo, param);

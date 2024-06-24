@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:32:05 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/21 15:30:49 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/24 16:07:23 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_param
 {
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		*death;
+	pthread_mutex_t		*start_mutex;
 	int					*is_taken;
 	int					is_someone_dead;
 	int					index;
@@ -37,9 +38,11 @@ typedef struct s_param
 typedef struct s_philo
 {
 	int					id;
-	int					dying_time;
-	int					eat_time;
-	int					sleep_time;
+	long				dying_time;
+	long				eat_time;
+	long				sleep_time;
+	long				time_start;
+	long				time_end;
 	int					nb_of_dining;
 	int					has_eaten;
 	pthread_mutex_t		*right_fork;
@@ -70,7 +73,7 @@ void	init_thread(t_philo *philo, t_param *param);
 t_philo	*init_philo(t_philo *philo, t_param *param, char **argv, int argc);
 void	end_thread(t_philo *philo, t_param *param);
 //usleep
-void	ft_sleep(char *msg, int id, int sleeping_time, long start);
+void	ft_sleep(t_philo *philo, char *msg, long sleeping_time);
 //debug
 void	printf_int_tab(int *tab);
 //---------------------\*__________*/-------------------//
