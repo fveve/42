@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:32:05 by arafa             #+#    #+#             */
-/*   Updated: 2024/06/24 16:07:23 by arafa            ###   ########.fr       */
+/*   Updated: 2024/06/25 15:23:49 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@
 typedef struct s_param
 {
 	pthread_mutex_t		*fork;
-	pthread_mutex_t		*death;
-	pthread_mutex_t		*start_mutex;
+	pthread_mutex_t		death;
+	pthread_mutex_t		check_everyone;
+	pthread_mutex_t		check_if_dying;
+	pthread_mutex_t		start_mutex;
+	pthread_mutex_t		print_mutex;
 	int					*is_taken;
 	int					is_someone_dead;
 	int					index;
 	int					nb;
+	int					everyone_has_eaten;
 	long				start;
 }	t_param;
 
@@ -41,7 +45,6 @@ typedef struct s_philo
 	long				dying_time;
 	long				eat_time;
 	long				sleep_time;
-	long				time_start;
 	long				time_end;
 	int					nb_of_dining;
 	int					has_eaten;
