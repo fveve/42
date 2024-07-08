@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"ft_printf.h": "c",
+		"get_next_line.h": "c",
+		"so_long.h": "c",
+		"mlx.h": "c",
+		"get_next_line_need_to_be_replace.h": "c"
+	}
+}
