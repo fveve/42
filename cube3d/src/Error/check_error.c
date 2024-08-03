@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:06:00 by arafa             #+#    #+#             */
-/*   Updated: 2024/07/30 14:03:43 by arafa            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:25:26 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,12 @@ int	check_error(t_map_data map_data)
 		free_tab(temp);
 		printf("Error\nMap must be close\n");
 	}
-	if (check_color(map_data.C) || check_color(map_data.F))
+	/*if (check_color(map_data.C) || check_color(map_data.F))
 	{
 		free_tab(temp);
 		printf("Error\nWrong color number\n");
-	}
-	free_tab(temp);
+	}*/
+	else
+		free_tab(temp);
 	return (0);
 }
