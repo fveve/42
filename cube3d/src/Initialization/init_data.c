@@ -6,8 +6,8 @@ void	init_mlx_data(t_mlx_data *data)
 	data->line_length = 0;
 	data->endian = 0;
 	data->mlx = mlx_init();
-	data->window = mlx_new_window(data->mlx, SCREEN_SIZE, SCREEN_SIZE, "boxeo");
-	data->img = mlx_new_image(data->mlx, SCREEN_SIZE, SCREEN_SIZE);
+	data->window = mlx_new_window(data->mlx, SCREEN_HEIGHT, SCREEN_WIDTH, "boxeo");
+	data->img = mlx_new_image(data->mlx, SCREEN_HEIGHT, SCREEN_WIDTH);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
 								&data->endian);
 }
@@ -50,13 +50,19 @@ void	init_trace_data(t_map_data *map_data, t_trace_data *data, t_mlx_data *mlx_d
 	data->drawEnd = 0;
 	data->oldDirX = 0;
 	data->oldPlaneX = 0;
-	data->moveSpeed = 0.05;
+	data->moveSpeed = 0.09;
 	data->rotSpeed = 0.05;
 	data->map_data = map_data;
 	data->mlx_data = mlx_data;
-	data->h = SCREEN_SIZE;
-	data->w = SCREEN_SIZE;
-
+	data->h = SCREEN_HEIGHT;
+	data->w = SCREEN_WIDTH;
+	data->xcolor = 0;
+	data->ycolor = 0;
+	data->texNum = 0;
+	data->texX = 0;
+	data->color = 0;
+	data->texY = 0;
+	data->texPos = 0;
 }
 
 void	init_data(t_data *data, char **argv)

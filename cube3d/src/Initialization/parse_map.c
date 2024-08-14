@@ -6,11 +6,46 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 09:52:22 by arafa             #+#    #+#             */
-/*   Updated: 2024/07/30 15:40:38 by arafa            ###   ########.fr       */
+/*   Updated: 2024/08/03 09:59:15 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	set_color(char *F, int *F_color, int trigger)
+{
+	int r;
+	int g;
+	int b;
+	int	x;
+
+	x = 0;
+	r = 0;
+	g = 0;
+	b = 0;
+	*F_color = 0;
+	while (F[x])
+	{
+		if (F[x] && F[x] >= '0' && F[x] <= '9')
+		{
+			if (!trigger)
+				r = (int)ft_atoi(&F[x]);
+			else if (trigger == 1)
+				g = (int)ft_atoi(&F[x]);
+			else if (trigger == 2)
+				b = (int)ft_atoi(&F[x]);
+			trigger++;
+			while (F[x] && F[x] != ',')
+				x++;
+		}
+		x++;
+	}
+	printf("r : %d, g : %d, b : %d\n", r, g, b);
+	*F_color = r;
+	*F_color = (*F_color << 8) | g;
+	*F_color = (*F_color << 8) | b;
+	printf("map_data->F_color : %d\n", *F_color);
+}
 
 int is_removable(char *s)
 {
@@ -165,7 +200,9 @@ void	parse_map(t_map_data *map_data, char *file)
 		map_data->map[x] = get_next_line(fd, 0);
 	map_data->map[x] = NULL;
 	map_data->map = remove_space(map_data->map);
-	//print_map_data(map_data);
+	set_color(map_data->F, &map_data->F_color, 0);
+	set_color(map_data->C, &map_data->C_color, 0);
+	print_map_data(map_data);
 	//print_tab(map_data->map);
 	set_pos(map_data);
 	//print_tab(map_data->map);

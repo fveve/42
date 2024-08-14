@@ -35,7 +35,14 @@
 
 # define	KEY_ESCAPE 65307
 
-# define	SCREEN_SIZE 800
+# define	SCREEN_HEIGHT 800
+
+# define	SCREEN_WIDTH 800
+
+# define	TEX_WIDTH	64
+
+# define	TEX_HEIGHT	64
+
 //			   __________		     //
 //------------/Structures\----------//
 
@@ -51,6 +58,9 @@ typedef struct s_map_data
 	char	*F;
 	char	*C;
 	char	**map;
+
+	int F_color;
+	int	C_color;
 } t_map_data;
 
 typedef struct s_mlx_data
@@ -92,8 +102,9 @@ typedef struct s_trace_data
 
 	double		WallX;
 	double		step;
-	double		textPos;
+	double		texPos;
 
+	int			color;
 	int			mapX;
 	int			mapY;
 	int			stepX;
@@ -108,8 +119,11 @@ typedef struct s_trace_data
 	int			ycolor;
 	int			xcolor;
 	int			texY;
+	int			*texture[8];
+	int			texNum;
+	int			texX;
 
-	char		texNum;
+	unsigned int buffer[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	t_map_data	*map_data;
 	t_mlx_data	*mlx_data;
@@ -142,7 +156,7 @@ long	ft_atoi( char *nptr);
 char	*extract_str(char *str);
 char	*ft_substr(char const *s, int	start, int	len);
 int		ft_strncmp(const char *s1, char *s2, size_t n);
-int	ft_strlen2(char **tab);
+int		ft_strlen2(char **tab);
 
 //				gnl_tools
 int		ft_strlen(const char *s);
