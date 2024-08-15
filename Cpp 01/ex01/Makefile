@@ -1,10 +1,10 @@
-NAME = fixed
+NAME = Zombie
 
 CC = c++ -std=c++98
 
 CFLAGS = -Wall -Wextra -Werror
 
-MAIN = main Fixed
+MAIN = Zombie zombieHorde main 
 
 SRC = $(addsuffix .cpp, $(addprefix ./, $(MAIN)))
 
@@ -13,9 +13,9 @@ OBJ = $(SRC:cpp=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mfixed Compiled !"
+	@echo "\033[0;32mZombie Compiled !"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "\n\033[0m./fixed to execute the program !"
+	@echo "\n\033[0m./zombie to execute the program !"
 
 %.o: %.cpp
 	@printf "\033[0;33mGenerating objects... %-33.33s\r\n" $@

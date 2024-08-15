@@ -1,8 +1,8 @@
 NAME = fixed
 
-CC = g++
+CC = c++ -std=c++98
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 MAIN = main Fixed
 
@@ -17,9 +17,9 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 	@echo "\n\033[0m./fixed to execute the program !"
 
-%.o: %.c
+%.o: %.cpp
 	@printf "\033[0;33mGenerating objects... %-33.33s\r\n" $@
-	@${CC} ${CFLAGS} -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "\nRemoving binaries..."

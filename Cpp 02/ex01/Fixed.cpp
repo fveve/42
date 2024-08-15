@@ -2,31 +2,31 @@
 
 Fixed :: Fixed(void)
 {
-	std :: cout << "Default constructor called" << std :: endl;
+	 cout << "Default constructor called" <<  endl;
 	nb = 0;
 }
 
 Fixed :: Fixed(const int raw)
 {
 	nb = raw << bit_nb;
-	std :: cout << "Int constructor called" << std :: endl;
+	 cout << "Int constructor called" <<  endl;
 }
 
 Fixed :: Fixed(const float raw)
 {
 	 nb = (int)roundf(raw * (1 << bit_nb));
-	std :: cout << "Float constructor called" << std :: endl;
+	 cout << "Float constructor called" <<  endl;
 }
 
 Fixed :: Fixed(const Fixed& original)
 {
-	std :: cout << "Copy constructor called" << std :: endl;
+	 cout << "Copy constructor called" <<  endl;
 	*this = original;
 }
 
 Fixed :: ~Fixed()
 {
-	std :: cout << "Destructor called" << std :: endl;
+	 cout << "Destructor called" <<  endl;
 }
 
 int Fixed :: getRawBits() const
@@ -41,7 +41,7 @@ void Fixed ::  setRawBits(int const raw)
 
 Fixed &Fixed :: operator=(const Fixed &_Fixed)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	cout << "Copy assignment operator called" << endl;
 	if (this != &_Fixed)
 		this->nb = _Fixed.getRawBits();
 
@@ -49,7 +49,7 @@ Fixed &Fixed :: operator=(const Fixed &_Fixed)
 }
 
 
-std :: ostream &operator << (std :: ostream &out, Fixed const &fixed)
+ ostream &operator << ( ostream &out, Fixed const &fixed)
 {
 	out << fixed.toFloat();
 	return (out);

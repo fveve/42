@@ -1,10 +1,10 @@
-NAME = fixed
+NAME = megaphone
 
 CC = c++ -std=c++98
 
 CFLAGS = -Wall -Wextra -Werror
 
-MAIN = main Fixed
+MAIN = megaphone
 
 SRC = $(addsuffix .cpp, $(addprefix ./, $(MAIN)))
 
@@ -13,12 +13,12 @@ OBJ = $(SRC:cpp=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mfixed Compiled !"
+	@echo "\033[0;32mMegalophone Compiled !"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "\n\033[0m./fixed to execute the program !"
+	@echo "\n\033[0m./megaphone to execute the program !"
 
 %.o: %.cpp
-	@printf "\033[0;33mGenerating objects... %-33.33s\r\n" $@
+	@printf "\033[0;33mGenerating megaphone objects... %-33.33s\r\n" $@
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

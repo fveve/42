@@ -1,10 +1,10 @@
-NAME = fixed
+NAME = Sed
 
 CC = c++ -std=c++98
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
-MAIN = main Fixed
+MAIN =  main
 
 SRC = $(addsuffix .cpp, $(addprefix ./, $(MAIN)))
 
@@ -13,9 +13,9 @@ OBJ = $(SRC:cpp=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mfixed Compiled !"
+	@echo "\033[0;32mSed Compiled !"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "\n\033[0m./fixed to execute the program !"
+	@echo "\n\033[0m./Sed to execute the program !"
 
 %.o: %.cpp
 	@printf "\033[0;33mGenerating objects... %-33.33s\r\n" $@
