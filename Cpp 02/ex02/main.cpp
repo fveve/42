@@ -5,12 +5,12 @@
 int main( void ) {
 Fixed a;
 Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-cout << a << endl;
-cout << ++a << endl;
-cout << a << endl;
-cout << a++ << endl;
-cout << a << endl;
-cout << b << endl;
-cout << Fixed::max( a, b ) << endl;
+std::cout << a << std::endl;
+std::cout << ++a << std::endl;
+std::cout << a << std::endl;
+std::cout << a++ << std::endl;
+std::cout << a << std::endl;
+std::cout << b << std::endl;
+std::cout << Fixed::max( a, b ) << std::endl;
 return 0;
 }

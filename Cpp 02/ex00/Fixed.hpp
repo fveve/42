@@ -1,10 +1,8 @@
-#include <iostream>
-#include <string>
+#pragma once
 
-using namespace std ;
+#include <iostream>
 
 class Fixed {
-
 	private :
 		int nb;
 		static const int bit_nb = 8;
@@ -14,5 +12,5 @@ class Fixed {
 		Fixed &operator=(const Fixed &_Fixed);
 		~Fixed();
 		int	getRawBits(void) const;
-		void setRawBits( int const raw);
+		void setRawBits(int const raw);
 };
