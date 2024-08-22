@@ -6,7 +6,24 @@
 		"minishell.h": "c",
 		"philo.h": "c",
 		"unistd.h": "c",
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"xstring": "cpp",
+		"atomic": "cpp",
+		"charconv": "cpp",
+		"exception": "cpp",
+		"fstream": "cpp",
+		"istream": "cpp",
+		"iterator": "cpp",
+		"memory": "cpp",
+		"ostream": "cpp",
+		"streambuf": "cpp",
+		"system_error": "cpp",
+		"tuple": "cpp",
+		"utility": "cpp",
+		"xlocale": "cpp",
+		"xlocinfo": "cpp",
+		"xmemory": "cpp",
+		"xutility": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }
