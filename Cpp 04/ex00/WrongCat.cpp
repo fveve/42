@@ -19,7 +19,6 @@ WrongCat::WrongCat(const WrongCat& other)
 WrongCat &WrongCat::operator=(const WrongCat&)
 {
 	return(*this);
-
 }
 
 std::string	WrongCat::getType() const
