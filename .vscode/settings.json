@@ -23,7 +23,8 @@
 		"xlocale": "cpp",
 		"xlocinfo": "cpp",
 		"xmemory": "cpp",
-		"xutility": "cpp"
+		"xutility": "cpp",
+		"iosfwd": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }
