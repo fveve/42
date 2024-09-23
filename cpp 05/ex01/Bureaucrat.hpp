@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:13:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 09:25:10 by arafa            ###   ########.fr       */
+/*   Updated: 2024/09/23 13:12:02 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include "Form.hpp"
+
+class Form;
+
 
 class  Bureaucrat {
 	private:
@@ -32,7 +36,9 @@ class  Bureaucrat {
 		void decrementGrade();
 		const std::string getName() const;
 		size_t			getGrade() const;
-		void	setGrade(size_t grade);
+		void			setName(const std::string _name);
+		void			setGrade(size_t grade);
+		void			signForm(Form *Form);
 		class GradeTooLowException : public std::exception
 		{
 			public:
