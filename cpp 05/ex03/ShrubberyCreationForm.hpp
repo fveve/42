@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "AForm.hpp"
 #include <iostream>
 #include <string>

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,8 +15,10 @@
 #include <string>
 #include <stdexcept>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
 
-class ShrubberyCreationForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 	private:
 		const std::string	name;
@@ -24,11 +26,11 @@ class ShrubberyCreationForm : public AForm
 		const size_t		sign_grade;
 		const size_t		exec_grade;
 	public:
-		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string);
-		ShrubberyCreationForm(const ShrubberyCreationForm& _ShrubberyCreationForm);
-		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &ShrubberyCreationForm);
-		~ShrubberyCreationForm();
+		RobotomyRequestForm();
+		RobotomyRequestForm(std::string);
+		RobotomyRequestForm(const RobotomyRequestForm& _RobotomyRequestForm);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &RobotomyRequestForm);
+		~RobotomyRequestForm();
 		const std::string	getName() const;
 		const std::string	getTarget() const;
 		size_t				getSignGrade() const;

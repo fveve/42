@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <fstream>
 
-class ShrubberyCreationForm : public AForm
+class PresidentialPardonForm : public AForm
 {
 	private:
 		const std::string	name;
@@ -24,11 +24,11 @@ class ShrubberyCreationForm : public AForm
 		const size_t		sign_grade;
 		const size_t		exec_grade;
 	public:
-		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string);
-		ShrubberyCreationForm(const ShrubberyCreationForm& _ShrubberyCreationForm);
-		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &ShrubberyCreationForm);
-		~ShrubberyCreationForm();
+		PresidentialPardonForm();
+		PresidentialPardonForm(std::string);
+		PresidentialPardonForm(const PresidentialPardonForm& _PresidentialPardonForm);
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &PresidentialPardonForm);
+		~PresidentialPardonForm();
 		const std::string	getName() const;
 		const std::string	getTarget() const;
 		size_t				getSignGrade() const;
