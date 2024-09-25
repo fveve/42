@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:47:19 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/24 14:11:19 by arafa            ###   ########.fr       */
+/*   Updated: 2024/09/25 12:50:05 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 #include <iostream>
 #include <string>
-#include <limits>
+#include <climits>
 #include <cstdlib>
 #include <iomanip>
 #include <cstring>
+#include <sstream>
 
 class ScalarConverter
 {
@@ -25,6 +26,8 @@ class ScalarConverter
 	
 	public:
 		ScalarConverter();
+		ScalarConverter(const ScalarConverter& _ScalarConverter);
 		~ScalarConverter();
+		ScalarConverter &operator=(const ScalarConverter &ScalarConverter);
 		static void convert(const char *value) ;
 };

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 11:23:02 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/25 12:39:08 by arafa            ###   ########.fr       */
+/*   Created: 2024/09/25 14:45:16 by arafa             #+#    #+#             */
+/*   Updated: 2024/09/25 15:15:52 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#pragma once
+#include <iostream>
 
-int main(int argc, char** argv) {
-    if (argc != 2) {
-        std::cerr << "Usage: ./convert <literal>" << std::endl;
-        return 1;
-    }
-	ScalarConverter::convert(argv[1]);
-}
+class Base
+{
+	public:
+		virtual ~Base()
+		{
+			std::cout << "salut tbo" << std::endl;
+		}
+};
