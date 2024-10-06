@@ -3,29 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 13:51:57 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/03 18:08:39 by arafa            ###   ########.fr       */
+/*   Created: 2024/10/05 12:09:29 by marvin            #+#    #+#             */
+/*   Updated: 2024/10/05 12:09:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "BitcoinExchange.hpp"
+#include "RPN.hpp"
 
 int main(int argc, char **argv)
 {
-	std::vector<std::string> content;
-	std::ifstream	data("data.csv");
-	Btc	btc;
-	
 	if (argc < 2)
-		return(std::cout << "Error: no file specified" << std::endl, 0);
-
-	std::ifstream _file(argv[1]);
-	if (!_file.is_open())
-		return(std::cout << "Error: could open file" << std::endl, 0);
-	
-	btc.verify_file(_file, data);
-	_file.close();
-	return 0;
+	{
+		std::cout << "Error: Not enough arguments" << std::endl;
+		return (0);
+	}
+	return (verify_expr(argv[1]));
 }

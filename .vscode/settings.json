@@ -59,7 +59,14 @@
 		"algorithm": "cpp",
 		"optional": "cpp",
 		"random": "cpp",
-		"vector": "cpp"
+		"vector": "cpp",
+		"array": "cpp",
+		"deque": "cpp",
+		"iomanip": "cpp",
+		"ranges": "cpp",
+		"span": "cpp",
+		"sstream": "cpp",
+		"stack": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "enabled"
 }

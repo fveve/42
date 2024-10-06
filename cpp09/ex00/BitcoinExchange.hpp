@@ -23,7 +23,7 @@ class Btc
 	private:
 		std::vector<std::string>	content;
 		std::vector<std::string>	data_content;
-		float					value;
+		float						value;
 		std::vector<int>			date;
 		
 	public:
@@ -38,12 +38,12 @@ class Btc
 		float 						getValue() const;
 		std::vector<int>			getDate() const;
 		
-		bool						verify_date(std::string line);
+		bool						verify_date(std::string line,  std::vector<std::vector<int> > list);
 		bool						verify_value(std::string line);
 		void						verify_file(std::ifstream &_file, std::ifstream &data);
-		float						get_coef(std::string line);
-		float						grab_data(void);
-		std::vector<std::string>	get_file(std::ifstream &_file);
+		float						grab_data();
+		std::vector<std::string>	get_file(std::ifstream &_file);		
+		std::vector<int>			find_min_date(std::vector<std::vector<int> > temp);
 		std::vector<int>			convert_date(std::string line);
 };
 
