@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:02:00 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/05 12:02:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:53:07 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int apply_operator(int a, int b, char op) {
         case '-': return a - b;
         case '*': return a * b;
         case '/': return a / b;
-       std::cout << "Error: Invalid operator" << std::endl;
+       std::cerr << "Error: Invalid operator" << std::endl;
     }
 	 return (0);
 }
@@ -38,13 +38,13 @@ bool	verify_value(std::string line)
 		{
 			if (x + 1 < line.length() && std::isdigit(line[x + 1]))
 			{
-				std::cout << "Error: Value must be under 10" << std::endl;
+				std::cerr << "Error: Value must be under 10" << std::endl;
 				return (1);
 			}
 		}
 		else if (line[x] != 32 && !is_operator(line[x]) && line[x] != '\r')
 		{
-			std::cout << "Error: Wrong character inputed" << std::endl;
+			std::cerr << "Error: Wrong character inputed" << std::endl;
 			return (1);
 		}
 

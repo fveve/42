@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:51:59 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/03 19:18:57 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/07 13:10:47 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,14 +131,14 @@ bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
 	//if date > 2022 return 1
 		if (line.size() < 14)
 	{
-		std::cout << "Error: No value written" << std::endl;
+		std::cerr << "Error: No value written" << std::endl;
 		return (1);
 	}
 	while (x < line.length() && x < 10)
 	{
 		if (!std::isdigit(line[x]) && line[x] != '-')
 		{
-			std::cout << "Error: Wrong syntax ->" << line << std::endl;
+			std::cerr << "Error: Wrong syntax ->" << line << std::endl;
 			return (1);
 		}
 		x++;
@@ -159,7 +159,7 @@ bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
 	//std::cout << "date: " << this->date[0] << " " <<  this->date[1] << " " <<  this->date[2] << std::endl;
 	if (grab_data() == 1.7976931348623157)
 	{
-			std::cout << "Error: Wrong syntax ->" << line << std::endl;
+			std::cerr << "Error: Wrong syntax ->" << line << std::endl;
 			return (1);
 	}
 	return (0);
@@ -202,7 +202,7 @@ bool	Btc::verify_value(std::string line)
 
 	if (nb < 0 || nb > 1000)
 	{
-		std::cout << "Error: Value out of bound" << std::endl;
+		std::cerr << "Error: Value out of bound" << std::endl;
 		return (1);
 	}
 	else
