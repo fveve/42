@@ -57,6 +57,7 @@
 		"ranges": "cpp",
 		"span": "cpp",
 		"sstream": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"*.tcc": "cpp"
 	}
 }

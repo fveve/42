@@ -6,29 +6,17 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:07:56 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/07 17:36:17 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/09 15:27:08 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-/*
-
-++++++	Divide
-++++++	Sort Subarrays
-for (!= ::end)
-	upper_bound
-++++++	Merge
-
-++++++	Repeat
-
-*/
-
 int main(int argc, char **argv)
 {
 	std::string			line = get_line(argv);
-	std::set<size_t>	set_numbers;
-	std::time_t			time = std::time(nullptr);
+	std::list<size_t>	list_numbers;
+	std::clock_t			time = std::clock();
 	
 	if (argc < 2)
 	{
@@ -38,7 +26,7 @@ int main(int argc, char **argv)
 		
 	try
 	{
-		set_numbers = verify_expr(line);
+		list_numbers = verify_expr(line);
 	}
 	catch(const DoubleException& e)
 	{
@@ -51,6 +39,6 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	ft_sort(set_numbers, time);
+	ft_sort(list_numbers, time);
 	return (0);
 }
