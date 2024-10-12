@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:13:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 09:25:10 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 13:10:55 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class  Bureaucrat {
 	private:
-		const std::string	name;
+		const std::string		name;
 		size_t					grade;
 	public:
 		Bureaucrat();
@@ -30,8 +30,8 @@ class  Bureaucrat {
 		~Bureaucrat();
 		void incrementGrade();
 		void decrementGrade();
-		const std::string getName() const;
-		size_t			getGrade() const;
+		const std::string	getName() const;
+		size_t				getGrade() const;
 		void	setGrade(size_t grade);
 		class GradeTooLowException : public std::exception
 		{

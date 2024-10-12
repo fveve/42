@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:13:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 14:55:14 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 14:22:23 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class  Bureaucrat {
 		size_t			getGrade() const;
 		void			setName(const std::string _name);
 		void			setGrade(size_t grade);
-		void			signForm(AForm *AForm);
+		void			signAForm(AForm *AForm);
 		class GradeTooLowException : public std::exception
 		{
 			public:
@@ -50,7 +50,7 @@ class  Bureaucrat {
 			public:
 				virtual const char *what() const throw();
 		};
-		void			executeForm(AForm const & form);
+		void			executeAForm(AForm const & AForm);
 };
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat *Bureaucrat);

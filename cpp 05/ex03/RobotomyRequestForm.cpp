@@ -68,7 +68,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
-	if (this->getIsSigned() && executor.getGrade() < this->exec_grade)
+		if (this->getIsSigned() && executor.getGrade() < this->exec_grade)
 	{
 		srand(time(0));
 		int random_number = rand() % 101;
@@ -77,7 +77,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 			std::cout << this->target << "has succesfully been robotomized" << std::endl;
 		else
 			std::cout << this->target << "can't be robotomized" << std::endl;
-		throw AForm::GradeTooHighException();
+
 	}
 	else if (executor.getGrade() > this->exec_grade)
 		throw AForm::GradeTooLowException();

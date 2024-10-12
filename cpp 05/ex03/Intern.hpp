@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:02:00 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 23:02:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/12 14:42:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ class  Intern
 		Intern(const Intern&);
 		Intern &operator=(const Intern &_Intern);
 		~Intern();
-		AForm	*makeForm(std::string name, std::string form);
-		class FormNotValidException : public std::exception
+		AForm	*makeAForm(std::string AForm, std::string name);
+		class AFormNotValidException : public std::exception
 		{
 			public:
 				virtual const char *what() const throw();
 		};
+
+	static AForm* createRobotomyRequestForm(std::string target);
+	static AForm* createPresidentialPardonForm(std::string target);
+	static AForm* createShrubberyCreationForm(std::string target);
 };

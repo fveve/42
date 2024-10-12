@@ -1,22 +1,22 @@
-NAME = AForm
+NAME = Intern
 
 CC = c++ -std=c++98
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = Bureaucrat.cpp AForm.cpp main.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp 
+SRC = Bureaucrat.cpp AForm.cpp main.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp Intern.cpp
 	  
 OBJ = $(SRC:cpp=o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[38;5;213mAForm Compiled"
+	@echo "\033[38;5;213mIntern Compiled"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "\n\033[1;31m./AForm to execute program\n"
+	@echo "\n\033[1;31m./Intern to execute program\n"
 
 %.o: %.cpp
-	@printf "\033[38;5;213mGenerating AForm objects... %-33.33s\r\n" $@
+	@printf "\033[38;5;213mGenerating Intern objects... %-33.33s\r\n" $@
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

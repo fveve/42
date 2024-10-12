@@ -6,9 +6,11 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:14:26 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/23 15:53:58 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 14:24:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #include "AForm.hpp"
 #include <iostream>
@@ -25,7 +27,7 @@ class ShrubberyCreationForm : public AForm
 		const size_t		exec_grade;
 	public:
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string);
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& _ShrubberyCreationForm);
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &ShrubberyCreationForm);
 		~ShrubberyCreationForm();

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Untitled-1                                         :+:      :+:    :+:   */
+/*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 23:13:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/12 14:57:37 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Intern::Intern(const Intern& _Intern)
 Intern &Intern::operator=(const Intern &_Intern)
 {
 	std::cout << "Intern assignement operator called" << std::endl;
+	if (this == &_Intern)
+		return *this;
 	return *this;
 }
 
@@ -33,35 +35,45 @@ Intern::~Intern()
 {
 	std::cout << "Intern deconstructor called" << std::endl;
 }
-AForm	*Intern::makeForm(std::string name, std::string form)
+
+AForm* Intern::createRobotomyRequestForm(std::string target) {
+	return new RobotomyRequestForm(target);
+}
+
+AForm* Intern::createPresidentialPardonForm(std::string target) {
+	return new PresidentialPardonForm(target);
+}
+
+AForm* Intern::createShrubberyCreationForm(std::string target) {
+	return new ShrubberyCreationForm(target);
+}
+
+AForm	*Intern::makeAForm(std::string AForm, std::string name)
 {
-	int i = 0;
-	for (int i; name[i]; i++)
-	{
-		name[i] = std::tolower(name[i]);
-	}
-	(!name.compare("robotomy request")) ? i = 1 : (!name.compare("presidential pardon request")) ? i = 2 : (!name.compare("shrubbery creation request")) ? i = 3 : i = 4;
-	switch(i)
-	{
-		case 1:
-		{
-			AForm *aform = new RobotomyRequestForm(form);
-			return (aform);
-		}
-		case 2:
-		{
-			AForm *aform = new PresidentialPardonForm(form);
-			return (aform);
-		}
-		case 3:
-		{
-			AForm *aform = new ShrubberyCreationForm(form);
-			return (aform);
-		}
-		case 4:
-		{
-			std::cout << "Error: can't recognize form format" << std::endl;
-			return (NULL);
+	std::string lowerAForm = AForm;
+	
+	for (size_t x = 0; x < lowerAForm.length(); x++)
+		lowerAForm[x] = std::tolower(lowerAForm[x]);
+
+	const char* AFormNames[] = {
+		"robotomyrequestform",
+		"presidentialpardonform",
+		"shrubberycreationform",
+		NULL
+	};
+
+ 	class AForm *(*create[])(std::string name) = {
+		&Intern::createRobotomyRequestForm,
+        &Intern::createPresidentialPardonForm,
+        &Intern::createShrubberyCreationForm,
+    };
+
+	for (int i = 0; AFormNames[i] != NULL; i++) {
+		if (!lowerAForm.compare(AFormNames[i])) {
+			return ((create[i])(name));
 		}
 	}
+	std::cout << "Error: can't recognize AForm Format" << std::endl;
+	exit(1);
+	return NULL;
 }

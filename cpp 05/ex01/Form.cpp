@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:30:30 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/23 14:25:35 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 15:06:37 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ Form::Form() : name("Random Form"), sign_grade(150), exec_grade(150), is_signed(
 	std::cout << this->name << " is initialized, which must be signed with a grade of at least " << this->sign_grade << ", executed with a grade of at least " << this->exec_grade << ", and is not signed" << std::endl;
 }
 
-Form::Form(const std::string _name, const size_t _sign_grade, const size_t _exec_grade) : name(_name), sign_grade(_sign_grade), exec_grade(_exec_grade), is_signed(0)
+Form::Form(const std::string _name, const size_t _sign_grade, const size_t _exec_grade) : name(_name), sign_grade(_sign_grade), exec_grade(_exec_grade),is_signed(0)
 {
+	if (_sign_grade > 150)
+		throw(Form::GradeTooLowException());
+	if (_sign_grade < 1)
+		throw(Form::GradeTooHighException());
+	if (_exec_grade > 150)
+		throw(Form::GradeTooLowException());
+	if (_exec_grade < 1)
+		throw(Form::GradeTooHighException());
 	std::cout << this->name << " is initialized, which must be signed with a grade of at least " << this->sign_grade << ", executed with a grade of at least " << this->exec_grade << ", and is not signed" << std::endl;
 }
 
@@ -62,15 +70,17 @@ Form &Form:: operator=(const Form &_Form)
 	return (*this);
 }
 
-void	Form::beSigned(Bureaucrat *Bureaucrat)
+void	Form::beSigned(Bureaucrat Bureaucrat)
 {
-	if (Bureaucrat->getGrade() > this->sign_grade)
+	if (Bureaucrat.getGrade() > this->sign_grade)
 		throw Form::GradeTooLowException();
-	else
+		else if (this->is_signed != 1)
 	{
 		this->is_signed = 1;
-		throw Form::GradeTooHighException();
+
 	}
+	else
+		std::cout << "Form has already been signed" << std::endl;
 }
 
 Form::~Form()

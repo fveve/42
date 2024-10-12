@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:14:05 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/23 13:21:22 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 14:02:55 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ class  Form {
 		Form(const std::string, const size_t sign_grade, const size_t exec_grade);
 		Form(const Form&);
 		Form &operator=(const Form &Form);
-		~Form();
+		virtual ~Form();
 		const std::string	getName() const;
 		size_t				getSignGrade() const;
 		size_t				getExecGrade() const;
 		bool				getIsSigned() const;
-		void				beSigned(Bureaucrat *Bureaucrat);
+		void				beSigned(Bureaucrat Bureaucrat);
 		class GradeTooLowException : public std::exception
 		{
 			public:

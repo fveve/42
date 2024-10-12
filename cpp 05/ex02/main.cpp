@@ -6,13 +6,15 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 14:40:55 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/23 15:43:11 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 14:24:35 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main(void)
 {
@@ -87,24 +89,19 @@ int main(void)
 	std::cout << std::endl;
 	delete b;
 	std::cout << std::endl;*/
-	/*Bureaucrat *a = new Bureaucrat(1);
+	Bureaucrat *a = new Bureaucrat(1);
 	std::cout << std::endl;
 	AForm		*b = new ShrubberyCreationForm("balls");
 	std::cout << std::endl;
-	a->executeForm(*b);
+	a->executeAForm(*b);
 	std::cout << std::endl;
 		try
 	{
-		a->signForm(b);
+		a->signAForm(b);
 	}
 	catch(AForm::GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	a->executeForm(*b);*/
-
-// Seed the random number generator with the current time
-
-
-    // Output the result
+	a->executeAForm(*b);
 }

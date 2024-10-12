@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "AForm.hpp"
 #include <iostream>
 #include <string>
@@ -25,7 +27,7 @@ class PresidentialPardonForm : public AForm
 		const size_t		exec_grade;
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(std::string);
+		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm& _PresidentialPardonForm);
 		PresidentialPardonForm &operator=(const PresidentialPardonForm &PresidentialPardonForm);
 		~PresidentialPardonForm();

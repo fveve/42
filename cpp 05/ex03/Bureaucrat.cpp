@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:18:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 15:57:40 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 15:03:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ Bureaucrat::Bureaucrat() : name("Random Bureaucrat"), grade(150)
 
 Bureaucrat::Bureaucrat(const std::string _name, size_t _grade) : name(_name), grade(_grade)
 {
-	std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
+	if (this->grade > 150 || this->grade < 1)
+	{
+		std::cout << "Error: grade out of bound, setting grade to the lowest" << std::endl;
+		this->grade = 150;
+	}
+	else
+		std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string _name) : name(_name), grade(150)
@@ -67,15 +73,15 @@ void	Bureaucrat::setGrade(size_t _grade)
 		this->grade = _grade;
 }
 
-void	Bureaucrat::signForm(AForm *AForm)
+void	Bureaucrat::signAForm(AForm *AForm)
 {
 	try
 	{
-		AForm->beSigned(this);
+		AForm->beSigned(*this);
 	}
 	catch(const AForm::GradeTooLowException& e)
 	{	
-		std::cout << this->name << " coudn't sign " << AForm->getName() << " because: " <<  "his grade is too low"<< std::endl;
+		std::cout << this->name << " cannot sign " << AForm->getName() << " because: " <<  "his grade is too low"<< std::endl;
 	}
 	catch(const AForm::GradeTooHighException& e)
 	{
@@ -120,23 +126,22 @@ std::ostream &operator<<(std::ostream &o, Bureaucrat *_Bureaucrat)
 }
 
 
-void	Bureaucrat::executeForm(AForm const & form)
+void	Bureaucrat::executeAForm(AForm const & AForm)
 {
 	try
 	{
-		form.execute(*this);
+		AForm.execute(*this);
 	}
 	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cerr << this->name << " can't execute the form " << form.getName() << " because of the exception: " << e.what() << std::endl;
+		std::cerr << this->name << " can't execute the AForm " << AForm.getName() << " because of the exception: " << e.what() << std::endl;
+		return;
 	}
 	catch(const AForm::NotSignedException& e)
 	{
-		std::cerr << this->name << " can't execute the form " << form.getName() << " because of the exception: " << e.what() << std::endl;
+		std::cerr << this->name << " can't execute the AForm " << AForm.getName() << " because of the exception: " << e.what() << std::endl;
+		return;
 	}
-	catch(const AForm::GradeTooHighException& e)
-	{
-		std::cout << this->name << " executed " << form.getName() << std::endl;
-	}
+	std::cout << this->name << " executed " << AForm.getName() << std::endl;
 	
 }

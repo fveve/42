@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 22:52:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 22:52:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/12 15:02:33 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		tree_file.open(this->target.c_str());
 		tree_file << "                     ; ; ;\n                   ;        ;  ;     ;;    ;\n                ;                 ;         ;  ;\n                                ;\n                               ;                ;;\n               ;          ;            ;              ;\n               ;            ';,        ;               ;\n               ;              'b      *\n                ;              '$    ;;                ;;\n               ;    ;           $:   ;:               ;\n             ;;      ;  ;;      *;  @):        ;   ; ;\n                          ;     :@,@):   ,;**:'   ;\n              ;      ;,         :@@*: ;;**'      ;   ;\n                       ';o;    ;:(@';@*\"'  ;\n               ;  ;       'bq,;;:,@@*'   ,*      ;  ;\n                          ,p$q8,:@)'  ;p*'      ;\n                   ;     '  ; '@@Pp@@*'    ;  ;\n                    ;  ; ;;    Y7'.'     ;  ;\n                              :@):.\n                             .:@:'.\n  ";
 		tree_file.close();
-		throw AForm::GradeTooHighException();
 	}
 	else if (executor.getGrade() > this->exec_grade)
 		throw AForm::GradeTooLowException();

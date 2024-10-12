@@ -28,7 +28,7 @@ class RobotomyRequestForm : public AForm
 		const size_t		exec_grade;
 	public:
 		RobotomyRequestForm();
-		RobotomyRequestForm(std::string);
+		RobotomyRequestForm(std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm& _RobotomyRequestForm);
 		RobotomyRequestForm &operator=(const RobotomyRequestForm &RobotomyRequestForm);
 		~RobotomyRequestForm();

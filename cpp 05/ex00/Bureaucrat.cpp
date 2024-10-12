@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:18:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 09:44:16 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 13:18:39 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ Bureaucrat::Bureaucrat() : name("Random Bureaucrat"), grade(150)
 
 Bureaucrat::Bureaucrat(const std::string _name, size_t _grade) : name(_name), grade(_grade)
 {
-	std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
+	if (this->grade > 150 || this->grade < 1)
+	{
+		std::cout << "Error: grade out of bound, setting grade to the lowest" << std::endl;
+		this->grade = 150;
+	}
+	else
+		std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string _name) : name(_name), grade(150)
@@ -89,7 +95,6 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
     return "Bureaucrat::GradeTooLowException";
 }
 
-// Define what() function for GradeTooHighException
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
     return "Bureaucrat::GradeTooHighException";
 }
@@ -99,5 +104,3 @@ std::ostream &operator<<(std::ostream &o, Bureaucrat *_Bureaucrat)
 	o << _Bureaucrat->getName() << ", bureaucrat grade " << _Bureaucrat->getGrade() << std::endl;
 	return (o);
 }
-
-

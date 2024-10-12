@@ -6,13 +6,17 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 14:40:55 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/23 15:43:11 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 15:07:10 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
+#include "Intern.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+
 
 int main(void)
 {
@@ -91,20 +95,50 @@ int main(void)
 	std::cout << std::endl;
 	AForm		*b = new ShrubberyCreationForm("balls");
 	std::cout << std::endl;
-	a->executeForm(*b);
+	a->executeAForm(*b);
 	std::cout << std::endl;
 		try
 	{
-		a->signForm(b);
+		a->signAForm(b);
 	}
 	catch(AForm::GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	a->executeForm(*b);*/
+	a->executeAForm(*b);*/
 
-// Seed the random number generator with the current time
+std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Bureaucrat *a = new Bureaucrat();
+		Intern *z = new Intern();
+		AForm *b = z->makeAForm("PresidentialPardonForm", "Clown");
+		//b = z->makeAForm("SomeRandomAForm", "Clown");
+		// AForm *b = new PresidentialPardonForm("Clown");
+		// AForm *c = new RobotomyRequestForm("Bender");
+		// AForm *d = new ShrubberyCreationForm("Christmas");
+		std::cout << std::endl;
 
+		std::cout << "\033[34mTesting\033[0m" << std::endl;
+		std::cout << a;
+		std::cout << b;
+		std::cout << std::endl;
 
-    // Output the result
+		try
+		{
+			b->beSigned(*a);
+			// b->execute(*a);
+		}
+		catch(Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
+		}
+
+		std::cout << std::endl;
+		std::cout << b;
+		std::cout << std::endl;
+
+		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		delete a;
+		delete b;
+		delete z;
+		std::cout << std::endl;
 }

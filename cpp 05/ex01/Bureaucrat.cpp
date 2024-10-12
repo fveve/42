@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 16:18:04 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/23 13:37:03 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/12 14:02:13 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ Bureaucrat::Bureaucrat() : name("Random Bureaucrat"), grade(150)
 
 Bureaucrat::Bureaucrat(const std::string _name, size_t _grade) : name(_name), grade(_grade)
 {
-	std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
+	if (this->grade > 150 || this->grade < 1)
+	{
+		std::cout << "Error: grade out of bound, setting grade to the lowest" << std::endl;
+		this->grade = 150;
+	}
+	else
+		std::cout << this->name << "is initialized with the grade " << this->grade << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string _name) : name(_name), grade(150)
@@ -71,17 +77,17 @@ void	Bureaucrat::signForm(Form *Form)
 {
 	try
 	{
-		Form->beSigned(this);
+		Form->beSigned(*this);
+
 	}
 	catch(const Form::GradeTooLowException& e)
 	{	
-		std::cout << this->name << " coudn't sign " << Form->getName() << " because: " <<  "his grade is too low"<< std::endl;
+		std::cout << this->name << " cannot sign " << Form->getName() << " because: " <<  "his grade is too low"<< std::endl;
 	}
 	catch(const Form::GradeTooHighException& e)
 	{
 		std::cout << this->getName() << " signed form " << Form->getName() << std::endl;
 	}
-	
 }
 
 Bureaucrat::~Bureaucrat()
