@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:55:41 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/30 18:42:14 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/16 12:12:27 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	Span::addNumber(int nb)
 {
 	try
 	{	
-		if ((this->array.capacity() - this->array.size()) > 0)
+		if (std::max(this->array.capacity() , this->array.size()) == this->array.capacity())
 			array.push_back(nb);
 		else
 			throw std::runtime_error("error, no more space to allocate");
@@ -61,25 +61,15 @@ void	Span::addNumber(int nb)
 
 void	Span::addRange(int *range, unsigned int size)
 {
-	try
-	{
-		if (size > static_cast<unsigned int>(this->array.capacity() - this->array.size()))
-			throw std::runtime_error("error, no more space to allocate");
-		else
-			for (unsigned int y = 0; y < size; y++)
-				this->array.push_back(range[y]);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	
-	}
+	this->array.insert(this->array.begin() + this->array.size(), range, range + size);
 }
 
 unsigned int Span::shortestSpan()
 {
-	unsigned int span = 4294967295;
-	
+	 if (array.size() < 2)
+        throw std::logic_error("Not enough elements to calculate shortest span");
+
+	unsigned int span = std::numeric_limits<unsigned int>::max();
 	std::vector<int> temp = array;
     std::sort(temp.begin(), temp.end());
 	for(int x = 1;  x < int(temp.size()); x++)

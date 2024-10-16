@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 10:05:52 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/01 12:25:47 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/16 12:28:06 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,7 @@ class MutantStack : public std::stack<T>
 		MutantStack(const MutantStack& _MutantStack);
 		MutantStack &operator=(const MutantStack& _MutantStack);
 		~MutantStack();
-		iterator begin()
-		{
-			return(this->c.begin());
-		};
-		iterator end()
-		{
-			return( this->c.end());	
-		};
+		iterator begin() ;
+		iterator end() ;
 };
 #include "MutantStack.tpp"

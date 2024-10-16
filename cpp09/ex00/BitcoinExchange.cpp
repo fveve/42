@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:51:59 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/07 13:10:47 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/16 14:48:32 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,25 +101,19 @@ std::vector<std::string> 	Btc::get_file(std::ifstream &_file)
 
 std::vector<int> Btc::find_min_date(std::vector<std::vector<int> > temp)
 {
-   std::vector<int> min; // Initializing with max int values
-    
-    // Store the target year, month, and day from `this->date`
+	std::vector<int> min; 
     int year = this->date[0];
     int month = this->date[1];
     int day = this->date[2];
-
-    // Loop through the input dates to find the minimum valid date
+	
     for (size_t x = 1; x < temp.size(); ++x) {
-        // Check if the current date in `temp` is smaller than the stored date
         if ( (temp[x][0] < year) || 
              (temp[x][0] == year && temp[x][1] < month) || 
              (temp[x][0] == year && temp[x][1] == month && temp[x][2] < day)) {
-            min = temp[x]; // Update min to the new minimum date
+            min = temp[x];
         }
     }
-    // Output the minimum date found
-    //std::cout << "min: " << min[0] << " " << min[1] << " " << min[2] << std::endl;
-    return min;
+	return min;
 }
 
 bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
@@ -128,7 +122,6 @@ bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
 	int							trigger = 0;
 	size_t						x = 0;
 	
-	//if date > 2022 return 1
 		if (line.size() < 14)
 	{
 		std::cerr << "Error: No value written" << std::endl;
@@ -143,7 +136,17 @@ bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
 		}
 		x++;
 	}
+	if (std::isdigit(line[4]))
+	{
+		std::cerr << "Error: Wrong syntax -> " << line << std::endl;
+		return (1);
+	}
 	this->date = convert_date(line);
+	if (convert_date(this->data_content[0])[0] > this->date[0] || this->date[1] > 12 || this->date[2] > 31)
+	{
+		std::cerr << "Error: Wrong syntax -> " << line << std::endl;
+		return (1);
+	}
 	for (size_t y = 0; y < this->data_content.size(); y++)
 	{
 		temp = convert_date(this->data_content[y]);
@@ -155,13 +158,6 @@ bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
 	}
 	if (trigger == 0)
 		this->date = find_min_date(list);
-	//std::cout << "x: " << x << std::endl;
-	//std::cout << "date: " << this->date[0] << " " <<  this->date[1] << " " <<  this->date[2] << std::endl;
-	if (grab_data() == 1.7976931348623157)
-	{
-			std::cerr << "Error: Wrong syntax ->" << line << std::endl;
-			return (1);
-	}
 	return (0);
 }
 
@@ -178,21 +174,17 @@ float	convert_float(std::string line)
 		if (std::isdigit(line[x]) && trigger == 0)
 		{
 			nb = nb * 10 + (line[x] - 48);
-		//	std::cout << "nb: " << nb << std::endl;
 		}	
 		else if (std::isdigit(line[x]) && trigger == 1)
 		{
 			coef /= 10;
 			comma = comma + float((line[x] - 48)) * coef;
-		//	std::cout << "comma: " << comma << std::endl;
 		}
 		else if (line[x] == '.')
 			trigger = 1;
 		else if (line[x] == '-')
 			sign *= -1;
 	}
-	//std::cout << "line: " << line << std::endl;
-	//std::cout << "value: " << (nb + comma) * sign << std::endl;
 	return ((nb + comma) * sign);
 }
 
@@ -229,8 +221,6 @@ std::vector<int>	Btc::convert_date(std::string line)
 		x++;
 	}
 	_date.push_back(nb);
-	//std::cout << "_date.size(): " << _date.size() << std::endl;
-	//std::cout << "date: " << _date[0] << " " <<  _date[1] << " " <<  _date[2] << std::endl;
 	return (_date);
 }
 
@@ -245,12 +235,8 @@ float	Btc::grab_data()
 		if (temp == convert_date(this->data_content[x]))
 			break ;
 	}
-				coef = convert_float(this->data_content[x]);
-			//std::cout << "date: " <<  this->date[0] << " " <<   this->date[1] << " " <<  this->date[2] << std::endl;
-			std::cout << "temp: " << temp[0] << " " <<  temp[1] << " " << temp[2] << std::endl;
-			std::cout << "get_coef: " << coef << std::endl;
-			return (this->value * coef);
-		return (1.7976931348623157);
+	coef = convert_float(this->data_content[x]);
+	return (this->value * coef);
 }
 
 void	Btc::verify_file(std::ifstream &_file, std::ifstream &data)
@@ -271,8 +257,7 @@ void	Btc::verify_file(std::ifstream &_file, std::ifstream &data)
 		std::cout << std::endl;
 		if (!verify_date(this->content[x], temp) && !verify_value(this->content[x]))
 		{
-			std::cout << this->content[x]<< std::endl;
-			std::cout << " = " << grab_data() << std::endl;
+			std::cout << this->content[x]<< " = " << grab_data() << std::endl;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:05:15 by arafa             #+#    #+#             */
-/*   Updated: 2024/09/30 18:39:28 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/16 12:09:53 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <limits>
 
 class Span
 {

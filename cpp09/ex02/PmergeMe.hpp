@@ -6,9 +6,11 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:08:32 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/09 15:26:49 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/16 14:55:09 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
 
 #include <iostream>
 #include <algorithm>
