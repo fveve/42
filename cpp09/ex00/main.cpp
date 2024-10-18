@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:51:57 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/03 18:08:39 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/18 15:00:48 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv)
 {
-	std::vector<std::string> content;
+	std::map<std::string> content;
 	std::ifstream	data("data.csv");
 	Btc	btc;
 	

@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:08:32 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/16 14:55:09 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/18 12:11:02 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ class WrongCharacterException : public std::exception
 };
 
 std::string			get_line(char **argv);
-std::list<size_t>	verify_expr(std::string line);
-void				ft_sort(std::list<size_t> list_numbers, std::clock_t time);
+void				verify_expr(std::string line);
+void				ft_sort(std::string line);
