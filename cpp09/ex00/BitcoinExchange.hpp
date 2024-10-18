@@ -18,34 +18,10 @@
 #include <string>
 #include <exception>
 #include <vector>
+#include <sstream>
+#include <climits>
 
-class Btc
-{
-	private:
-		std::map<std::string>	content;
-		std::map<std::string>	data_content;
-		float						value;
-		std::map<int>			date;
-		
-	public:
-		Btc();
-		Btc(std::map<std::string> _content, std::map<std::string>	_data_content, std::map<int> _date, float _value);
-		Btc(const Btc& _btc);
-		Btc &operator=(const Btc& _btc);
-		~Btc();
-		
-		std::map<std::string>	getContent() const;
-		std::map<std::string>	getDataContent() const;
-		float 						getValue() const;
-		std::map<int>			getDate() const;
-		
-		bool						verify_date(std::string line,  std::map<std::map<int> > list);
-		bool						verify_value(std::string line);
-		void						verify_file(std::ifstream &_file, std::ifstream &data);
-		float						grab_data();
-		std::map<std::string>	get_file(std::ifstream &_file);		
-		std::map<int>			find_min_date(std::map<std::map<int> > temp);
-		std::map<int>			convert_date(std::string line);
-};
-
-float	get_coef(std::string line);
+typedef std::vector<size_t> _vector;
+typedef	std::map<_vector, float> _map;
+_map	get_file(std::ifstream &_file);
+void	ft_btc(_map data, std::ifstream  &_file);

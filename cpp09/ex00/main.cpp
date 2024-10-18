@@ -12,20 +12,21 @@
 
 #include  "BitcoinExchange.hpp"
 
+
 int main(int argc, char **argv)
 {
-	std::map<std::string> content;
-	std::ifstream	data("data.csv");
-	Btc	btc;
+	_map			data;
+	std::ifstream	_data("data.csv");
 	
+	data = get_file(_data);
 	if (argc < 2)
-		return(std::cout << "Error: no file specified" << std::endl, 0);
-
+		return(std::cout << "Error: no file specified" << std::endl, 1);
 	std::ifstream _file(argv[1]);
 	if (!_file.is_open())
-		return(std::cout << "Error: could open file" << std::endl, 0);
-	
-	btc.verify_file(_file, data);
+		return(std::cout << "Error: could open file" << std::endl, 1);
+
+	ft_btc(data, _file);
 	_file.close();
+
 	return 0;
 }
