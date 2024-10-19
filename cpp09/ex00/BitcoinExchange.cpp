@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:51:59 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/18 15:22:19 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/19 14:17:30 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ void	ft_btc(_map data, std::ifstream  &_file)
 		if (!verify_date(data, get_content(temp, line).begin()))
 		{
 			float coef = get_coef(data, temp.begin());
-			if (coef >= 0 && coef <= 1000)
+			if (temp.begin()->second >= 0 && temp.begin()->second <= 1000)
 			{
 				print_date(temp.begin());
 				std::cout << " => " << get_coef(data, temp.begin()) <<std::endl;
 			}
-			else if (coef > 0 && (size_t)(coef) > 1000)
+			else if (temp.begin()->second > 0 && (size_t)(temp.begin()->second) > 1000)
 			{
 				std::cerr << "Error: too large of a number" << std::endl;
 			}
@@ -108,48 +108,3 @@ void	ft_btc(_map data, std::ifstream  &_file)
 	}
 }
 //========================================================================verification========================================================
-
-//======================================================================
-/*bool	Btc::verify_date(std::string line,  std::vector<std::vector<int> > list)
-{
-	std::vector<int>			temp;
-	int							trigger = 0;
-	size_t						x = 0;
-	
-		if (line.size() < 14)
-	{
-		std::cerr << "Error: No value written" << std::endl;
-		return (1);
-	}
-	while (x < line.length() && x < 10)
-	{
-		if (!std::isdigit(line[x]) && line[x] != '-')
-		{
-			std::cerr << "Error: Wrong syntax ->" << line << std::endl;
-			return (1);
-		}
-		x++;
-	}
-	if (std::isdigit(line[4]))
-	{
-		std::cerr << "Error: Wrong syntax -> " << line << std::endl;
-		return (1);
-	}
-	this->date = convert_date(line);
-	if (convert_date(this->data_content[0])[0] > this->date[0] || this->date[1] > 12 || this->date[2] > 31)
-	{
-		std::cerr << "Error: Wrong syntax -> " << line << std::endl;
-		return (1);
-	}
-	for (size_t y = 0; y < this->data_content.size(); y++)
-	{
-		temp = convert_date(this->data_content[y]);
-		if (temp[0] == this->date[0] && temp[1] == this->date[1] && temp[2] == this->date[2])
-		{
-			trigger = 1;
-			break ;
-		}
-	}
-	if (trigger == 0)
-		this->date = find_min_date(list);
-}*/

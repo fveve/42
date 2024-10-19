@@ -6,7 +6,7 @@
 /*   By: arafa <arafa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:51:57 by arafa             #+#    #+#             */
-/*   Updated: 2024/10/18 15:00:48 by arafa            ###   ########.fr       */
+/*   Updated: 2024/10/19 14:13:38 by arafa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 		return(std::cout << "Error: no file specified" << std::endl, 1);
 	std::ifstream _file(argv[1]);
 	if (!_file.is_open())
-		return(std::cout << "Error: could open file" << std::endl, 1);
+		return(std::cout << "Error: could not open file" << std::endl, 1);
 
 	ft_btc(data, _file);
 	_file.close();
