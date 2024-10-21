@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb                      # The name of the container
+    networks:
+      - inception                                 # The network it belongs to
+    build: 
+      context: requirements/mariadb               # Where the Dockerfile is located
+      dockerfile: Dockerfile                      # Name of the Dockerfile
+    env_file: .env                               # Environment file to pass variables
+    volumes:
+      - mariadb:/var/lib/mysql                    # Mounting the database volume
+    restart: unless-stopped                       # Restart unless it is stopped
+    expose:
+      - "3306"                                    # Port to expose
+
+  nginx:
+    container_name: nginx                         # The name of the container
+    volumes:
+      - wordpress:/var/www/wordpress              # Mounting WordPress volume
+    networks:
+      - inception                                 # The network it belongs to
+    depends_on:
+      - wordpress                                 # Wait for WordPress to start
+    build: 
+      context: requirements/nginx                  # Where the Dockerfile is located
+      dockerfile: Dockerfile                      # Name of the Dockerfile
+    env_file: .env                               # Environment file to pass variables
+    ports:
+      - "443:443"                                 # Port exposed to the host
+    restart: on-failure                           # Restart only on failure
+
+  wordpress:
+    container_name: wordpress                     # The name of the container
+    env_file: .env                               # Environment file to pass variables
+    volumes:
+      - wordpress:/var/www/wordpress              # Mounting WordPress volume
+    networks:
+      - inception                                 # The network it belongs to
+    build: 
+      context: requirements/wordpress              # Where the Dockerfile is located
+      dockerfile: Dockerfile                      # Name of the Dockerfile
+    depends_on:
+      - mariadb                                   # Wait for MariaDB to start
+    restart: on-failure                           # Restart only on failure
+    expose:
+      - "9000"                                    # Port to expose
+
+volumes:
+  wordpress:
+    driver: local                                 # Local volume for WordPress
+    driver_opts:
+      type: 'none'                                # No specific type
+      o: 'bind'                                   # Bind mount options
+      device: '/Users/arafa/data/wordpress'      # Where to store WordPress data locally
+  mariadb:
+    driver: local                                 # Local volume for MariaDB
+    driver_opts:
+      type: 'none'                                # No specific type
+      o: 'bind'                                   # Bind mount options
+      device: '/Users/arafa/data/mariadb'        # Where to store MariaDB data locally
+
+networks:
+  inception:
+    driver: bridge                                # Bridge network for inter-container communication
