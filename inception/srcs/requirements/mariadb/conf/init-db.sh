@@ -6,7 +6,7 @@ echo "Starting MariaDB..."
 service mysql start
 
 # Allow some time for the server to start
-sleep 5
+sleep 10
 
 # Check if MariaDB started successfully
 if ! mysqladmin ping; then
