@@ -1,5 +1,5 @@
 # Variables
-COMPOSE_FILE=srcs/docker-compose.yml
+COMPOSE_FILE=/home/arafa/42/inception/srcs/docker-compose.yml
 
 # Targets
 .PHONY: all build up down logs
