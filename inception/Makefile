@@ -4,7 +4,13 @@ COMPOSE_FILE=srcs/docker-compose.yml
 # Targets
 .PHONY: all build up down logs
 
-all: build
+all: build up
 
 build:
-	docker-compose up -f $(COMPOSE_FILE) build
+	docker-compose -f $(COMPOSE_FILE) build
+
+up:
+	docker-compose -f $(COMPOSE_FILE) up -d
+
+down:
+	docker-compose -f $(COMPOSE_FILE) down
