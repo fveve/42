@@ -7,4 +7,4 @@ COMPOSE_FILE=srcs/docker-compose.yml
 all: build
 
 build:
-	docker-compose -f $(COMPOSE_FILE) --build
+	docker-compose -f $(COMPOSE_FILE) build
