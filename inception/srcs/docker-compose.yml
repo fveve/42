@@ -24,6 +24,7 @@ services:
     networks:
       - inception                                 # The network it belongs to
     depends_on:
+      - mariadb
       - wordpress                                 # Wait for WordPress to start
     build: 
       context: requirements/nginx                  # Where the Dockerfile is located
