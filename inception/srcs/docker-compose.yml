@@ -67,4 +67,5 @@ volumes:
 
 networks:
   inception:
+    name: inception
     driver: bridge                                # Bridge network for inter-container communication
