@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile                      # Name of the Dockerfile
     env_file: .env                               # Environment file to pass variables
     volumes:
-      - wordpress:/var/lib/mysql                   # Mounting the database volume
+      - mariadb:/var/lib/mysql                    # Mounting the database volume
     restart: unless-stopped                       # Restart unless it is stopped
     expose:
       - "3306"                                    # Port to expose
@@ -52,13 +52,15 @@ services:
       - "9000"                                    # Port to expose
 
 volumes:
-  wordpress:                                     # Explicitly set volume name here
+  wordpress:
+    name: wordpress
     driver: local                                 # Local volume for WordPress
     driver_opts:
       type: 'none'                                # No specific type
       o: 'bind'                                   # Bind mount options
       device: '/home/arafa/data/wordpress'      # Where to store WordPress data locally
-  mariadb:                                       # Explicitly set volume name here
+  mariadb:
+    name: mariadb
     driver: local                                 # Local volume for MariaDB
     driver_opts:
       type: 'none'                                # No specific type
