@@ -2,9 +2,9 @@
 COMPOSE_FILE=srcs/docker-compose.yml
 
 # Targets
-.PHONY: all build up down logs
+.PHONY: all build up down clean
 
-all: build up
+all: clean build up
 
 build:
 	docker-compose -f $(COMPOSE_FILE) build
@@ -14,3 +14,7 @@ up:
 
 down:
 	docker-compose -f $(COMPOSE_FILE) down
+
+clean:
+	docker rm -f $$(docker ps -aq) || true  # Remove all stopped containers
+	docker rmi -f $$(docker images -aq) || true  # Remove all images
