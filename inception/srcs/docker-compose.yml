@@ -1,73 +1,80 @@
-version: '3'
+version: '3.9'
 
 services:
   mariadb:
-    image: mariadb
-    container_name: mariadb                      # The name of the container
-    networks:
-      - inception                                 # The network it belongs to
-    build: 
-      context: requirements/mariadb               # Where the Dockerfile is located
-      dockerfile: Dockerfile                      # Name of the Dockerfile
-    env_file: .env                               # Environment file to pass variables
+    container_name: mariadb
+    build: ./requirements/mariadb
+    restart: always
+    env_file: .env
     volumes:
-      - mariadb:/var/lib/mysql                    # Mounting the database volume
-    restart: unless-stopped                       # Restart unless it is stopped
-    expose:
-      - "3306"                                    # Port to expose
+      - db:/var/lib/mysql
+    networks:
+      - project
 
-  nginx:
-    image: nginx
-    container_name: nginx                         # The name of the container
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file: .env
     volumes:
-      - wordpress:/var/www/wordpress              # Mounting WordPress volume
+      - wp:/var/www/html/wordpress
     networks:
-      - inception                                 # The network it belongs to
+      - project
     depends_on:
       - mariadb
-      - wordpress                                 # Wait for WordPress to start
-    build: 
-      context: requirements/nginx                  # Where the Dockerfile is located
-      dockerfile: Dockerfile                      # Name of the Dockerfile
-    env_file: .env                               # Environment file to pass variables
-    ports:
-      - "443:443"                                 # Port exposed to the host
-    restart: on-failure                           # Restart only on failure
 
-  wordpress:
-    image: wordpress
-    container_name: wordpress                     # The name of the container
-    env_file: .env                               # Environment file to pass variables
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    hostname: localhost
     volumes:
-      - wordpress:/var/www/wordpress              # Mounting WordPress volume
+      - wp:/var/www/html/wordpress
     networks:
-      - inception                                 # The network it belongs to
-    build: 
-      context: requirements/wordpress              # Where the Dockerfile is located
-      dockerfile: Dockerfile                      # Name of the Dockerfile
+      - project
     depends_on:
-      - mariadb                                   # Wait for MariaDB to start
-    restart: on-failure                           # Restart only on failure
-    expose:
-      - "9000"                                    # Port to expose
+      - wordpress
+    ports:
+      - "443:443"
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+  
+  adminer:
+    image: adminer:4
+    container_name: adminer
+    restart: unless-stopped
+    networks:
+      - project
+    depends_on:
+      - mariadb
+    ports:
+      - "9000:8080"
 
 volumes:
-  wordpress:
-    name: wordpress
-    driver: local                                 # Local volume for WordPress
+  db:
+    name: db
+    driver: local
     driver_opts:
-      type: 'none'                                # No specific type
-      o: 'bind'                                   # Bind mount options
-      device: '/home/arafa/data/wordpress'      # Where to store WordPress data locally
-  mariadb:
-    name: mariadb
-    driver: local                                 # Local volume for MariaDB
+      type: none
+      o: bind
+      device: /home/${USER}/data/db
+  wp:
+    name: wp
+    driver: local
     driver_opts:
-      type: 'none'                                # No specific type
-      o: 'bind'                                   # Bind mount options
-      device: '/home/arafa/data/mariadb'        # Where to store MariaDB data locally
+      type: none
+      o: bind
+      device: /home/${USER}/data/wp
 
 networks:
-  inception:
-    name: inception
-    driver: bridge                                # Bridge network for inter-container communication
+  project:
+    driver: bridge

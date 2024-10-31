@@ -1,10 +1,22 @@
-FROM	debian:buster
+FROM debian:buster
 
-RUN		apt update &&\
-		apt upgrade -y &&\
-		apt-get	install mariadb-server -y &&\
-		mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
+EXPOSE 3306
 
-COPY	conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
+ARG DB_NAME=${DB_NAME}
+ARG DB_USER=${DB_USER}
+ARG DB_PASSWORD=${DB_PASSWORD}
+ARG DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
 
-COPY	conf/init-db.sh /docker-entrypoint-initdb.d/
+RUN apt-get update && apt-get install \
+	mariadb-server -y && \
+	rm -rf /var/lib/apt/lists/*
+
+RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
+
+COPY tools/create_user.sh /
+RUN bash ./create_user.sh
+
+RUN rm -rf create_user.sh
+
+CMD ["mysqld_safe"]
