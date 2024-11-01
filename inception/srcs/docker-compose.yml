@@ -17,7 +17,6 @@ services:
     image: nginx
     container_name: nginx
     build: ./requirements/nginx
-    hostname: localhost
     volumes:
       - wordpress:/var/www/html/wordpress
     networks:
@@ -26,8 +25,9 @@ services:
       - wordpress
     ports:
       - "443:443"
-    extra_hosts:
-    - "wordpress:127.0.0.1"
+    expose:
+      - "443"
+    restart: always
 
   wordpress:
     image: wordpress
