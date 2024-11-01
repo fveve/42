@@ -7,7 +7,7 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - db:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - project
 
@@ -16,7 +16,7 @@ services:
     build: ./requirements/wordpress
     env_file: .env
     volumes:
-      - wp:/var/www/html/wordpress
+      - wordpress:/var/www/html/wordpress
     networks:
       - project
     depends_on:
@@ -27,47 +27,22 @@ services:
     build: ./requirements/nginx
     hostname: localhost
     volumes:
-      - wp:/var/www/html/wordpress
+      - wordpress:/var/www/html/wordpress
     networks:
       - project
     depends_on:
       - wordpress
     ports:
       - "443:443"
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    ports:
-      - "8000:8000"
-      - "9443:9443"
-    volumes:
-      - "/etc/localtime:/etc/localtime:ro"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    security_opt:
-      - no-new-privileges:true
-    restart: always
-  
-  adminer:
-    image: adminer:4
-    container_name: adminer
-    restart: unless-stopped
-    networks:
-      - project
-    depends_on:
-      - mariadb
-    ports:
-      - "9000:8080"
-
 volumes:
-  db:
+  mariadb:
     name: mariadb
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/${USER}/data/mariadb
-  wp:
+  wordpress:
     name: wordpress
     driver: local
     driver_opts:
