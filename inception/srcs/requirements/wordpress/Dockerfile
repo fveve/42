@@ -31,5 +31,3 @@ RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.p
 		mv wp-cli.phar /usr/local/bin/wp
 	
 COPY	conf/wordpress.conf /etc/php/7.3/fpm/pool.d
-
-CMD ["bash", "/var/www/wordpress/config.sh"]
