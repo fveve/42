@@ -31,9 +31,9 @@ RUN apt update && \
 
 # Download and set up WordPress
 RUN wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www && \
-    tar -xzf /var/www/wordpress-6.0-fr_FR.tar.gz -C /var/www && \
+    tar -xzf /var/www/html/wordpress-6.0-fr_FR.tar.gz -C /var/www && \
     rm /var/www/wordpress-6.0-fr_FR.tar.gz && \
-    chown -R www-data:www-data /var/www/wordpress
+    chown -R www-data:www-data /var/www/html/wordpress
 
 # Install WP-CLI
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
