@@ -39,4 +39,4 @@ RUN mkdir -p /run/php
 COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d
 
 # Start PHP-FPM in the foreground
-CMD ["php-fpm7.3", "-F"]
+CMD ["php-fpm7.3", "-F", "-y", "/etc/php/7.3/fpm/php-fpm.conf"]
