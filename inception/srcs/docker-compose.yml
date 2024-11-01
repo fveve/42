@@ -1,7 +1,9 @@
-version: '3.9'
+version: '3'
 
 services:
+
   mariadb:
+    image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb
     restart: always
@@ -10,8 +12,9 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - project
-      
+
   nginx:
+    image: nginx
     container_name: nginx
     build: ./requirements/nginx
     hostname: localhost
@@ -25,6 +28,7 @@ services:
       - "443:443"
 
   wordpress:
+    image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress
     env_file: .env
