@@ -26,6 +26,8 @@ services:
       - wordpress
     ports:
       - "443:443"
+    extra_hosts:
+    - "wordpress:127.0.0.1"
 
   wordpress:
     image: wordpress
