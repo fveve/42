@@ -31,6 +31,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /run/php
+	mkdir -p  /home/root/data/wordpress:/var/lib/docker/volumes/wordpress/_data
 
 
 # Copy the PHP-FPM pool configuration for WordPress
