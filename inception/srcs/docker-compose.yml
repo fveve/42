@@ -10,18 +10,7 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - project
-
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress
-    env_file: .env
-    volumes:
-      - wordpress:/var/www/html/wordpress
-    networks:
-      - project
-    depends_on:
-      - mariadb
-
+      
   nginx:
     container_name: nginx
     build: ./requirements/nginx
@@ -34,6 +23,18 @@ services:
       - wordpress
     ports:
       - "443:443"
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    networks:
+      - project
+    depends_on:
+      - mariadb
+    
 volumes:
   mariadb:
     name: mariadb
