@@ -30,6 +30,8 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
+RUN chown -R www-data:www-data /etc/php/7.3/fpm/pool.d/wordpress.conf
+
 RUN mkdir -p /run/php
 
 
