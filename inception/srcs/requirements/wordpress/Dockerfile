@@ -12,6 +12,8 @@
 
 FROM	debian:buster
 
+EXPOSE 9000
+
 RUN		apt update &&\
 		apt upgrade -y &&\
 		apt-get -y install wget &&\
@@ -28,4 +30,6 @@ RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.p
 		chmod +x wp-cli.phar && \
 		mv wp-cli.phar /usr/local/bin/wp
 	
-COPY	conf/wordpress.conf /etc/php/php.conf
+COPY	conf/wordpress.conf /etc/php/7.3/fpm/pool.d
+
+CMD ["bash", "/var/www/wordpress/config.sh"]
