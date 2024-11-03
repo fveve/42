@@ -12,6 +12,8 @@
 
 FROM	debian:buster
 
+EXPOSE 443
+
 RUN		apt update &&\
 		apt upgrade -y &&\
 		mkdir -p /etc/nginx/ssl &&\
