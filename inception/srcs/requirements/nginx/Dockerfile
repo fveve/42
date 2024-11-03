@@ -10,23 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM	debian:buster
+FROM debian:buster
 
-EXPOSE 443
-
-RUN		apt update &&\
-		apt upgrade -y &&\
-		mkdir -p /etc/nginx/ssl &&\
-		apt install nginx curl vim openssl -y &&\
-		openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/CN=arafa.42.fr" &&\
-		mkdir -p /var/run/nginx
-#La commande req crée et traite principalement des demandes de certificats au format PKCS#10.
-#Elle peut en outre créer des certificats auto-signés.
+RUN apt update && \
+    apt upgrade -y && \
+    mkdir -p /etc/nginx/ssl && \
+    apt install nginx curl vim openssl -y && \
+    openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/CN=arafa.42.fr" && \
+    mkdir -p /var/run/nginx
 
 RUN chmod 755 /var/www/html
-
 RUN chown -R www-data:www-data /var/www/html
 
-COPY	conf/nginx.conf /etc/nginx/sites-available/default
+# Copy the Nginx configuration to the correct location
+COPY conf/nginx.conf /etc/nginx/sites-available/default
 
-CMD [ "nginx", "-g", "daemon off;" ]
+# Link the configuration in `sites-enabled`
+RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Expose port 443 for HTTPS
+EXPOSE 443
+
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
