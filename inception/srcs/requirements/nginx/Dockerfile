@@ -26,7 +26,7 @@ RUN chown -R www-data:www-data /var/www/html
 COPY conf/nginx.conf /etc/nginx/sites-available/default
 
 # Link the configuration in `sites-enabled`
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+RUN rm -f /etc/nginx/sites-enabled/default && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Expose port 443 for HTTPS
 EXPOSE 443
