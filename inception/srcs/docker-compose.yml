@@ -19,7 +19,7 @@ services:
     image: mariadb
     container_name: mariadb
     restart: always
-    env:
+    environment:  # Change here
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # If you need a root password
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
@@ -32,7 +32,7 @@ services:
   wordpress:
     image: wordpress
     container_name: wordpress
-    env:
+    environment:  # Change here
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
