@@ -25,9 +25,6 @@ RUN chown -R www-data:www-data /var/www/html
 # Copy the Nginx configuration to the correct location
 COPY ./conf/nginx.conf  /etc/nginx/conf.d
 
-# Link the configuration in `sites-enabled`
-RUN rm -f /etc/nginx/sites-enabled/default && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-
 # Expose port 443 for HTTPS
 EXPOSE 443
 
