@@ -7,10 +7,11 @@ COMPOSE_FILE=srcs/docker-compose.yml
 all: build up
 
 build:
-    docker rm -f $$(docker ps -aq) || true  # Remove all stopped containers
-    docker rmi -f $$(docker images -aq) || true  # Remove all images
-    sudo mkdir -p /home/root/data/mariadb
-    docker-compose -f srcs/docker-compose.yml build
+	docker rm -f $$(docker ps -aq) || true  # Remove all stopped containers
+	docker rmi -f $$(docker images -aq) || true  # Remove all images
+	sudo mkdir -p /home/root/data/mariadb
+	docker-compose -f $(COMPOSE_FILE) build
+
 up:
 	docker-compose -f $(COMPOSE_FILE) up -d
 
