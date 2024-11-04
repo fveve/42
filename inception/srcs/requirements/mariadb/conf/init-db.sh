@@ -5,16 +5,16 @@ set -e
 service mysql start
 
 # Create the database if it does not exist
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;" 
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;" 
 
 # Create the user if it does not exist
-mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';" 
+mysql -e "CREATE USER IF NOT EXISTS \`${DB_USER}\`@'%' IDENTIFIED BY '${DB_PASSWORD}';" 
 
 # Grant all privileges to the user for the database
-mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%';" 
+mysql -e "GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO \`${DB_USER}\`@'%';" 
 
 # Change the root user's password
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" 
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_PASSWORD}';" 
 
 # Refresh privileges
 mysql -e "FLUSH PRIVILEGES;"

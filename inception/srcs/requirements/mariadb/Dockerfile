@@ -1,12 +1,6 @@
 # Start from the Debian Buster image
 FROM debian:buster
 
-# Environment variables for MariaDB
-ENV MYSQL_ROOT_PASSWORD=1234
-ENV SQL_DATABASE=wordpress
-ENV SQL_USER=root
-ENV SQL_PASSWORD=1234
-
 # Install required packages and MariaDB
 RUN apt-get update -y && \
     apt-get upgrade -y && \
