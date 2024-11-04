@@ -1,7 +1,20 @@
+#!/bin/bash
+set -e
+
+# Start the MariaDB service
 service mysql start
 
-mysql -u root -e "CREATE DATABASE ${DB_NAME};"
-mysql -u root -e "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%';"
-mysql -u root -e "FLUSH PRIVILEGES;"
-mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';"
+# Create the database if it does not exist
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;" 
+
+# Create the user if it does not exist
+mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" 
+
+# Grant all privileges to the user for the database
+mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'localhost';" 
+
+# Change the root user's password
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" 
+
+# Refresh privileges
+mysql -e "FLUSH PRIVILEGES;"
