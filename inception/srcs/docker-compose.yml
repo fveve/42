@@ -51,16 +51,16 @@ volumes:
   wordpress:
     driver: local
     driver_opts:
-      type: 'none'  # no specific type
+      type: 'none'
       o: 'bind'
-      device: '/home/arafa/data/wordpress'  # where to store the folder on your local machine
+      device: '/home/arafa/data/wordpress'
 
   mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/arafa/data/mariadb'  # where to store the folder on your local machine
+      device: '/home/arafa/data/mariadb'
 
 networks:
   inception:
