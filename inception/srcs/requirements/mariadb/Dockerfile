@@ -2,10 +2,10 @@
 FROM debian:buster
 
 # Environment variables for MariaDB
-ENV MYSQL_ROOT_PASSWORD=root_password
-ENV SQL_DATABASE=my_database
-ENV SQL_USER=my_user
-ENV SQL_PASSWORD=my_password
+ENV MYSQL_ROOT_PASSWORD=1234
+ENV SQL_DATABASE=wordpress
+ENV SQL_USER=root
+ENV SQL_PASSWORD=1234
 
 # Install required packages and MariaDB
 RUN apt-get update -y && \
