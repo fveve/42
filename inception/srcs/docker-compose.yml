@@ -33,7 +33,7 @@ services:
     build: ./requirements/wordpress
     env_file: .env
     volumes:
-      - wordpress:/var/www//wordpress
+      - wordpress:/var/www/wordpress
     networks:
       - project
     depends_on:
