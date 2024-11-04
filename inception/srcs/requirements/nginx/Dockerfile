@@ -25,7 +25,7 @@ RUN mkdir -p /etc/nginx/ssl && \
 RUN mkdir -p /var/run/nginx
 
 # Remplace le fichier de configuration de NGINX avec le fichier personnalisé
-COPY conf/nginx.conf /etc/nginx/conf.d
+COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose le port 443 pour les connexions HTTPS
 EXPOSE 443
