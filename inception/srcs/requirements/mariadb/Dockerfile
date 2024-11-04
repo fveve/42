@@ -17,7 +17,7 @@ RUN apt-get update -y && \
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Script to initialize the database and user
-COPY init_db.sh /docker-entrypoint-initdb.d/init_db.sh
+COPY ./tools/init_db.sh /docker-entrypoint-initdb.d/init_db.sh
 RUN chmod +x /docker-entrypoint-initdb.d/init_db.sh
 
 # Expose the MySQL port
