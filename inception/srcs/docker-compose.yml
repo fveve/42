@@ -1,67 +1,55 @@
 version: '3'
 
 services:
+  mariadb:
+    container_name: mariadb                # Le nom du container
+    networks:
+      - inception                          # Réseau auquel il appartient
+    build: 
+      context: requirements/mariadb         # Emplacement du Dockerfile
+      dockerfile: Dockerfile                # Nom du Dockerfile
+    env_file: .env                         # Fichier d'environnement pour les variables
+    volumes:                               # Montages de volumes
+      - mariadb:/var/lib/mysql
+    restart: unless-stopped                # Redémarre tant qu'il n'est pas stoppé
+    expose:                                # Port à exposer
+      - "3306"
+
   nginx:
-    image: nginx
     container_name: nginx
-    build: ./requirements/nginx
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - project
-    depends_on:
+      - inception
+    depends_on:                            # NGINX ne démarre pas tant que WordPress n'a pas démarré
       - wordpress
+    build: 
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    env_file: .env
     ports:
-      - "443:443"
-    restart: always
-
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    restart: always
-    environment:  # Change here
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # If you need a root password
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - mariadb:/var/lib/mysql
-    networks:
-      - project
+      - "443:443"                          # Port exposé à la machine locale
+    restart: on-failure                    # Le container redémarre uniquement en cas de crash
 
   wordpress:
-    image: wordpress
     container_name: wordpress
-    environment:  # Change here
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-      WP_ADMIN_USER: ${WP_ADMIN_USER}
-      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
-      WP_TITLE: arafa.42.fr # Add other relevant WordPress config here
+    env_file: .env
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - project
-    depends_on:
+      - inception
+    build: 
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    depends_on:                            # WordPress démarre uniquement après MariaDB
       - mariadb
+    restart: on-failure
+    expose: 
+      - "9000"
 
 volumes:
   mariadb:
-    name: mariadb
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/${USER}/data/mariadb
   wordpress:
-    name: wordpress
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/${USER}/data/wordpress
 
 networks:
-  project:
-    driver: bridge
+  inception:
