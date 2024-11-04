@@ -7,7 +7,6 @@ COMPOSE_FILE=srcs/docker-compose.yml
 all: build up
 
 build:
-	sudo rm -rf /home/root/data/mariadb
 	sudo mkdir -p /home/root/data/mariadb
 	docker-compose -f $(COMPOSE_FILE) build
 
