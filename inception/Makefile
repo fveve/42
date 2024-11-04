@@ -13,6 +13,7 @@ build:
 	@if [ "$$(docker images -aq)" ]; then \
 		docker rmi -f $$(docker images -aq); \
 	fi;  # Remove all images if any
+	sudo rm -rf /home/root/data/mariadb
 	sudo mkdir -p /home/root/data/mariadb
 	docker-compose -f $(COMPOSE_FILE) build
 
