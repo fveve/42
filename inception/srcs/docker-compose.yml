@@ -38,7 +38,7 @@ wordpress:
     WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
     WP_ADMIN_USER: ${WP_ADMIN_USER}
     WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
-    WP_TITLE: YourSiteTitle # Add other relevant WordPress config here
+    WP_TITLE: arafa.42.fr # Add other relevant WordPress config here
   volumes:
     - wordpress:/var/www/wordpress
   networks:
