@@ -19,13 +19,13 @@ RUN apt update && \
 
 # Création d'un dossier pour stocker le certificat SSL et génération du certificat auto-signé
 RUN mkdir -p /etc/nginx/ssl && \
-    openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=login.42.fr/UID=login"
+    openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Perpignan/O=42/OU=42/CN=arafa.42.fr/UID=login"
 
 # Création d'un dossier pour stocker les fichiers de configuration de NGINX
 RUN mkdir -p /var/run/nginx
 
 # Remplace le fichier de configuration de NGINX avec le fichier personnalisé
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx.conf /etc/nginx/conf.d
 
 # Expose le port 443 pour les connexions HTTPS
 EXPOSE 443
