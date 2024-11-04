@@ -5,10 +5,13 @@ services:
     container_name: mariadb
     networks:
       - inception
-    build: 
-      context: requirements/mariadb
-      dockerfile: Dockerfile
+    image: mariadb
     env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}  # Set root password
+      MYSQL_DATABASE: ${DB_NAME}            # Automatically create database
+      MYSQL_USER: ${DB_USER}                 # Create user
+      MYSQL_PASSWORD: ${DB_PASSWORD}         # User password
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
