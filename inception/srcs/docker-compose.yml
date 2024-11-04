@@ -1,18 +1,6 @@
 version: '3'
 
 services:
-
-  mariadb:
-    image: mariadb
-    container_name: mariadb
-    build: ./requirements/mariadb
-    restart: always
-    env_file: .env
-    volumes:
-      - mariadb:/var/lib/mysql
-    networks:
-      - project
-
   nginx:
     image: nginx
     container_name: nginx
@@ -27,17 +15,38 @@ services:
       - "443:443"
     restart: always
 
-  wordpress:
-    image: wordpress
-    container_name: wordpress
-    build: ./requirements/wordpress
-    env_file: .env
-    volumes:
-      - wordpress:/var/www/wordpress
-    networks:
-      - project
-    depends_on:
-      - mariadb
+mariadb:
+  image: mariadb
+  container_name: mariadb
+  restart: always
+  env:
+    MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # If you need a root password
+    MYSQL_DATABASE: ${DB_NAME}
+    MYSQL_USER: ${DB_USER}
+    MYSQL_PASSWORD: ${DB_PASSWORD}
+  volumes:
+    - mariadb:/var/lib/mysql
+  networks:
+    - project
+
+wordpress:
+  image: wordpress
+  container_name: wordpress
+  env:
+    WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+    WORDPRESS_DB_USER: ${DB_USER}
+    WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+    WP_ADMIN_USER: ${WP_ADMIN_USER}
+    WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+    WP_TITLE: YourSiteTitle # Add other relevant WordPress config here
+  volumes:
+    - wordpress:/var/www/wordpress
+  networks:
+    - project
+  depends_on:
+    - mariadb
+
     
 volumes:
   mariadb:
