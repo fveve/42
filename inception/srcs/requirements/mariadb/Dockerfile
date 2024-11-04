@@ -11,7 +11,8 @@ ENV SQL_PASSWORD=my_password
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y mariadb-server && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /run/mysqld
 
 # Copy the custom configuration file
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
