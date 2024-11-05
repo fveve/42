@@ -38,6 +38,8 @@ COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d
 
 COPY conf/auto-config.sh /usr/local/auto-config.sh
 
+RUN chmod +x /usr/local/auto-config.sh
+
 EXPOSE 9000
 
 CMD ["/usr/local/auto-config.sh"]
