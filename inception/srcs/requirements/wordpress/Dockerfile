@@ -34,7 +34,9 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN mkdir -p /run/php && \
     mkdir -p /home/root/data/wordpress
 
-COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d/
+COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d
+
+RUN chown -R www-data:www-data  /etc/php/7.3/fpm/pool.d
 
 EXPOSE 9000
 
