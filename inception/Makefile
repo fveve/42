@@ -21,5 +21,5 @@ clean : down
 	rm -rf /home/${USER}/data/wordpress
 	rm -rf /home/${USER}/data/mariadb
 	docker system prune -a
-	docker volume rm srcs-mariadb
-	docker volume rm srcs-wordpress
+	docker volume rm srcs_mariadb
+	docker volume rm srcs_wordpress
