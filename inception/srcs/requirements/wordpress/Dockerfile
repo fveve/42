@@ -36,8 +36,8 @@ RUN mkdir -p /run/php && \
 
 COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d
 
-RUN chown -R www-data:www-data  /etc/php/7.3/fpm/pool.d
+COPY conf/auto-config.sh /usr/local/
 
 EXPOSE 9000
 
-CMD ["/etc/php/7.3/fpm/pool.d/wordpress.conf"]
+CMD ["/usr/local/auto-config.sh"]
