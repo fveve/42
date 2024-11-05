@@ -20,3 +20,4 @@ down:
 clean : down
 	rm -rf /home/${USER}/data/wordpress
 	rm -rf /home/${USER}/data/mariadb
+	docker system prune -a
