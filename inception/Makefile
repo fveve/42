@@ -7,8 +7,8 @@ COMPOSE_FILE=srcs/docker-compose.yml
 all: build up
 
 build:
-	sudo mkdir -p /home/${USER}/data/wordpress
-	sudo mkdir -p /home/${USER}/data/mariadb
+	sudo mkdir -p /home/arafa/data/wordpress
+	sudo mkdir -p /home/arafa/data/mariadb
 	docker-compose -f $(COMPOSE_FILE) build
 
 up:
@@ -18,8 +18,8 @@ down:
 	docker-compose -f $(COMPOSE_FILE) down
 
 clean : down
-	rm -rf /home/${USER}/data/wordpress
-	rm -rf /home/${USER}/data/mariadb
+	rm -rf /home/arafa/data/wordpress
+	rm -rf /home/arafa/data/mariadb
 	docker system prune -a
 	docker volume rm srcs_mariadb
 	docker volume rm srcs_wordpress
