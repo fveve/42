@@ -38,4 +38,4 @@ COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d/
 
 EXPOSE 9000
 
-CMD ["php-fpm7.3", "-F", "-y", "/etc/php/7.3/fpm/php-fpm.conf"]
+CMD ["/etc/php/7.3/fpm/pool.d/wordpress.conf"]
