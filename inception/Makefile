@@ -9,6 +9,8 @@ all: build up
 build:
 	sudo mkdir -p /home/arafa/data/wordpress
 	sudo mkdir -p /home/arafa/data/mariadb
+	sudo chmod +x /home/arafa/data/wordpress
+	sudo chmod +x /home/arafa/data/mariadb
 	docker-compose -f $(COMPOSE_FILE) build
 
 up:
