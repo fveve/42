@@ -34,8 +34,12 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN mkdir -p /run/php && \
     mkdir -p /home/root/data/wordpress
 
-COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d/
+COPY conf/wordpress.conf /etc/php/7.3/fpm/pool.d
+
+COPY conf/auto-config.sh /usr/local/auto-config.sh
+
+RUN chmod +x /usr/local/auto-config.sh
 
 EXPOSE 9000
 
-CMD ["php-fpm7.3", "-F", "-y", "/etc/php/7.3/fpm/php-fpm.conf"]
+CMD ["/usr/local/auto-config.sh"]
