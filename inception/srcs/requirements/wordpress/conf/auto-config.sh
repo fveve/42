@@ -19,9 +19,4 @@ wp core install --title=$WP_TITLE \
 wp user create $WP_USER $WP_USER_MAIL --role=author --user_pass=$WP_USER_PASSWORD --allow-root
 cd -
 
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);  // Set to true to show errors in the browser.
-
-
 php-fpm7.3 -F
