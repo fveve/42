@@ -20,7 +20,7 @@ RUN mkdir -p /etc/nginx/ssl && \
 
 RUN mkdir -p /var/run/nginx
 
-COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY conf/nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 443
 
