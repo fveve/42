@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+
+</head>
+<body>
+<a href="https://projects.intra.42.fr/">login </a>
+<h1 id = salut style="color:rgb(251, 0, 88);" title="toi">salut</h1>
+<br>
+<button type="button" onclick="prints()">click batard</button>
+
+<script>
+		document.getElementById("salut").style.display= "none";
+	function prints()
+	{
+		if (document.getElementById("salut").style.display != "none")
+		{
+			document.getElementById("salut").style.display= "none";
+			alert(2 + 3);
+		}
+		else
+			document.getElementById("salut").style.display = "block";
+	}
+</script>
+</body>
+</html>
