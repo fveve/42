@@ -3,13 +3,14 @@ let end_w = 500;
 let end_h = 500;
 
 const	canvas = document.querySelector("canvas");
+canvas.width = end_w;
+canvas.height = end_h;
 const	ctx = canvas.getContext("2d");
-ctx.fillStyle = "black"
-ctx.fillRect(0, 0, end_w, end_h);
+
 let width = 25;
 let height = 100;
-let maxBounceAngle = 180;
-let speed = 5;
+let maxBounceAngle = 50;
+let speed = 10;
 
 function getRandomArbitrary(min, max) {
 	return Math.random() * (max - min) + min;
@@ -102,9 +103,7 @@ class	Player{
 		this.points = 0;
 	}
 	movePlayer(y)
-	{	
-		ctx.fillStyle = "black"
-		ctx.fillRect(this.x, this.y, width, height);
+	{
 		this.y += y;
 	}
 	drawPlayer()
@@ -136,7 +135,7 @@ document.addEventListener('keyup', (event) => {
 
 function movement()
 {
-	if (keys["z"] && p1.y > 0) {
+	if ((keys["z"] || keys["w"]) && p1.y > 0) {
 		p1.movePlayer(-(speed + 2));
 	}
 	if (keys["s"] && p1.y < end_h - 100) {
@@ -156,6 +155,9 @@ function movement()
 
 function drawFrame()
 {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "black"
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	movement();
 	if (trigger == 1)
 		ball.moveBall(p1, p2);
