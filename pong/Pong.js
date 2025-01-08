@@ -136,16 +136,16 @@ document.addEventListener('keyup', (event) => {
 function movement()
 {
 	if ((keys["z"] || keys["w"]) && p1.y > 0) {
-		p1.movePlayer(-(speed + 2));
+		p1.movePlayer(-(speed + 5));
 	}
 	if (keys["s"] && p1.y < end_h - 100) {
-		p1.movePlayer(speed + 2);
+		p1.movePlayer(speed + 5);
 	}
 	if (keys["ArrowUp"] && p2.y > 0) {
-		p2.movePlayer(-(speed + 2));
+		p2.movePlayer(-(speed + 5));
 	}
 	if (keys["ArrowDown"] && p2.y < end_h - 100) {
-		p2.movePlayer(speed + 2);
+		p2.movePlayer(speed + 5);
 	}
 	if (keys[" "])
 		trigger = 1;
@@ -167,8 +167,8 @@ function drawFrame()
 		p2.points++;
 	if (ball.x >= 500)
 		p1.points+= 1;
-	document.getElementById("p1 points").innerText = p1.points;
-	document.getElementById("p2 points").innerText = p2.points;
+	document.getElementById("p1-points").innerText = p1.points;
+	document.getElementById("p2-points").innerText = p2.points;
 	//console.log(p1.points);
 	requestAnimationFrame(drawFrame);
 }
